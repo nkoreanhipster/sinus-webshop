@@ -1,22 +1,61 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Products from '../views/Products.vue'
+import ProductCart from '../views/ProductCart.vue'
+import Admin from '../views/Admin.vue'
+import AdminProducts from '../views/AdminProducts.vue'
+import MakeOrder from '../views/MakeOrder.vue'
+import OrderDone from '../views/OrderDone.vue'
+import Profile from '../views/Profile.vue'
+import Register from '../views/Register.vue'
+import Test from '../views/_Test.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Products',
+    component: Products
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
+  },
+  {
+    path: '/admin-products',
+    name: 'AdminProducts',
+    component: AdminProducts
+  },
+  {
+    path: '/make-order',
+    name: 'MakeOrder',
+    component: MakeOrder
+  },
+  {
+    path: '/order-done',
+    name: 'OrderDone',
+    component: OrderDone
+  },
+  {
+    path: '/product-cart',
+    name: 'ProductCart',
+    component: ProductCart
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },{
+    path: '/test',
+    name: 'Test',
+    component: Test
   }
 ]
 

@@ -1,0 +1,40 @@
+// Funktioner för att få ned kodskrivandet
+
+// Padding, marginsmått etc. p-1, .p-2, m-1, m-2 ...
+$sizes:0.25, 0.50, 1, 2, 4, 8, 16;
+
+@each $size in $sizes{
+    $i: index($sizes, $size);
+
+    // p-1, p-2, p-3 ...
+    .p-#{$i} {
+        padding:#{$size}rem;
+    }
+    .m-#{$i} {
+        margin:#{$size}rem;
+    }
+    .mh-#{$i} {
+        margin-right:#{$size}rem;
+        margin-left:#{$size}rem;
+    }
+    .mv-#{$i} {
+        margin-top:#{$size}rem;
+        margin-bottom:#{$size}rem;
+    }
+    .ph-#{$i} {
+        padding-right:#{$size}rem;
+        padding-left:#{$size}rem;
+    }
+    .pv-#{$i} {
+        padding-top:#{$size}rem;
+        padding-bottom:#{$size}rem;
+    }
+}
+
+$opacities:0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,1.00;
+@each $opacity in $opacities{
+    $i: index($opacities, $opacity);
+    .opacity-#{$i}0{
+        opacity: $opacity;
+    }
+}

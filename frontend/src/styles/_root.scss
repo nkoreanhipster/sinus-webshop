@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: $fontsize-reset-percentage;      // 
+    background-color: $white;                   // Standard
+    color:$black;                               // todo;
+    font-family: $font-family;                  // todo;
+}
+
+body {
+    font-size: 1.8rem;                          // Sätter tillbaka standard fonten till 16px, men behåller 1rem till 10px
+}
