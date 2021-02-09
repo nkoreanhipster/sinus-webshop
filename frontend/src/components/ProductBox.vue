@@ -1,28 +1,32 @@
 <template>
-  <div>
-      <!-- _id: '39y7gbbZk1u4ABnv', // generated serverside
-    title: 'Gretas Fury',
-    price: 999,
-    shortDesc: 'Unisex',
-    longDesc: 'Skate ipsum dolor sit amet...',
-    imgFile: 'skateboard-greta.png' // Asset logic on clientside -->
-    
-    <p>Short description</p>
-    <img src="../assets/skateboard-generic.png" alt="">
-    <p>Price</p>
-    <p>Title</p>
-    <p>Short description</p>
-  </div>
-  
-    
+  <article class="mv-4 p-1" style="border: 2px solid #000000aa">
+    <ProductItem :product="product" />
+    <div>
+      <input type="number" v-model.number="amountToAddToCart" />
+      <button @click="addToCart" class="pv-1 ph-6">+</button>
+    </div>
+  </article>
 </template>
 
 <script>
+import ProductItem from "@/components/ProductItem.vue";
 export default {
-
-}
+  data() {
+    return {
+      // Number input, hur många X antal produkter man vill läggga i cart
+      amountToAddToCart: 1,
+    };
+  },
+  props: {
+    // ProductObject från parent
+    product: Object,
+  },
+  methods: {
+    addToCart() {
+      let arr = new Array(this.amountToAddToCart).fill(this.product);
+      this.$store.dispatch("addProductsToCart", arr);
+    },
+  },
+  components: { ProductItem },
+};
 </script>
-
-<style>
-
-</style>
