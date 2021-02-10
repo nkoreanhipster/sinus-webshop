@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { fakeProducts } from './dummy-data.js'
+import api from '@/api'
 
 Vue.use(Vuex)
 
@@ -56,6 +57,12 @@ export default new Vuex.Store({
       var itemTobeUpdated = state.cart.find(p => p._id === payload._id);
       itemTobeUpdated = payload
     },
+
+    // Login eller ej,. status
+    TOGGLE_AUTH(state, payload) {
+      state.isAuthenticated = payload.isAuthenticated
+      state.role = payload.role
+    },
   },
   actions: {
     async loadProductsFromDB({ commit }) {
@@ -69,6 +76,24 @@ export default new Vuex.Store({
 
     addProductsToCart({ commit }, payload) {
       commit('ADD_TO_CART', payload)
+    },
+
+    /**
+     * Pass data into endpoiunt
+     * @param {Object} payload Data from login form
+     */
+    async tryAndLogin({ commit }, payload) {
+      let response = await api.auth.tryLoginAttempt(payload)
+      console.log('Action tru and login -->', { response })
+      //let data = {role:'',isAuthenticated:true}; // todo; fake
+      commit('TOGGLE_AUTH', response);
+    },
+
+    async tryAndRegister({ commit }, payload) {
+      let response = await api.register.registerNewUser(payload)
+      console.log('Action tryAndRegister-->', { response })
+      //let data = {role:'',isAuthenticated:true}; // todo; fake
+      commit('TOGGLE_AUTH', response);
     },
   },
 

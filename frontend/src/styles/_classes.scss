@@ -3,9 +3,15 @@
 }
 
 .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.nav-links > li{
     display: inline;
 }
 
 .nav-cart-popout {
-    display: inline;
+    // display: inline;
 }

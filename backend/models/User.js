@@ -4,6 +4,7 @@ const users = new NeDB({filename:'database/users.db', autoload: true})
 const jwt = require('jsonwebtoken')
 
 async function validate(body){
+    console.log('validate',{body})
     let user = await users.findOne({email:body.email})
     let result = {error:false, messages:[]}
     if(user){
@@ -18,7 +19,7 @@ async function validate(body){
 
 function format(body){
     let {email,name,adress,password} = body;
-
+    console.log(21,{body})
     return {
         email,name,adress,
         role: 'customer',
