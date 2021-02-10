@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     async loadProductCatalog() {
-      let response = await this.$store.dispatch("load__FAKE__ProductsFromDB")
+      let response = await this.$store.dispatch("loadProductsFromDB")
     },
   },
   mounted() {

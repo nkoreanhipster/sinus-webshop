@@ -1,5 +1,6 @@
 // /api/auth/ 	POST 	Authentiserar user med email & password. Returnerar en JWT-token som används vid varje anrop API:et i en Authorization-header.
 // /api/register/ 	POST 	Registrerar en user enligt User-modellen.
+
 // /api/products/ 	GET 	Returnerar en lista på samtliga produkter.
 // /api/products/:id 	GET 	Returnerar en enstaka produkt.
 // /api/products/ 	POST 	Skapar en ny produkt, se produkt-modell. Enbart tillgänglig för admins
