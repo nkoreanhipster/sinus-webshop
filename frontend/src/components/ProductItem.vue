@@ -11,7 +11,7 @@
           "serial"{Number}
         }
    -->
-  <div class="product-items">
+  <div class="product-item bg-3">
     <div class="img-container">
       <img src="~@/assets/bag.svg" class="bag" />
       <img
@@ -20,10 +20,17 @@
         class="image"
       />
     </div>
-    <p>{{ product.title }}</p>
-    <i>{{ product.price }} SEK</i>
 
-    <p>shortDesc: {{ product.shortDesc }}</p>
+    <div>
+      <span style="float: left;">
+        {{ product.title }}
+      </span>
+      <span style="float: right;">
+        {{ product.price }} SEK
+      </span>
+    </div>
+
+    <p>{{ product.shortDesc }}</p>
     <p>
       <u>countOfDuplicates: {{ product.countOfDuplicates }}</u>
     </p>
@@ -60,5 +67,10 @@ export default {
   left: 0;
   background-image: "~@/assets/bag.svg";
   width: 20rem;
+}
+
+.product-item {
+  padding: 2rem;
+  margin: 0.25rem; 
 }
 </style>

@@ -1,3 +1,6 @@
+.bg-3 {
+    background-color: $gray-3;
+}
 .hotpink {
     color: hotpink;
 }
@@ -21,18 +24,6 @@
 .nav-cart-popout {
     // display: inline;
 }
-
-// .product-article {
-//     width: 20rem;
-// }
-
-// .product-item {
-//     background-color: $gray-1;
-//     width: 20rem;
-//     &.div {
-//         width: 20rem;
-//     }
-// }
 
 .checkout-button{
     padding: 0;
