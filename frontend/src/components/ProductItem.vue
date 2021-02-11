@@ -16,6 +16,7 @@
       :src="product.imgFile"
       @error="$event.target.src = '/images/gallagher-not.found.png'"
     />
+    <img src="~@/assets/bag.svg"/>
     <p>{{ product.title }}</p>
     <i>{{ product.price }} SEK</i>
 
