@@ -1,0 +1,11 @@
+@keyframes button-click {
+    0%{
+        background-color: $black-hover;
+    }
+    90%{
+        background-color: $blood-orange;
+    }
+    100%{
+        background-color: $black;
+    }
+}

@@ -9,6 +9,7 @@ html {
     background-color: $white;                   // Standard
     color:$black;                               // todo;
     font-family: $font-family;                  // todo;
+    overflow-y: scroll;                         // Hidnra scrollbar från att putta
 }
 
 body {

@@ -11,24 +11,31 @@
       <!-- Right side of the header -->
       <nav class="">
         <ol class="nav-links">
-          <li><router-link to="/">Products</router-link> |</li>
+          <li>
+            <router-link class="nav-button" to="/">
+              <span>Products</span>
+            </router-link>
+          </li>
 
           <li v-if="isCurrentUserAuthenticated">
-            <router-link to="/profile">My account</router-link> 
+            <router-link class="nav-button" to="/profile">
+              <span> My account </span>
+            </router-link>
           </li>
           <li v-else-if="!isCurrentUserAuthenticated">
-            <router-link to="/register">Register</router-link>
+            <a class="nav-button" @click="toggleLoginModal">
+              <span>Login</span>
+            </a>
           </li>
 
-          <li style="display: none;">
+          <li style="display: none">
             <CartPopOut />
-            <Login />
           </li>
 
           <li>
             <router-link to="/checkout">
               <div class="checkout-button">
-                <img class="image" src="~@/assets/bag.svg"/>
+                <img class="image" src="~@/assets/bag.svg" />
               </div>
             </router-link>
           </li>
@@ -36,26 +43,7 @@
       </nav>
     </div>
 
-    <!-- <div class="nav-inner">
-      <router-link to="/">Products</router-link> |
-      <router-link to="/profile">My account</router-link> |
-      <router-link to="/checkout">Cart</router-link>
-    </div>
-
-    <div v-if="isCurrentUserAuthenticated === true">
-      <span style="color:darkgreen;">LoggedIn</span>
-    </div>
-    <div v-else>
-      <span style="color:darkred;">LoggedOut</span>
-    </div>
- 
-    <div v-if="isCurrentUserAuthenticated === true">
-        <router-link to="/profile">My Account</router-link>
-    </div>
-
-
-
-    <span>am i logged in [{{ isCurrentUserAuthenticated }}]</span> -->
+    <Login v-if="isLoginModalActive" />
   </header>
 </template>
 
@@ -69,7 +57,18 @@ export default {
     isCurrentUserAuthenticated() {
       return this.isAuthenticated;
     },
+    isLoginModalActive() {
+      return this.$store.state.isModalActive.login;
+    },
   },
   components: { CartPopOut, Login },
+  methods: {
+    toggleLoginModal() {
+      this.$store.dispatch("toggleModal", "login");
+    },
+  },
 };
 </script>
+
+<style lang="scss">
+</style>

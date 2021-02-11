@@ -1,21 +1,71 @@
+.input[type=text],
+.input[type=password],
+.input[type=email] {
+    display    : block;
+    font-family: $font-family;
+    color      : $gray-4;
+    font-size  : 1.8rem;
+    border     : 1px solid rgba(0, 0, 0, 0.50);
+    height: 5rem;
+    border-radius: 1rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
 .hotpink {
     color: hotpink;
 }
 
+.bg-white {
+    background-color: $white;
+}
+
+.bg-black {
+    background-color: $black;
+}
+
+.bg-mustard {
+    background-color: $mustard;
+}
+
+.bg-blood-orange {
+    background-color: $blood-orange;
+}
+
 .nav-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
     background-color: $gray-2;
 }
 
 .nav-links {
-    display: flex;
+    display    : flex;
     align-items: center;
 }
 
-.nav-links > li{
+.nav-links>li {
     margin-right: 0.4rem;
+}
+
+.nav-links>li>.nav-button {
+    color      : $black;
+    display    : inline-block;
+    text-align : center;
+    padding    : 1.4rem 1.6rem;
+    font-weight: 700;
+    cursor     : pointer;
+}
+
+.nav-links>li>a:hover {
+    background-color: $mustard-opacity-60;
+    color           : $white;
+}
+
+.router-link-active.nav-button span {
+    border-bottom: solid;
+    border-width: 0.4rem;
+    border-color : $black;
 }
 
 .nav-cart-popout {
@@ -24,7 +74,7 @@
 
 .product-item {
     background-color: $gray-1;
-    width: 50rem;
+    width           : 50rem;
 }
 
 .product-box {
@@ -35,19 +85,19 @@
     border-width: thick;
 }
 
-.checkout-button{
-    padding: 0;
-    margin: 0;
-    border-radius: 50%;
+.checkout-button {
+    padding         : 0;
+    margin          : 0;
+    border-radius   : 50%;
     background-color: #DF9C29;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center
+    width           : 45px;
+    height          : 45px;
+    display         : flex;
+    justify-content : center;
+    align-items     : center
 }
 
 .image {
-    width: 30px;
+    width : 30px;
     height: 30px;
 }

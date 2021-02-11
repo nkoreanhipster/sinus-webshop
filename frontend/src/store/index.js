@@ -19,6 +19,10 @@ export default new Vuex.Store({
     isAuthenticated: false,
     // '', 'user' eller 'admin'
     role: '',
+    //
+    isModalActive: {
+      login: false
+    }
   },
   mutations: {
     /**
@@ -68,6 +72,10 @@ export default new Vuex.Store({
     TOGGLE_AUTH(state, payload) {
       state.isAuthenticated = payload.isAuthenticated
       state.role = payload.role
+    },
+
+    TOGGLE_MODAL(state, nameOfModal) {
+      state.isModalActive[nameOfModal] = !state.isModalActive[nameOfModal]
     },
   },
   actions: {
@@ -132,6 +140,10 @@ export default new Vuex.Store({
       let response = await register.registerNewUser(payload)
       commit('TOGGLE_AUTH', response);
     },
+
+    toggleModal({commit}, nameOfModal){
+      commit('TOGGLE_MODAL', nameOfModal)
+    }
   },
 
   getters: {
