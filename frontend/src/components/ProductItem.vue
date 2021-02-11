@@ -11,21 +11,18 @@
           "serial"{Number}
         }
    -->
-  <div>
-    <p>title: {{ product.title }}</p>
-    <span>
-      <i>price: {{ product.price }} </i>
-      <i>category: {{ product.category }}</i>
-      <i>serial: {{ product.serial }}</i>
-    </span>
-    <p>shortDesc: {{ product.shortDesc }}</p>
-    <p>longDesc: {{ product.longDesc }}</p>
+  <div class="product-item">
     <img
       :src="product.imgFile"
       @error="$event.target.src = '/images/gallagher-not.found.png'"
     />
-    <p><u>countOfDuplicates: {{ product.countOfDuplicates }}</u></p>
+    <p>{{ product.title }}</p>
+    <i>{{ product.price }} SEK</i>
 
+    <p>shortDesc: {{ product.shortDesc }}</p>
+    <p>
+      <u>countOfDuplicates: {{ product.countOfDuplicates }}</u>
+    </p>
   </div>
 </template>
 
