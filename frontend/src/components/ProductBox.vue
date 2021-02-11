@@ -1,10 +1,10 @@
 <template>
-  <article class="mv-4 p-1">
+  <article>
     <ProductItem :product="product" />
-    <div class="product-box">
+    <!-- <div class="product-box">
       <input type="number" v-model.number="amountToAddToCart" />
       <button @click="addToCart" class="pv-1 ph-6">+</button>
-    </div>
+    </div> -->
   </article>
 </template>
 
@@ -13,7 +13,7 @@ import ProductItem from "@/components/ProductItem.vue";
 export default {
   data() {
     return {
-      // Number input, hur många X antal produkter man vill läggga i cart
+      // Number input, hur många X antal produkter man vill lägga i cart
       amountToAddToCart: 1,
     };
   },

@@ -22,18 +22,17 @@
     // display: inline;
 }
 
-.product-item {
-    background-color: $gray-1;
-    width: 50rem;
-}
+// .product-article {
+//     width: 20rem;
+// }
 
-.product-box {
-    width: 50rem;
-}
-
-.no-border {
-    border-width: thick;
-}
+// .product-item {
+//     background-color: $gray-1;
+//     width: 20rem;
+//     &.div {
+//         width: 20rem;
+//     }
+// }
 
 .checkout-button{
     padding: 0;
@@ -45,9 +44,4 @@
     display: flex;
     justify-content: center;
     align-items: center
-}
-
-.image {
-    width: 30px;
-    height: 30px;
 }

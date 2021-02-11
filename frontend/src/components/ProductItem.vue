@@ -11,12 +11,15 @@
           "serial"{Number}
         }
    -->
-  <div class="product-item">
-    <img
-      :src="product.imgFile"
-      @error="$event.target.src = '/images/gallagher-not.found.png'"
-    />
-    <img src="~@/assets/bag.svg"/>
+  <div class="product-items">
+    <div class="img-container">
+      <img src="~@/assets/bag.svg" class="bag" />
+      <img
+        :src="product.imgFile"
+        @error="$event.target.src = '/images/gallagher-not.found.png'"
+        class="image"
+      />
+    </div>
     <p>{{ product.title }}</p>
     <i>{{ product.price }} SEK</i>
 
@@ -36,5 +39,26 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+.bag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.image {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.img-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  background-image: "~@/assets/bag.svg";
+  width: 20rem;
+}
 </style>
