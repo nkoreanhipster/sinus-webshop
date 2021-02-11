@@ -3,7 +3,9 @@
     <div class="nav-inner ph-6">
       <!-- Left side of the header -->
       <div class="logo">
-        <i>(LogoHere)</i>
+        <router-link to="/">
+        <img src="../assets/sinus-logo.svg" alt="" width="100" height="100">
+        </router-link>
       </div>
 
       <!-- Right side of the header -->
@@ -24,7 +26,7 @@
       </nav>
     </div>
 
-    <!-- <img src="../../../assets/sinus-logo.svg" alt="" width="100" height="100"> -->
+    
     <!-- <div class="nav-inner">
       <router-link to="/">Products</router-link> |
       <router-link to="/profile">My account</router-link> |
