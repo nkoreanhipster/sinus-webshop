@@ -4,7 +4,7 @@
       <!-- Left side of the header -->
       <div class="logo">
         <router-link to="/">
-        <img src="../assets/sinus-logo.svg" alt="" width="100" height="100">
+          <img src="../assets/sinus-logo.svg" alt="" width="100" height="100" />
         </router-link>
       </div>
 
@@ -14,19 +14,28 @@
           <li><router-link to="/">Products</router-link> |</li>
 
           <li v-if="isCurrentUserAuthenticated">
-            <router-link to="/profile">My account</router-link> |
+            <router-link to="/profile">My account</router-link> 
           </li>
-          <li v-else-if="!isCurrentUserAuthenticated"><router-link to="/register">Register</router-link> |</li>
+          <li v-else-if="!isCurrentUserAuthenticated">
+            <router-link to="/register">Register</router-link>
+          </li>
+
+          <li style="display: none;">
+            <CartPopOut />
+            <Login />
+          </li>
+
           <li>
-            <router-link to="/checkout">Cart</router-link>
-                <CartPopOut/>
-                <Login/>
+            <router-link to="/checkout">
+              <div class="checkout-button">
+                <img class="image" src="~@/assets/bag.svg"/>
+              </div>
+            </router-link>
           </li>
         </ol>
       </nav>
     </div>
 
-    
     <!-- <div class="nav-inner">
       <router-link to="/">Products</router-link> |
       <router-link to="/profile">My account</router-link> |

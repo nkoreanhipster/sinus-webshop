@@ -9,8 +9,13 @@
     background-color: $gray-2;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links > li{
-    display: inline;
+    margin-right: 0.4rem;
 }
 
 .nav-cart-popout {
@@ -19,6 +24,11 @@
 
 .product-item {
     background-color: $gray-1;
+    width: 50rem;
+}
+
+.product-box {
+    width: 50rem;
 }
 
 .no-border {
@@ -26,8 +36,18 @@
 }
 
 .checkout-button{
-    background-color: $mustard;
+    padding: 0;
+    margin: 0;
     border-radius: 50%;
-    width: 2.4rem;
-    height: 2.4rem;
+    background-color: #DF9C29;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.image {
+    width: 30px;
+    height: 30px;
 }

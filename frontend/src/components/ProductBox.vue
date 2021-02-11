@@ -1,7 +1,7 @@
 <template>
-  <article class="mv-4 p-1" style="border: 2px solid #000000aa">
+  <article class="mv-4 p-1">
     <ProductItem :product="product" />
-    <div>
+    <div class="product-box">
       <input type="number" v-model.number="amountToAddToCart" />
       <button @click="addToCart" class="pv-1 ph-6">+</button>
     </div>
