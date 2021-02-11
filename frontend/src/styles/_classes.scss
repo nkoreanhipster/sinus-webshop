@@ -12,6 +12,9 @@
     padding-right: 4rem;
 }
 
+.bg-3 {
+    background-color: $gray-3;
+}
 .hotpink {
     color: hotpink;
 }
@@ -72,6 +75,7 @@
     // display: inline;
 }
 
+<<<<<<< HEAD
 .product-item {
     background-color: $gray-1;
     width           : 50rem;
@@ -100,4 +104,16 @@
 .image {
     width : 30px;
     height: 30px;
+=======
+.checkout-button{
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    background-color: #DF9C29;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+>>>>>>> 04e91237de476083c35629db603c139848cd8a1d
 }
