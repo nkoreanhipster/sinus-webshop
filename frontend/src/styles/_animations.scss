@@ -1,7 +1,8 @@
 .blur-in {
     animation: blur 250ms reverse;
 }
-.blur-out{}
+
+.blur-out {}
 
 @keyframes button-click {
     0% {
@@ -24,5 +25,15 @@
 
     100% {
         filter: blur(5px);
+    }
+}
+
+@keyframes swosh-in {
+    from {
+        right: 100px;
+    }
+
+    to {
+        right: 0;
     }
 }
