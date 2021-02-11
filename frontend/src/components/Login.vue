@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white pv-5 ph-6">
+    <div class="bg-white p-3">
       <form action="">
         <input
           class="mb-2 reset input"

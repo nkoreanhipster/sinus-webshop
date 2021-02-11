@@ -72,7 +72,9 @@ export default new Vuex.Store({
     },
 
     TOGGLE_MODAL(state, nameOfModal) {
+      console.log({nameOfModal})
       state.isModalActive[nameOfModal] = !state.isModalActive[nameOfModal]
+      Object.keys(state.isModalActive).filter(key => key !== nameOfModal).map(key => state.isModalActive[key] = false)
     },
 
     SET_CURRENTUSER(state, payload) {

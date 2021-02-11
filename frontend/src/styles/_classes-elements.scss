@@ -7,7 +7,6 @@
     text-align      : center;
     padding         : 1rem 2rem;
     border          : none;
-    width           : 12.8rem;
     color           : $white;
     cursor          : pointer;
 
@@ -18,7 +17,14 @@
     &:hover {
         background-color: $black-hover;
     }
+
+    &[disabled], &[disabled]:hover {
+        opacity: 0.5;
+        background-color: gray;
+    }
 }
+
+
 
 .logo {
     padding: 0.1rem 1rem;

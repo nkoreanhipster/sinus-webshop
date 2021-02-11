@@ -1,5 +1,5 @@
 <template>
-  <article class="product-item bg-gray-1">
+  <article class="product-item bg-gray-1" @click="goToDetailedView">
     <div class="mb-3">
       <span class="title"> {{ product.title }} SEK </span>
       <span class="text"> {{ product.price }} SEK </span>
@@ -27,8 +27,10 @@ export default {
   },
   methods: {
     addToCart() {
-      console.log(this.product);
       this.$store.dispatch("addProductToCart", this.product);
+    },
+    goToDetailedView() {
+      this.$store.dispatch("toggleModal", 'cover');
     },
   },
 };
@@ -36,16 +38,26 @@ export default {
 
 <style scoped lang="scss">
 .product-item {
+  user-select: none;
   margin: 0.25rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: background-color 100ms ease;
   & div {
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+  &:hover {
+    background-color: rgba(0,0,0,0.5);
+    cursor: pointer;
+  }
+  &:active {
+    background-color: rgba(102, 148, 64, 0.5);
+    cursor: pointer;
   }
 }
 .img-container {

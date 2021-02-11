@@ -1,3 +1,7 @@
+.is-blurred {
+    filter: blur(0.5rem);
+}
+
 .input[type=text],
 .input[type=password],
 .input[type=email] {
@@ -17,21 +21,21 @@
 }
 
 .image-small {
-    width           : 100%;
-    height          : 120px;
-    background-color: #f0f0f0;
+    width           : 100px;
+    height          : 100px;
+    background-color: #bbbbbb;
 }
 
 .image-medium {
-    max-width       : 80%;
+    width           : 220px;
     height          : 320px;
-    background-color: #f0f0f0;
+    background-color: #bbbbbb;
 }
 
 .image-large {
-    width           : 100%;
+    width           : 320px;
     height          : 420px;
-    background-color: #f0f0f0;
+    background-color: #bbbbbb;
 }
 
 .image-small>img,
@@ -45,6 +49,10 @@
     background-repeat: no-repeat;
 }
 
+.linebreak{
+    padding-top: 1rem;
+    border: 1px solid #000000 10%;
+}
 
 .title {
     font-size  : 2.2rem;
@@ -97,7 +105,7 @@
     display   : none;
 }
 
-.modal.active {
+.modal.is-active {
     position        : fixed;
     visibility      : visible;
     display         : block;
@@ -145,6 +153,10 @@
             }
         }
     }
+
+    & li:last-child {
+        margin-left: 1rem;
+    }
 }
 
 .checkout-button {
@@ -157,6 +169,7 @@
     background-image   : url("~@/assets/bag.svg");
     background-repeat  : no-repeat;
     background-position: center;
+    cursor: pointer;
 
     & * {
         // position: absolute;
@@ -168,5 +181,14 @@
         border-radius   : 50%;
         text-align      : center;
         color           : $white;
+    }
+
+    &:hover {
+        background-color: $mustard-opacity-70;
+    }
+
+    &:active,
+    &:focus {
+        background-color: $blood-orange;
     }
 }

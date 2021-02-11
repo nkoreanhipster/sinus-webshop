@@ -18,22 +18,24 @@
           </li>
 
           <li v-if="isCurrentUserAuthenticated">
-            <a :class="{'active':isCartModalActive}" class="nav-button" @click="toggleModel('cart')">
-              <span> My account </span>
-            </a>
+            <router-link class="nav-button" to="/profile">
+              <span>My Account</span>
+            </router-link>
           </li>
           <li v-else-if="!isCurrentUserAuthenticated">
-            <a :class="{'active':isLoginModalActive}" class="nav-button" @click="toggleModel('login')">
+            <a
+              :class="{ active: isLoginModalActive }"
+              class="nav-button"
+              @click="toggleModel('login')"
+            >
               <span>Login</span>
             </a>
           </li>
 
           <li>
-            <router-link to="/checkout">
-              <div class="checkout-button">
-                <div>{{ itemsInCart }}</div>
-              </div>
-            </router-link>
+            <div class="checkout-button" @click="toggleModel('cart')">
+              <div>{{ itemsInCart }}</div>
+            </div>
           </li>
         </ol>
       </nav>

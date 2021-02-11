@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="is-fullsize">
-    <Navigation></Navigation>
-    <main class="">
+    <Navigation :class="{'is-blurred':isModalFullCoverActive}"></Navigation>
+    <main class="" :class="{'is-blurred':isModalFullCoverActive}">
       <router-view />
     </main>
     <Modal></Modal>
@@ -11,10 +11,17 @@
 <script>
 import Navigation from "@/components/Navigation.vue";
 import Modal from "@/components/Modal.vue";
+import {mapGetters} from 'vuex';
 export default {
   components: {
     Navigation,
     Modal,
+  },
+  computed: {
+    ...mapGetters(["modalStates"]),
+    isModalFullCoverActive() {
+      return this.modalStates.cover;
+    },
   },
 };
 </script>
