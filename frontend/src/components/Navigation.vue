@@ -18,24 +18,20 @@
           </li>
 
           <li v-if="isCurrentUserAuthenticated">
-            <router-link class="nav-button" to="/profile">
+            <a :class="{'active':isCartModalActive}" class="nav-button" @click="toggleModel('cart')">
               <span> My account </span>
-            </router-link>
-          </li>
-          <li v-else-if="!isCurrentUserAuthenticated">
-            <a class="nav-button" @click="toggleLoginModal">
-              <span>Login</span>
             </a>
           </li>
-
-          <li style="display: none">
-            <CartPopOut />
+          <li v-else-if="!isCurrentUserAuthenticated">
+            <a :class="{'active':isLoginModalActive}" class="nav-button" @click="toggleModel('login')">
+              <span>Login</span>
+            </a>
           </li>
 
           <li>
             <router-link to="/checkout">
               <div class="checkout-button">
-                <img class="image" src="~@/assets/bag.svg" />
+                <div>{{ itemsInCart }}</div>
               </div>
             </router-link>
           </li>
@@ -43,28 +39,42 @@
       </nav>
     </div>
 
-    <Login v-if="isLoginModalActive" />
+    <PopUp :isActive="isLoginModalActive || isCartModalActive">
+      <template v-slot:login>
+        <Login v-if="isLoginModalActive" />
+      </template>
+      <template v-slot:cart>
+        <CartPopOut v-if="isCartModalActive" />
+      </template>
+    </PopUp>
   </header>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import CartPopOut from "./CartPopOut.vue";
+import PopUp from "./PopUp.vue";
 import Login from "./Login.vue";
 export default {
   computed: {
-    ...mapGetters(["isAuthenticated"]),
+    ...mapGetters(["isAuthenticated", "totalItemsInCart", "modalStates"]),
     isCurrentUserAuthenticated() {
       return this.isAuthenticated;
     },
     isLoginModalActive() {
-      return this.$store.state.isModalActive.login;
+      return this.modalStates.login;
+    },
+    isCartModalActive() {
+      return this.modalStates.cart;
+    },
+    itemsInCart() {
+      return this.totalItemsInCart;
     },
   },
-  components: { CartPopOut, Login },
+  components: { PopUp, CartPopOut, Login },
   methods: {
-    toggleLoginModal() {
-      this.$store.dispatch("toggleModal", "login");
+    toggleModel(nameOfModal) {
+      this.$store.dispatch("toggleModal", nameOfModal);
     },
   },
 };

@@ -1,17 +1,20 @@
 <template>
-  <div id="app">
+  <div id="app" class="is-fullsize">
     <Navigation></Navigation>
-    <main>
+    <main class="">
       <router-view />
     </main>
+    <Modal></Modal>
   </div>
 </template>
 
 <script>
 import Navigation from "@/components/Navigation.vue";
+import Modal from "@/components/Modal.vue";
 export default {
   components: {
     Navigation,
+    Modal,
   },
 };
 </script>

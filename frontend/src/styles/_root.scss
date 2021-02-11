@@ -5,21 +5,42 @@
 }
 
 html {
-    font-size: $fontsize-reset-percentage;      // 
-    background-color: $white;                   // Standard
-    color:$black;                               // todo;
-    font-family: $font-family;                  // todo;
-    overflow-y: scroll;                         // Hidnra scrollbar från att putta
+    font-size       : $fontsize-reset-percentage; // 
+    background-color: $white; // Standard
+    color           : $black; // todo;
+    font-family     : $font-family; // todo;
+    //overflow-y      : scroll; // Hidnra scrollbar från att putta
 }
 
 body {
-    font-size: 1.8rem;                          // Sätter tillbaka standard fonten till 16px, men behåller 1rem till 10px
+    font-size: 1.8rem; // Sätter tillbaka standard fonten till 16px, men behåller 1rem till 10px
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
 }
 
 h1 {
-    font-size: 2.8rem;
+    font-size  : 3.2rem;
+    font-weight: bold;
 }
 
 h2 {
     font-size: 2.2rem;
+}
+
+header {
+    user-select: none;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
 }

@@ -35,6 +35,12 @@ $sizes:0.25, 0.50, 1, 2, 4, 8, 16;
         padding-top:#{$size}rem;
         padding-bottom:#{$size}rem;
     }
+    .pt-#{$i} {
+        padding-bottom:#{$size}rem;
+    }
+    .pb-#{$i} {
+        padding-bottom:#{$size}rem;
+    }
 }
 
 $opacities:0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,1.00;

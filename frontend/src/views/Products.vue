@@ -1,15 +1,15 @@
 <template>
   <section class="products">
-    <ProductBox
+    <ProductItem
       v-for="item in allProducts"
       :key="item.id"
       :product="item"
-    ></ProductBox>
+    ></ProductItem>
   </section>
 </template>
 
 <script>
-import ProductBox from "@/components/ProductBox.vue";
+import ProductItem from "@/components/ProductItem.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -27,13 +27,15 @@ export default {
   mounted() {
     this.loadProductCatalog();
   },
-  components: { ProductBox },
+  components: { ProductItem },
 };
 </script>
 <style lang="scss">
 .products {
   display: grid;
+  width: 100%;
+  //grid-auto-columns: minmax(20rem, auto);
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  
+  grid-template-rows: auto;
 }
 </style>

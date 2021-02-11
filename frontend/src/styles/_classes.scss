@@ -1,20 +1,77 @@
 .input[type=text],
 .input[type=password],
 .input[type=email] {
-    display    : block;
-    font-family: $font-family;
-    color      : $gray-4;
-    font-size  : 1.8rem;
-    border     : 1px solid rgba(0, 0, 0, 0.50);
-    height: 5rem;
+    display      : block;
+    font-family  : $font-family;
+    color        : $gray-4;
+    font-size    : 1.8rem;
+    border       : 1px solid rgba(0, 0, 0, 0.50);
+    height       : 5rem;
     border-radius: 1rem;
-    padding-left: 4rem;
+    padding-left : 4rem;
     padding-right: 4rem;
+
+    &:focus {
+        color: $black;
+    }
 }
 
-.bg-3 {
+.image-small {
+    width           : 100%;
+    height          : 120px;
+    background-color: #f0f0f0;
+}
+
+.image-medium {
+    max-width       : 80%;
+    height          : 320px;
+    background-color: #f0f0f0;
+}
+
+.image-large {
+    width           : 100%;
+    height          : 420px;
+    background-color: #f0f0f0;
+}
+
+.image-small>img,
+.image-medium>img,
+.image-large>img {
+    width            : 100%;
+    height           : 100%;
+    position         : relative;
+    overflow         : hidden;
+    background-size  : cover;
+    background-repeat: no-repeat;
+}
+
+
+.title {
+    font-size  : 2.2rem;
+    font-weight: bold;
+}
+
+.text {
+    font-size  : $fontsize-default;
+    font-weight: normal;
+}
+
+.bg-gray-1 {
+    background-color: $gray-1;
+}
+
+.bg-gray-2 {
+    background-color: $gray-2;
+}
+
+.bg-gray-3 {
     background-color: $gray-3;
 }
+
+.bg-gray-4 {
+    background-color: $gray-4;
+}
+
 .hotpink {
     color: hotpink;
 }
@@ -35,6 +92,22 @@
     background-color: $blood-orange;
 }
 
+.modal {
+    visibility: hidden;
+    display   : none;
+}
+
+.modal.active {
+    position        : fixed;
+    visibility      : visible;
+    display         : block;
+    background-color: rgba(0, 0, 0, 0.50);
+    height          : 100vh;
+    width           : 100vw;
+    top             : 0;
+    left            : 0;
+}
+
 .nav-inner {
     display         : flex;
     justify-content : space-between;
@@ -45,75 +118,55 @@
 .nav-links {
     display    : flex;
     align-items: center;
-}
 
-.nav-links>li {
-    margin-right: 0.4rem;
-}
+    & li {
+        margin-right: 0.4rem;
 
-.nav-links>li>.nav-button {
-    color      : $black;
-    display    : inline-block;
-    text-align : center;
-    padding    : 1.4rem 1.6rem;
-    font-weight: 700;
-    cursor     : pointer;
-}
+        & .nav-button {
+            color      : $black;
+            display    : inline-block;
+            text-align : center;
+            padding    : 1.4rem 1.6rem;
+            font-weight: 700;
+            cursor     : pointer;
 
-.nav-links>li>a:hover {
-    background-color: $mustard-opacity-60;
-    color           : $white;
-}
+            &:hover {
+                background-color: $mustard-opacity-60;
+                color           : $white;
+            }
+        }
 
-.router-link-active.nav-button span {
-    border-bottom: solid;
-    border-width: 0.4rem;
-    border-color : $black;
-}
-
-.nav-cart-popout {
-    // display: inline;
-}
-
-<<<<<<< HEAD
-.product-item {
-    background-color: $gray-1;
-    width           : 50rem;
-}
-
-.product-box {
-    width: 50rem;
-}
-
-.no-border {
-    border-width: thick;
+        & .router-link-exact-active.nav-button,
+        .nav-button.active {
+            & span {
+                border-bottom: solid;
+                border-width : 0.4rem;
+                border-color : $black;
+            }
+        }
+    }
 }
 
 .checkout-button {
-    padding         : 0;
-    margin          : 0;
-    border-radius   : 50%;
-    background-color: #DF9C29;
-    width           : 45px;
-    height          : 45px;
-    display         : flex;
-    justify-content : center;
-    align-items     : center
-}
+    padding            : 0;
+    margin             : 0;
+    border-radius      : 50%;
+    background-color   : $mustard;
+    width              : 6.4rem;
+    height             : 6.4rem;
+    background-image   : url("~@/assets/bag.svg");
+    background-repeat  : no-repeat;
+    background-position: center;
 
-.image {
-    width : 30px;
-    height: 30px;
-=======
-.checkout-button{
-    padding: 0;
-    margin: 0;
-    border-radius: 50%;
-    background-color: #DF9C29;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center
->>>>>>> 04e91237de476083c35629db603c139848cd8a1d
+    & * {
+        // position: absolute;
+        background-color: $blood-orange;
+        top             : 0;
+        right           : 0;
+        width           : 2rem;
+        height          : 2rem;
+        border-radius   : 50%;
+        text-align      : center;
+        color           : $white;
+    }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-cart-popout">
+  <div class="bg-white pv-5 ph-6">
     <p>Popout</p>
   </div>
 </template>

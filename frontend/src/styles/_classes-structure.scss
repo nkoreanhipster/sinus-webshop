@@ -2,3 +2,7 @@
     width: $wrapper-width;
     margin: 0 auto;
 }
+
+.is-fullsize {
+    min-height: 100vh;
+}
