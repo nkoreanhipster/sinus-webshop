@@ -21,12 +21,24 @@ $sizes:0.25, 0.50, 1, 2, 4, 8, 16;
         margin-top:#{$size}rem;
         margin-bottom:#{$size}rem;
     }
+    .mt-#{$i} {
+        margin-top:#{$size}rem;
+    }
+    .mb-#{$i} {
+        margin-bottom:#{$size}rem;
+    }
     .ph-#{$i} {
         padding-right:#{$size}rem;
         padding-left:#{$size}rem;
     }
     .pv-#{$i} {
         padding-top:#{$size}rem;
+        padding-bottom:#{$size}rem;
+    }
+    .pt-#{$i} {
+        padding-bottom:#{$size}rem;
+    }
+    .pb-#{$i} {
         padding-bottom:#{$size}rem;
     }
 }
@@ -36,5 +48,8 @@ $opacities:0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,1.00;
     $i: index($opacities, $opacity);
     .opacity-#{$i}0{
         opacity: $opacity;
+    }
+    .black-#{$i}0{
+        color: rgba(0, 0, 0, $opacity);
     }
 }

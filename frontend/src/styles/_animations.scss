@@ -1,0 +1,28 @@
+.blur-in {
+    animation: blur 250ms reverse;
+}
+.blur-out{}
+
+@keyframes button-click {
+    0% {
+        background-color: $black-hover;
+    }
+
+    90% {
+        background-color: $blood-orange;
+    }
+
+    100% {
+        background-color: $black;
+    }
+}
+
+@keyframes blur {
+    0% {
+        filter: blur(0);
+    }
+
+    100% {
+        filter: blur(5px);
+    }
+}

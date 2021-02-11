@@ -11,24 +11,27 @@
       <!-- Right side of the header -->
       <nav class="">
         <ol class="nav-links">
-          <li><router-link to="/">Products</router-link> |</li>
+          <li>
+            <router-link class="nav-button" to="/">
+              <span>Products</span>
+            </router-link>
+          </li>
 
           <li v-if="isCurrentUserAuthenticated">
-            <router-link to="/profile">My account</router-link> 
+            <a :class="{'active':isCartModalActive}" class="nav-button" @click="toggleModel('cart')">
+              <span> My account </span>
+            </a>
           </li>
           <li v-else-if="!isCurrentUserAuthenticated">
-            <router-link to="/register">Register</router-link>
-          </li>
-
-          <li style="display: none;">
-            <CartPopOut />
-            <Login />
+            <a :class="{'active':isLoginModalActive}" class="nav-button" @click="toggleModel('login')">
+              <span>Login</span>
+            </a>
           </li>
 
           <li>
             <router-link to="/checkout">
               <div class="checkout-button">
-                <img class="image" src="~@/assets/bag.svg"/>
+                <div>{{ itemsInCart }}</div>
               </div>
             </router-link>
           </li>
@@ -36,40 +39,43 @@
       </nav>
     </div>
 
-    <!-- <div class="nav-inner">
-      <router-link to="/">Products</router-link> |
-      <router-link to="/profile">My account</router-link> |
-      <router-link to="/checkout">Cart</router-link>
-    </div>
-
-    <div v-if="isCurrentUserAuthenticated === true">
-      <span style="color:darkgreen;">LoggedIn</span>
-    </div>
-    <div v-else>
-      <span style="color:darkred;">LoggedOut</span>
-    </div>
- 
-    <div v-if="isCurrentUserAuthenticated === true">
-        <router-link to="/profile">My Account</router-link>
-    </div>
-
-
-
-    <span>am i logged in [{{ isCurrentUserAuthenticated }}]</span> -->
+    <PopUp :isActive="isLoginModalActive || isCartModalActive">
+      <template v-slot:login>
+        <Login v-if="isLoginModalActive" />
+      </template>
+      <template v-slot:cart>
+        <CartPopOut v-if="isCartModalActive" />
+      </template>
+    </PopUp>
   </header>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import CartPopOut from "./CartPopOut.vue";
+import PopUp from "./PopUp.vue";
 import Login from "./Login.vue";
 export default {
   computed: {
-    ...mapGetters(["isAuthenticated"]),
+    ...mapGetters(["isAuthenticated", "totalItemsInCart", "modalStates"]),
     isCurrentUserAuthenticated() {
       return this.isAuthenticated;
     },
+    isLoginModalActive() {
+      return this.modalStates.login;
+    },
+    isCartModalActive() {
+      return this.modalStates.cart;
+    },
+    itemsInCart() {
+      return this.totalItemsInCart;
+    },
   },
-  components: { CartPopOut, Login },
+  components: { PopUp, CartPopOut, Login },
+  methods: {
+    toggleModel(nameOfModal) {
+      this.$store.dispatch("toggleModal", nameOfModal);
+    },
+  },
 };
 </script>

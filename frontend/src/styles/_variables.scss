@@ -5,12 +5,21 @@ $wrapper-width: 1366px;
 // Colors
 $white: #FFF;
 $black: #000;
+$black-hover:#222324;
 $gray-1: #EAE7DE;
 $gray-2: #D7DACC;
 $gray-3: #B4B9A9;
+$gray-4: #9c9c9c;
+$gray-5: #404040;
 $mustard: #DF9C29;
+$mustard-opacity-70: rgba(223, 156, 41, 0.70);
+$mustard-opacity-60: rgba(223, 156, 41, 0.60);
+$mustard-opacity-50: rgba(223, 156, 41, 0.50);
+$mustard-opacity-40: rgba(223, 156, 41, 0.40);
+$mustard-opacity-30: rgba(223, 156, 41, 0.30);
 $blood-orange: #EF7745;
 
 // Typography
 $fontsize-reset-percentage:62.5%;       // 1 rem == 10px
 $font-family:Open Sans, sans-serif;      //
+$fontsize-default:1.8rem;

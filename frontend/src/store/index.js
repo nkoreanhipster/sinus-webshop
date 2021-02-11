@@ -8,17 +8,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
-    // Produkter som kommer från databasen
-    // Lista med object
-    products: [],
-    // Produkt som kund lägger i sin cart
-    // I stort sett identisk med produktObject
-    cart: [],
-    // Triggar login-modal m.m.
-    isAuthenticated: false,
-    // '', 'user' eller 'admin'
-    role: '',
+    products: [],             // Produkter som kommer från databasen
+    cart: [],                 // Produkt som kund lägger i sin cart, I stort sett identisk med produktObject 
+    isAuthenticated: false,   // Triggar login-modal m.m.
+    isModalActive: {
+      login: false,           // Loginbox
+      cart: false,            // Cart för items
+      cover: false            // Täcker hela sidan med svart bakgrund
+    },
+    curentUser: {             // Hämtas vid inlogg, annars denna som default
+      role: '',
+      email: null,
+      token: null,
+    }
   },
   mutations: {
     /**
@@ -46,8 +48,8 @@ export default new Vuex.Store({
     },
 
     ADD_TO_CART(state, payload) {
-      payload.map(x => x.amount = 1)
-      state.cart.push(...payload)
+      //payload.map(x => x.amount = 1)
+      state.cart.push(payload)
     },
 
     REMOVE_FROM_CART(state, payload) {
@@ -66,8 +68,15 @@ export default new Vuex.Store({
 
     // Login eller ej,. status
     TOGGLE_AUTH(state, payload) {
-      state.isAuthenticated = payload.isAuthenticated
-      state.role = payload.role
+      state.isAuthenticated = !state.isAuthenticated
+    },
+
+    TOGGLE_MODAL(state, nameOfModal) {
+      state.isModalActive[nameOfModal] = !state.isModalActive[nameOfModal]
+    },
+
+    SET_CURRENTUSER(state, payload) {
+      state.currentUser = payload
     },
   },
   actions: {
@@ -103,7 +112,7 @@ export default new Vuex.Store({
     //   commit('SET_PRODUCTS', fakeProducts)
     // },
 
-    addProductsToCart({ commit }, payload) {
+    addProductToCart({ commit }, payload) {
       commit('ADD_TO_CART', payload)
     },
 
@@ -124,14 +133,34 @@ export default new Vuex.Store({
      */
     async tryAndLogin({ commit }, payload) {
       let response = await auth.tryLoginAttempt(payload)
+      console.log({ response })
+      if (response.error)
+        return response
+      else if (response.token && response.user) {
+        console.log('toggling')
+        commit('SET_CURRENTUSER', response)
+        commit('TOGGLE_AUTH', response)
+        commit('TOGGLE_MODAL', 'login')
+      }
+
       //let data = {role:'',isAuthenticated:true}; // todo; fake
-      commit('TOGGLE_AUTH', response);
+      //;
     },
 
     async tryAndRegister({ commit }, payload) {
       let response = await register.registerNewUser(payload)
-      commit('TOGGLE_AUTH', response);
+      if (response.error) {
+        return response
+      }
+      else if (response.token && response.user) {
+        return response
+      }
+      //commit('TOGGLE_AUTH', response);
     },
+
+    toggleModal({ commit }, nameOfModal) {
+      commit('TOGGLE_MODAL', nameOfModal)
+    }
   },
 
   getters: {
@@ -140,7 +169,11 @@ export default new Vuex.Store({
       return state.products
     },
 
-    itemsInCart: (state) => {
+    modalStates: (state) => {
+      return state.isModalActive
+    },
+
+    totalItemsInCart: state => {
       return state.cart.length
     },
 
@@ -153,7 +186,7 @@ export default new Vuex.Store({
       return sum
     },
 
-    cart: (state) => {
+    cart: state => {
       return state.cart
     },
 

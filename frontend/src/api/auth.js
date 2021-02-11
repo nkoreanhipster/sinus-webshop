@@ -1,5 +1,5 @@
 let tryLoginAttempt = async function (payload) {
-    let response = await fetch('http://localhost:5000/api/register/', {
+    let response = await fetch('http://localhost:5000/api/auth/', {
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {
