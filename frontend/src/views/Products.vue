@@ -5,7 +5,7 @@
       :key="item.id"
       :product="item"
     ></ProductItem>
-    <Modal></Modal>
+    <Modal :product="selectedItem"></Modal>
   </section>
 </template>
 
@@ -15,6 +15,12 @@ import { mapGetters } from "vuex";
 import Modal from "@/components/Modal.vue";
 
 export default {
+  data(){
+    return{
+      //The chosen product
+      selectedItem: {} 
+    }
+  },
 
   computed: {
     ...mapGetters(["productCatalog"]),
@@ -29,6 +35,9 @@ export default {
   },
   mounted() {
     this.loadProductCatalog();
+    this.$on ("selectedProduct", function(data){
+      this.selectedItem = data
+    })
   },
   components: { ProductItem, Modal },
 };

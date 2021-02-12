@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="is-fullsize">
-    <Navigation :class="{'is-blurred':isModalFullCoverActive}"></Navigation>
-    <main class="" :class="{'is-blurred':isModalFullCoverActive}">
+    <Navigation></Navigation>
+    <main>
       <router-view />
     </main>
   </div>

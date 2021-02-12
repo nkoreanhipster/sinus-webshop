@@ -30,6 +30,7 @@ export default {
       this.$store.dispatch("addProductToCart", this.product);
     },
     goToDetailedView() {
+      this.$parent.$emit("selectedProduct", this.product)
       this.$store.dispatch("toggleModal", 'cover');
     },
   },
