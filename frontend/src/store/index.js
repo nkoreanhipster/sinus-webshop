@@ -16,10 +16,19 @@ export default new Vuex.Store({
       cart: false,            // Cart för items
       cover: false            // Täcker hela sidan med svart bakgrund
     },
-    curentUser: {             // Hämtas vid inlogg, annars denna som default
-      role: '',
+    currentUser: {             // Hämtas vid inlogg, annars denna som default
+      _id: '',
+      name: 'Johan Kivi',
+      role: 'anonymous',
       email: null,
       token: null,
+      password: '',
+      adress: {
+        street: '',
+        zip: '',
+        city: ''
+      },
+      orderHistory: []
     }
   },
   mutations: {
@@ -72,13 +81,15 @@ export default new Vuex.Store({
     },
 
     TOGGLE_MODAL(state, nameOfModal) {
-      console.log({nameOfModal})
       state.isModalActive[nameOfModal] = !state.isModalActive[nameOfModal]
       Object.keys(state.isModalActive).filter(key => key !== nameOfModal).map(key => state.isModalActive[key] = false)
     },
 
     SET_CURRENTUSER(state, payload) {
-      state.currentUser = payload
+      let { user, token } = payload
+      state.currentUser.role = user.role
+      state.currentUser.email = user.email
+      state.currentUser.token = token
     },
   },
   actions: {
@@ -110,22 +121,49 @@ export default new Vuex.Store({
       return response
     },
 
-    // async load__FAKE__ProductsFromDB({ commit }) {
-    //   commit('SET_PRODUCTS', fakeProducts)
-    // },
+    async getAllOrders({ commit, state }) {
+      let token = state.currentUser.token
+      if (!token || typeof token === 'undefined') {
+        return {
+          message: "User not logged in"
+        }
+      }
+      let response = await products.getListOfAllOrders(token)
+      return response
+    },
+
+    async getUserOrderHistory({ commit, state }) {
+     
+      let response  = await order.getListOfAllOrders(state.currentUser.token)
+      // {
+      //   "items": [
+      //     "243baSCUq5sJGwEg",
+      //     "TVOvQePGV2B4kPhU"
+      //   ],
+      //   "timeStamp": 1613141407639,
+      //   "status": "inProcess",
+      //   "orderValue": 1798,
+      //   "_id": "bPmN7ifxvkBL3lpx"
+      // }
+      state.currentUser.orderHistory = response
+    },
 
     addProductToCart({ commit }, payload) {
       commit('ADD_TO_CART', payload)
     },
 
-    async submitNewOrder({ commit }) {
-      let _order = {
-        items: this.state.cart,
-        customer: '_____X',
-        payment: true,
+    async submitNewOrder({ commit, state }) {
+      // Destruct id properties
+      let ids = state.cart.map(item => item._id)
+      let body = {
+        _id: state.currentUser._id,
+        timeStamp: Date.now(),
+        status: 'inProcess',
+        items: ids, // Array of product IDs
+        orderValue: state.cart.reduce((a,b) => a.price+b.price)
       }
 
-      let response = await order.submitNewOrder(_order)
+      let response = await order.submitNewOrder(body, state.currentUser.token)
       return response
     },
 
@@ -133,13 +171,11 @@ export default new Vuex.Store({
      * Pass data into endpoiunt
      * @param {Object} payload Data from login form
      */
-    async tryAndLogin({ commit }, payload) {
+    async tryAndLogin({ commit,state }, payload) {
       let response = await auth.tryLoginAttempt(payload)
-      console.log({ response })
       if (response.error)
         return response
       else if (response.token && response.user) {
-        console.log('toggling')
         commit('SET_CURRENTUSER', response)
         commit('TOGGLE_AUTH', response)
         commit('TOGGLE_MODAL', 'login')
@@ -195,6 +231,10 @@ export default new Vuex.Store({
     isAuthenticated: (state) => {
       return state.isAuthenticated ? true : false
     },
+
+    orderHistory: (state) => {
+      return state.currentUser.orderHistory
+    }
   }
   // modules: {}
 })

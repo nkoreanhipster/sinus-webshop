@@ -1,8 +1,84 @@
 .wrapper {
-    width: $wrapper-width;
+    width : $wrapper-width;
     margin: 0 auto;
 }
 
 .is-fullsize {
     min-height: 100vh;
+}
+
+.current-breakpoint {
+    width           : 3rem;
+    height          : 1rem;
+    background-color: wheat;
+}
+
+.flex{
+    display: flex;
+}
+
+.columns {
+    display: flex;
+    flex-flow:row;
+    gap:$gap;
+}
+
+.columns > * {
+    width:100%;
+    flex-grow: 1; 
+}
+
+
+.products {
+    display              : grid;
+    width                : 100%;
+    //grid-auto-columns: minmax(20rem, auto);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows   : auto;
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+    .current-breakpoint::after {
+        content: "MOBILE";
+        color  : darkred;
+    }
+    .columns {
+        flex-direction: column;
+    }
+    .wrapper {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: $breakpoint-mobile + 1px) {
+    .current-breakpoint::after {
+        content: "TABLET";
+        color  : darkblue;
+    }
+
+    .wrapper {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: $breakpoint-laptop + 1px) {
+    .current-breakpoint::after {
+        content: "LAPTOP";
+        color  : darkcyan;
+    }
+
+    .wrapper {
+        width: 960px;
+    }
+}
+
+@media screen and (min-width: $breakpoint-desktop + 1px) {
+    .current-breakpoint::after {
+        content: "DESKTOP";
+        color  : darkviolet;
+    }
+
+    .wrapper {
+        width: 1048px;
+    }
 }

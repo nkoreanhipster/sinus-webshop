@@ -5,6 +5,7 @@
       :key="item.id"
       :product="item"
     ></ProductItem>
+    
   </section>
 </template>
 
@@ -30,12 +31,3 @@ export default {
   components: { ProductItem },
 };
 </script>
-<style lang="scss">
-.products {
-  display: grid;
-  width: 100%;
-  //grid-auto-columns: minmax(20rem, auto);
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto;
-}
-</style>

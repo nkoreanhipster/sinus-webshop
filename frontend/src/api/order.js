@@ -1,12 +1,14 @@
+import { POST, GET } from './request';
+
 /**
  * Hämta lista med alla ordrar
+ * @param {String} token 
  */
-let getListOfAllOrders = async() => {
-    let response = await fetch('http://localhost:5000/api/orders', {
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
+let getListOfAllOrders = async (token) => {
+    let response = await GET('orders', token)
+    if(!response.ok){
+        return {message:"Error"}
+    }
     let json = await response.json()
     return json
 }
@@ -15,15 +17,11 @@ let getListOfAllOrders = async() => {
  * Skapa ny order
  * @param {Object} order 
  */
-let submitNewOrder = async(order) => {
-    let response = await fetch('http://localhost:5000/api/orders', {
-        method: 'POST',
-        body: JSON.stringify(order),
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
+let submitNewOrder = async (order, token) => {
+    let response = await POST('orders', order, token)
+    if(!response.ok){
+        return {message:"Error"}
+    }
     let json = await response.json()
     return json
 }

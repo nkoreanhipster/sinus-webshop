@@ -1,22 +1,22 @@
 <template>
-    <div class="bg-white p-3">
-      <form action="">
-        <input
-          class="mb-2 reset input"
-          type="text"
-          v-model="email"
-          placeholder="email"
-        />
-        <input
-          class="mb-2 reset input"
-          type="password"
-          v-model="password"
-          placeholder="password"
-        />
-        <button class="btn-black" @click="Login">Login</button>
-        <p class="error">{{ message }}</p>
-      </form>
-    </div>
+  <div class="bg-white p-3">
+    <form action="">
+      <input
+        class="mb-2 reset input"
+        type="text"
+        v-model="email"
+        placeholder="email"
+      />
+      <input
+        class="mb-2 reset input"
+        type="password"
+        v-model="password"
+        placeholder="password"
+      />
+      <button class="btn-black" @click="Login">Login</button>
+      <p class="error">{{ message }}</p>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -37,7 +37,7 @@ export default {
     this.message = ""; // Reset on component moun
   },
   methods: {
-    Login(event) {
+    async Login(event) {
       event.preventDefault();
       event.preventDefault();
       this.message = "";
@@ -53,7 +53,10 @@ export default {
       };
 
       // Check against database/store
-      this.$store.dispatch("tryAndLogin", payload);
+      let res = await this.$store.dispatch("tryAndLogin", payload);
+      if (this.$store.state.isAuthenticated) {
+        this.$router.push({ path: "profile" });
+      }
     },
   },
 };

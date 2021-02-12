@@ -10,6 +10,10 @@
 
     <hr />
 
+    <div>
+      <p>Total <span>{{cartItemSum}}</span></p>
+    </div>
+
     <button
       class="btn-black mt-3"
       :disabled="isButtonDisabled"
@@ -25,9 +29,12 @@ import { mapGetters } from "vuex";
 import ProductMiniature from "@/components/ProductMiniature.vue";
 export default {
   computed: {
-    ...mapGetters(["cart", "totalItemsInCart"]),
+    ...mapGetters(["cart", "totalItemsInCart",'sumOfCartItems']),
     cartItems() {
       return this.cart;
+    },
+    cartItemSum() {
+      return this.sumOfCartItems;
     },
     isButtonDisabled() {
       return this.totalItemsInCart < 1 ? true : false;
