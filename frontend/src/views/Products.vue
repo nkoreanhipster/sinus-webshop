@@ -5,7 +5,11 @@
       :key="item.id"
       :product="item"
     ></ProductItem>
+<<<<<<< HEAD
+    
+=======
     <Modal :product="selectedItem"></Modal>
+>>>>>>> 9fba93ba8edd308c3dfc0784c032cb129c1a9a3e
   </section>
 </template>
 
@@ -42,12 +46,3 @@ export default {
   components: { ProductItem, Modal },
 };
 </script>
-<style lang="scss">
-.products {
-  display: grid;
-  width: 100%;
-  //grid-auto-columns: minmax(20rem, auto);
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto;
-}
-</style>

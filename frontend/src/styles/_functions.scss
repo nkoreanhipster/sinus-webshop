@@ -27,6 +27,12 @@ $sizes:0.25, 0.50, 1, 2, 4, 8, 16;
     .mb-#{$i} {
         margin-bottom:#{$size}rem;
     }
+    .ml-#{$i} {
+        margin-left:#{$size}rem;
+    }
+    .mr-#{$i} {
+        margin-right:#{$size}rem;
+    }
     .ph-#{$i} {
         padding-right:#{$size}rem;
         padding-left:#{$size}rem;
@@ -40,6 +46,12 @@ $sizes:0.25, 0.50, 1, 2, 4, 8, 16;
     }
     .pb-#{$i} {
         padding-bottom:#{$size}rem;
+    }
+    .pr-#{$i} {
+        padding-right:#{$size}rem;
+    }
+    .pl-#{$i} {
+        padding-left:#{$size}rem;
     }
 }
 

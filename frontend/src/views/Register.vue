@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <p>REGISTER</p>
+  <section class="wrapper">
+    <h1 class="mv-5">REGISTER</h1>
     <input type="text" v-model="user" placeholder="Namn" />
     <input type="text" v-model="email" placeholder="E-mail" />
     <input type="text" v-model="password" placeholder="Lösenord" />

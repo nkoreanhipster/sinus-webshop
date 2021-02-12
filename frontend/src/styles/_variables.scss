@@ -1,6 +1,10 @@
 // Breakpoints & widths
-$mobile-width: 900px;
+$breakpoint-mobile:480px;
+$breakpoint-tablet:768px;
+$breakpoint-laptop:1024px;
+$breakpoint-desktop:1200px;
 $wrapper-width: 1366px;
+$gap:1.2rem;
 
 // Colors
 $white: #FFF;

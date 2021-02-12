@@ -5,16 +5,16 @@
 }
 
 html {
-    font-size       : $fontsize-reset-percentage; // 
-    background-color: $white; // Standard
-    color           : $black; // todo;
-    font-family     : $font-family; // todo;
+    font-size         : $fontsize-reset-percentage; // 
+    background-color  : $white; // Standard
+    color             : $black; // todo;
+    font-family       : $font-family; // todo;
     //overflow-y      : scroll; // Hidnra scrollbar från att putta
 }
 
 body {
-    font-size: 1.8rem; // Sätter tillbaka standard fonten till 16px, men behåller 1rem till 10px
-    width: 100vw;
+    font-size : 1.8rem; // Sätter tillbaka standard fonten till 16px, men behåller 1rem till 10px
+    width     : 100vw;
     overflow-x: hidden;
 }
 
@@ -28,8 +28,9 @@ h6 {
 }
 
 h1 {
-    font-size  : 3.2rem;
-    font-weight: bold;
+    font-size     : 3.2rem;
+    font-weight   : 800;
+    text-transform: uppercase;
 }
 
 h2 {
@@ -41,6 +42,20 @@ header {
 }
 
 img {
-    max-width: 100%;
+    max-width : 100%;
     max-height: 100%;
+}
+
+hr {
+    flex-grow: 1;
+    border: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
+}
+
+hr.dotted {
+    flex-grow: 1;
+    border: transparent;
+    border-bottom: 0.1rem dotted rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
 }
