@@ -4,18 +4,15 @@
     <main class="" :class="{'is-blurred':isModalFullCoverActive}">
       <router-view />
     </main>
-    <Modal></Modal>
   </div>
 </template>
 
 <script>
 import Navigation from "@/components/Navigation.vue";
-import Modal from "@/components/Modal.vue";
 import {mapGetters} from 'vuex';
 export default {
   components: {
-    Navigation,
-    Modal,
+    Navigation
   },
   computed: {
     ...mapGetters(["modalStates"]),

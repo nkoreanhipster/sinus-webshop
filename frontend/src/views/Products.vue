@@ -5,14 +5,17 @@
       :key="item.id"
       :product="item"
     ></ProductItem>
+    <Modal></Modal>
   </section>
 </template>
 
 <script>
 import ProductItem from "@/components/ProductItem.vue";
 import { mapGetters } from "vuex";
+import Modal from "@/components/Modal.vue";
 
 export default {
+
   computed: {
     ...mapGetters(["productCatalog"]),
     allProducts() {
@@ -27,7 +30,7 @@ export default {
   mounted() {
     this.loadProductCatalog();
   },
-  components: { ProductItem },
+  components: { ProductItem, Modal },
 };
 </script>
 <style lang="scss">

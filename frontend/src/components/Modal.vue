@@ -5,7 +5,15 @@
     @click="closeModal"
   >
     <div class="bg-white m-6 p-6">
-      Details and buy-button about product here
+      <div>
+      <h1>BAJSKORV</h1>
+      <img src="~@/assets/bag.svg" style="background-color: black;"/>
+      <!-- <img
+        :src="require(`@/assets/${product.imgFile}`)"
+        alt="/images/gallagher-not.found.png"
+      /> -->
+
+      </div>
     </div>
   </section>
 </template>
