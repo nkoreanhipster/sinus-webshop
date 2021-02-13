@@ -4,7 +4,7 @@
     class="modal"
     @click="closeModal"
   >
-    <div class="bg-white m-6 p-3 modal-content-align">
+    <div class="bg-white p-3 modal-content-align">
       <span style="margin-right: 5rem;">
         <img src="/images/gallagher-not.found.png" alt="" />
       </span>

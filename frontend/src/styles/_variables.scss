@@ -1,29 +1,38 @@
 // Breakpoints & widths
-$breakpoint-mobile:480px;
-$breakpoint-tablet:768px;
-$breakpoint-laptop:1024px;
+$breakpoint-mobile :480px;
+$breakpoint-tablet :768px;
+$breakpoint-laptop :1024px;
 $breakpoint-desktop:1200px;
-$wrapper-width: 1366px;
-$gap:1.2rem;
+$wrapper-width     :1366px;
+$gap               :1.2rem;
 
 // Colors
-$white: #FFF;
-$black: #000;
-$black-hover:#222324;
-$gray-1: #EAE7DE;
-$gray-2: #D7DACC;
-$gray-3: #B4B9A9;
-$gray-4: #9c9c9c;
-$gray-5: #404040;
-$mustard: #DF9C29;
-$mustard-opacity-70: rgba(223, 156, 41, 0.70);
-$mustard-opacity-60: rgba(223, 156, 41, 0.60);
-$mustard-opacity-50: rgba(223, 156, 41, 0.50);
-$mustard-opacity-40: rgba(223, 156, 41, 0.40);
-$mustard-opacity-30: rgba(223, 156, 41, 0.30);
-$blood-orange: #EF7745;
+$white                  : #FFF;
+$black                  : #000;
+$black-hover            : #222324;
+$gray-1                 : #EAE7DE; // Part of mood board. HEADER
+$gray-x                 : #F2F0F0; // Background of products
+$gray-2                 : #D7DACC; // FOOTER
+$gray-3                 : #B4B9A9; // ACCENT
+$gray-4                 : #9c9c9c;
+$gray-5                 : #404040;
+$mustard                : #DF9C29;
+$mustard-opacity-70     : rgba(223, 156, 41, 0.70);
+$mustard-opacity-60     : rgba(223, 156, 41, 0.60);
+$mustard-opacity-50     : rgba(223, 156, 41, 0.50);
+$mustard-opacity-40     : rgba(223, 156, 41, 0.40);
+$mustard-opacity-30     : rgba(223, 156, 41, 0.30);
+$blood-orange           : #ef7745;
+$blood-orange-opacity-70: rgba(239, 119, 69, 0.70);
+$blood-orange-opacity-60: rgba(239, 119, 69, 0.60);
+$blood-orange-opacity-50: rgba(239, 119, 69, 0.50);
+$blood-orange-opacity-40: rgba(239, 119, 69, 0.40);
+$blood-orange-opacity-30: rgba(239, 119, 69, 0.30);
+$success                : #B0D527;
+$failure                : #d52727;
 
 // Typography
-$fontsize-reset-percentage:62.5%;       // 1 rem == 10px
-$font-family:Open Sans, sans-serif;      //
+$fontsize-reset-percentage:62.5%; // 1 rem == 10px
+$font-family              :Open Sans,
+sans-serif;
 $fontsize-default:1.8rem;

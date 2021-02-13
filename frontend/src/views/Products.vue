@@ -1,15 +1,13 @@
 <template>
-  <section class="products">
-    <ProductItem
-      v-for="item in allProducts"
-      :key="item.id"
-      :product="item"
-    ></ProductItem>
-<<<<<<< HEAD
-    
-=======
+  <section>
+    <div class="products">
+      <ProductItem
+        v-for="item in allProducts"
+        :key="item.id"
+        :product="item"
+      ></ProductItem>
+    </div>
     <Modal :product="selectedItem"></Modal>
->>>>>>> 9fba93ba8edd308c3dfc0784c032cb129c1a9a3e
   </section>
 </template>
 
@@ -19,11 +17,11 @@ import { mapGetters } from "vuex";
 import Modal from "@/components/Modal.vue";
 
 export default {
-  data(){
-    return{
+  data() {
+    return {
       //The chosen product
-      selectedItem: {} 
-    }
+      selectedItem: {},
+    };
   },
 
   computed: {
@@ -37,11 +35,15 @@ export default {
       let response = await this.$store.dispatch("loadProductsFromDB");
     },
   },
+  created() {
+    this.$store.dispatch("resetInterface");
+    this.$store.dispatch('closeAllModals')
+  },
   mounted() {
     this.loadProductCatalog();
-    this.$on ("selectedProduct", function(data){
-      this.selectedItem = data
-    })
+    this.$on("selectedProduct", function (data) {
+      this.selectedItem = data;
+    });
   },
   components: { ProductItem, Modal },
 };
