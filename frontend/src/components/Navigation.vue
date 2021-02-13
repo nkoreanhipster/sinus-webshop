@@ -1,10 +1,15 @@
 <template>
-  <header>
+  <header :class="{ 'is-blurred': isModalFullCoverActive }">
     <div class="nav-inner ph-4">
       <!-- Left side of the header -->
       <div class="logo ph-2">
         <router-link to="/">
-          <img src="../assets/sinus-logo.svg" alt="" width="100"  height="auto" />
+          <img
+            src="../assets/sinus-logo.svg"
+            alt=""
+            width="120"
+            height="auto"
+          />
         </router-link>
       </div>
 
@@ -13,7 +18,7 @@
         <ol class="nav-links">
           <li>
             <router-link class="nav-button" to="/">
-              <span>Products</span>
+              <span @click="closeAllModals">Products</span>
             </router-link>
           </li>
 
@@ -35,7 +40,9 @@
           <li @click="toggleModel('cart')">
             <div class="checkout-bag">
               <a class=""></a>
-              <span><b>({{ itemsInCart }})</b></span>
+              <span
+                ><b>({{ itemsInCart }})</b></span
+              >
             </div>
           </li>
 
@@ -67,6 +74,9 @@ import Login from "./Login.vue";
 export default {
   computed: {
     ...mapGetters(["isAuthenticated", "totalItemsInCart", "modalStates"]),
+    isModalFullCoverActive() {
+      return this.modalStates.cover;
+    },
     isCurrentUserAuthenticated() {
       return this.isAuthenticated;
     },
@@ -84,6 +94,9 @@ export default {
   methods: {
     toggleModel(nameOfModal) {
       this.$store.dispatch("toggleModal", nameOfModal);
+    },
+    closeAllModals() {
+      this.$store.dispatch("closeAllModals");
     },
   },
 };

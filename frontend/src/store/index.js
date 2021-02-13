@@ -230,7 +230,7 @@ export default new Vuex.Store({
         maxHeight: 353,
         minHeight: 100
       });
-      dispatch('CLOSE_ALL_MODALS')
+      dispatch('closeAllModals')
     },
   },
 

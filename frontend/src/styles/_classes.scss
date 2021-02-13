@@ -180,7 +180,7 @@ input.rectangle {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 0.2rem 1rem;
     cursor             : pointer;
     &:hover {
         background-color: $mustard-opacity-70;

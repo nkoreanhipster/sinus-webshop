@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="products">
+    <div class="products" :class="{'is-blurred':isModalFullCoverActive}">
       <ProductItem
         v-for="item in allProducts"
         :key="item.id"
@@ -25,7 +25,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["productCatalog"]),
+    ...mapGetters(["productCatalog", "modalStates"]),
+    isModalFullCoverActive() {
+      return this.modalStates.cover;
+    },
     allProducts() {
       return this.productCatalog;
     },
@@ -37,7 +40,7 @@ export default {
   },
   created() {
     this.$store.dispatch("resetInterface");
-    this.$store.dispatch('closeAllModals')
+    this.$store.dispatch("closeAllModals");
   },
   mounted() {
     this.loadProductCatalog();

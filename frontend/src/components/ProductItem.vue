@@ -9,9 +9,14 @@
         @click.self="goToDetailedView"
       />
     </div>
-    <div class="mt-3">
-      <span class="title"> {{ product.title }} SEK </span>
-      <span class="text"> {{ product.price }} SEK </span>
+    <div class="">
+      <div>
+        <span class="title"> {{ product.title }}</span>
+        <span class="text"> {{ product.price }} <span class="small">SEK</span> </span>
+        <div>
+          <i>{{ product.shortDesc }}</i>
+        </div>
+      </div>
     </div>
   </article>
 </template>
@@ -41,17 +46,26 @@ export default {
   background-color: $gray-x;
   user-select: none;
   margin: 0.25rem;
-  padding: 1rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: background-color 100ms ease;
-  & div {
+  
+  & > div:nth-of-type(1) {
+    padding-top: 4rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
+
+  & > div:nth-of-type(2) {
+    border-top: 0.6rem solid $white;
+    align-self: stretch;
+    padding: 1rem 2rem;
+  }
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;

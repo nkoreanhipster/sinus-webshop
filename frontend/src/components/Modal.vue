@@ -5,7 +5,7 @@
     @click="closeModal"
   >
     <div class="bg-white p-3 modal-content-align">
-      <span style="margin-right: 5rem;">
+      <span style="margin-right: 5rem">
         <img src="/images/gallagher-not.found.png" alt="" />
       </span>
       <span>
@@ -14,6 +14,10 @@
         <p>{{ product.longDesc }}</p>
         <h2>{{ product.price }} SEK</h2>
       </span>
+
+      <div>
+        <button class="btn-black" @click="addToCart">Add to checkout</button>
+      </div>
     </div>
   </section>
 </template>
@@ -33,6 +37,9 @@ export default {
   methods: {
     closeModal() {
       this.$store.dispatch("toggleModal", "cover");
+    },
+    addToCart() {
+      this.$store.dispatch("addProductToCart", this.product);
     },
   },
 };
