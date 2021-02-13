@@ -1,18 +1,24 @@
 <template>
-  <div id="app" class="is-fullsize">
+  <div id="app">
     <Navigation></Navigation>
-    <main>
+    <main class="is-fullsize">
+      <Banner/>
       <router-view />
     </main>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Navigation from "@/components/Navigation.vue";
+import Banner from "@/components/Banner.vue";
+import Footer from "@/components/Footer.vue";
 import {mapGetters} from 'vuex';
 export default {
   components: {
-    Navigation
+    Navigation, 
+    Banner,
+    Footer
   },
   computed: {
     ...mapGetters(["modalStates"]),

@@ -10,7 +10,9 @@
         <li class="mb-2" v-for="(item, index) in allProducts" :key="index">
           <ol>
             <span class="light">Items: </span>
-            <span class="text small" v-for="(x, i) in item.items" :key="i">{{ x }}, </span>
+            <span class="text small" v-for="(x, i) in item.items" :key="i"
+              >{{ x }},
+            </span>
           </ol>
           <p>Timestamp: {{ item.timeStamp }}</p>
           <p>Status: {{ item.status }}</p>
@@ -50,11 +52,13 @@ export default {
       await this.$store.dispatch("getUserOrderHistory");
     },
     // Fake logout by refreshing
-    logout(){
-        location.reload()
-    }
+    logout() {
+      location.reload();
+    },
   },
   mounted() {
+    this.$store.dispatch("closeAllModals");
+    this.$store.dispatch("changeBannerSize", { maxHeight: 120 });
     this.getOrderHistory();
   },
   computed: {

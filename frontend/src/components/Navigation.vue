@@ -1,10 +1,10 @@
 <template>
   <header>
-    <div class="nav-inner ph-6">
+    <div class="nav-inner ph-4">
       <!-- Left side of the header -->
-      <div class="logo">
+      <div class="logo ph-2">
         <router-link to="/">
-          <img src="../assets/sinus-logo.svg" alt="" width="100" height="100" />
+          <img src="../assets/sinus-logo.svg" alt="" width="100"  height="auto" />
         </router-link>
       </div>
 
@@ -30,6 +30,13 @@
             >
               <span>Login</span>
             </a>
+          </li>
+
+          <li @click="toggleModel('cart')">
+            <div class="checkout-bag">
+              <a class=""></a>
+              <span><b>({{ itemsInCart }})</b></span>
+            </div>
           </li>
 
           <li>

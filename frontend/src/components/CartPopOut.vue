@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-3">
+  <div class="bg-white p-3 m-2">
     <div>
       <ProductMiniature
         v-for="item in cartItems"

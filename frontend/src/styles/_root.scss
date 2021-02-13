@@ -5,14 +5,28 @@
 }
 
 html {
-    font-size         : $fontsize-reset-percentage; // 
-    background-color  : $white; // Standard
-    color             : $black; // todo;
-    font-family       : $font-family; // todo;
+
+    /* Font varient */
+    font-variant-ligatures        : none;
+    -webkit-font-variant-ligatures: none;
+    /* Smoothing */
+    text-shadow                   : 1px 1px 1px rgba(0, 0, 0, 0.004);
+    text-rendering                : optimizeLegibility !important;
+    -webkit-font-smoothing        : antialiased !important;
+    -moz-osx-font-smoothing       : grayscale !important;
+    font-size                     : $fontsize-reset-percentage; // 
+    background-color              : $white; // Standard
+    color                         : $black; // todo;
+    font-family                   : $font-family; // todo;
     //overflow-y      : scroll; // Hidnra scrollbar från att putta
 }
 
+html{
+    height: 100%;
+}
+
 body {
+    min-height: 100%;
     font-size : 1.8rem; // Sätter tillbaka standard fonten till 16px, men behåller 1rem till 10px
     width     : 100vw;
     overflow-x: hidden;
@@ -38,7 +52,13 @@ h2 {
 }
 
 header {
-    user-select: none;
+    user-select     : none;
+    background-color: $gray-1;
+}
+
+footer {
+    background-color: $gray-2;
+
 }
 
 img {
@@ -47,15 +67,15 @@ img {
 }
 
 hr {
-    flex-grow: 1;
-    border: transparent;
+    flex-grow    : 1;
+    border       : transparent;
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 0.2rem;
 }
 
 hr.dotted {
-    flex-grow: 1;
-    border: transparent;
+    flex-grow    : 1;
+    border       : transparent;
     border-bottom: 0.1rem dotted rgba(0, 0, 0, 0.4);
     border-radius: 0.2rem;
 }

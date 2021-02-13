@@ -1,17 +1,22 @@
 <template>
-  <section>
-    <p class="opacity-50">/admin</p>
-    <h2>Admin Products</h2>
-    <div>
-          <p class="opacity-50">Add/Edit</p>
-          <span>Upload form</span>
-          <form action="">
+  <section class='wrapper'>
+    <h1>Admin Products</h1>
 
-          </form>
-    </div>
-    <div>
-      <p>product-list</p>
-    </div>
-    <h2>Orders</h2>
+    <h1>Orders</h1>
   </section>
 </template>
+
+<script>
+export default {
+  mounted(){
+    this.$store.dispatch('closeAllModals')
+    this.$store.dispatch('changeBannerSize', {
+      maxHeight:100
+    })
+  }
+}
+</script>
+
+<style>
+
+</style>

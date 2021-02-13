@@ -2,11 +2,6 @@
     filter: blur(0.5rem);
 }
 
-.input-field {
-    display: grid;
-}
-
-
 .input[type=text],
 .input[type=password],
 .input[type=email] {
@@ -25,29 +20,26 @@
     }
 }
 
-.input.square {
+input.rectangle {
     display      : block;
     border       : 1px solid rgba(0, 0, 0, 0.60);
     border-radius: 0;
-    color:$black;
+    color        : $black;
 }
 
 .image-small {
-    width           : 100px;
-    height          : 100px;
-    background-color: #bbbbbb;
+    width : 100px;
+    height: auto;
 }
 
 .image-medium {
-    width           : 220px;
-    height          : 320px;
-    background-color: #bbbbbb;
+    width : 220px;
+    height: auto;
 }
 
 .image-large {
-    width           : 320px;
-    height          : 420px;
-    background-color: #bbbbbb;
+    width : 320px;
+    height: auto;
 }
 
 .image-small>img,
@@ -72,7 +64,7 @@
 }
 
 .text {
-    font-size: 1.8rem;
+    font-size  : 1.8rem;
     font-size  : $fontsize-default;
     font-weight: normal;
 }
@@ -82,11 +74,11 @@
     font-weight   : 400;
     line-height   : 2.2rem;
     letter-spacing: 0em;
-    color:rgba(0, 0, 0, 0.60)
+    color         : rgba(0, 0, 0, 0.60)
 }
 
-.small{
-    font-size     : 1.4rem;
+.small {
+    font-size: 1.4rem;
 }
 
 .bg-gray-1 {
@@ -139,14 +131,13 @@
     width           : 100vw;
     top             : 0;
     left            : 0;
-    z-index: 1120394937409238482039491203949374092381203949374092384848374091203949374092384823848;
+    z-index         : 9;
 }
 
 .nav-inner {
-    display         : flex;
-    justify-content : space-between;
-    align-items     : center;
-    background-color: $gray-2;
+    display            : flex;
+    justify-content    : space-between;
+    // align-items     : center;
 }
 
 .nav-links {
@@ -183,6 +174,45 @@
     & li:last-child {
         margin-left: 1rem;
     }
+}
+
+.checkout-bag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    cursor             : pointer;
+    &:hover {
+        background-color: $mustard-opacity-70;
+    }
+    &:active,
+    &:focus {
+        background-color: $blood-orange;
+    }
+}
+.checkout-bag>a::before{
+    content: "";
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+    border:0.2rem solid $mustard;
+    display: block;
+    height: 0.6rem;
+    width: 1rem;
+    margin-left: 0.6rem;
+}
+.checkout-bag>a::after{
+    content: '';
+    display: block;
+    width: 2.6rem;
+    height: 3rem;
+    background: $mustard;
+}
+
+.checkout-bag>a{
+    margin-right: 1rem;
+}
+.checkout-bag b{
+    font-weight: 700;
 }
 
 .checkout-button {

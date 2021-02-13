@@ -29,7 +29,11 @@ export default new Vuex.Store({
         city: ''
       },
       orderHistory: []
-    }
+    },
+    bannerSize: {
+      maxHeight: 353,
+      minHeight: 100
+    },
   },
   mutations: {
     /**
@@ -85,11 +89,19 @@ export default new Vuex.Store({
       Object.keys(state.isModalActive).filter(key => key !== nameOfModal).map(key => state.isModalActive[key] = false)
     },
 
+    CLOSE_ALL_MODALS(state){
+      Object.keys(state.isModalActive).map(key => state.isModalActive[key] = false)
+    },
+
     SET_CURRENTUSER(state, payload) {
       let { user, token } = payload
       state.currentUser.role = user.role
       state.currentUser.email = user.email
       state.currentUser.token = token
+    },
+
+    SET_BANNER_SIZE(state, payload) {
+      state.bannerSize = { ...state.bannerSize, ...payload }
     },
   },
   actions: {
@@ -133,8 +145,8 @@ export default new Vuex.Store({
     },
 
     async getUserOrderHistory({ commit, state }) {
-     
-      let response  = await order.getListOfAllOrders(state.currentUser.token)
+
+      let response = await order.getListOfAllOrders(state.currentUser.token)
       // {
       //   "items": [
       //     "243baSCUq5sJGwEg",
@@ -160,7 +172,7 @@ export default new Vuex.Store({
         timeStamp: Date.now(),
         status: 'inProcess',
         items: ids, // Array of product IDs
-        orderValue: state.cart.reduce((a,b) => a.price+b.price)
+        orderValue: state.cart.reduce((a, b) => a.price + b.price)
       }
 
       let response = await order.submitNewOrder(body, state.currentUser.token)
@@ -171,7 +183,7 @@ export default new Vuex.Store({
      * Pass data into endpoiunt
      * @param {Object} payload Data from login form
      */
-    async tryAndLogin({ commit,state }, payload) {
+    async tryAndLogin({ commit, state }, payload) {
       let response = await auth.tryLoginAttempt(payload)
       if (response.error)
         return response
@@ -198,7 +210,28 @@ export default new Vuex.Store({
 
     toggleModal({ commit }, nameOfModal) {
       commit('TOGGLE_MODAL', nameOfModal)
-    }
+    },
+
+    changeBannerSize({ commit }, payload) {
+      commit('SET_BANNER_SIZE', payload)
+    },
+
+    closeAllModals({ commit }, payload) {
+      commit('CLOSE_ALL_MODALS')
+    },
+
+    /**
+     * Reset default page view to defualt values
+     * BannerSize -> {}
+     * Modals -> false
+     */
+    resetInterface({ commit, dispatch }) {
+      dispatch('changeBannerSize', {
+        maxHeight: 353,
+        minHeight: 100
+      });
+      dispatch('CLOSE_ALL_MODALS')
+    },
   },
 
   getters: {
@@ -234,6 +267,10 @@ export default new Vuex.Store({
 
     orderHistory: (state) => {
       return state.currentUser.orderHistory
+    },
+
+    bannerSize: (state) => {
+      return state.bannerSize
     }
   }
   // modules: {}
