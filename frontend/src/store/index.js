@@ -153,7 +153,7 @@ export default new Vuex.Store({
           message: "User not logged in"
         }
       }
-      let response = await API.products.getListOfAllOrders(token)
+      let response = await API.order.getListOfAllOrders(token)
       return response
     },
 
@@ -233,9 +233,9 @@ export default new Vuex.Store({
     /**
      * Orders. #Admin only
      */
-    orders: (state) => {
-      return state.products
-    },
+    // orders: (state) => {
+    //   return state.orders
+    // },
 
     /**
      * Nuvarande cart

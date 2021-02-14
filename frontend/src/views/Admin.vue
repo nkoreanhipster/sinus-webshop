@@ -14,24 +14,34 @@
         </div>
         <div>
           <label for="photo">Product Name</label>
-          <input type="text" name="name" />
+          <input type="text" name="title" v-model="selectedProduct.title"/>
           <label for="short_desc">Product short desc</label>
-          <input type="text" name="short_desc" />
+          <input type="text" name="short_desc" v-model="selectedProduct.shortDesc"/>
           <label for="price">Product Price</label>
-          <input type="text" name="price" />
+          <input type="number" name="price" v-model="selectedProduct.price" />
           <label for="serial">Product Serial</label>
-          <input type="text" name="serial" />
+          <input type="text" name="serial" v-model="selectedProduct.serial" />
         </div>
         <div>
           <label for="long_desc">Product Description</label>
-          <textarea name="long_desc" id="" cols="30" rows="10"></textarea>
+          <textarea name="long_desc" id="" cols="30" rows="10" v-model="selectedProduct.longDesc"></textarea>
+          <button>Uppdatera!</button>
         </div>
       </div>
     </div>
 
+    <h2>Products</h2>
+    <div class="admin-products" v-for="product in products" :key="product._id">
+      <span @click="setSelectedProduct(product)">
+      {{ product }}
+        <button disabled>ta bort</button> 
+        <button disabled>uppdatera</button> 
+      </span>
+    </div>
+
     <h1 class="mt-5">Orders</h1>
     <ul>
-      <li v-for="(item, index) in orderHistoryOfAllUsers" :key="index">
+      <li v-for="item in orderHistoryOfAllUsers" :key="item._id">
         <p>{{ item }}</p>
       </li>
     </ul>
@@ -53,6 +63,7 @@ export default {
   data() {
     return {
       orderHistoryOfAllUsers: [],
+      selectedProduct:{}
     };
   },
   mounted() {
@@ -60,15 +71,25 @@ export default {
     this.$store.dispatch("changeBannerSize", {
       maxHeight: 100,
     });
+    this.getAllOrders();
+    this.loadProductCatalog();
   },
   methods: {
     logout() {
       location.reload();
     },
     async getAllOrders() {
-      let orders = await this.$store.dispatch("getAllOrders");
-      this.orderHistoryOfAllUsers = orders;
+      let res = await this.$store.dispatch("getAllOrders");
+      console.log("????????????", { res });
+      this.orderHistoryOfAllUsers = res;
+      return res;
     },
+    async loadProductCatalog() {
+      let response = await this.$store.dispatch("loadProductsFromDB");
+    },
+    setSelectedProduct(product){
+      this.selectedProduct = product
+    }
   },
   computed: {
     ...mapGetters(["productCatalog", "userRole", "isAuthenticated"]),
@@ -107,5 +128,9 @@ export default {
 .input-box label {
   font-family: Open Sans;
   color: rgba(255, 255, 255, 0.8);
+}
+.admin-products span:hover{
+  color: rgba(206, 105, 105, 0.9);
+  cursor: pointer;
 }
 </style>
