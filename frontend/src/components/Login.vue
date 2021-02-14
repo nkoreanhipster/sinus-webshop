@@ -14,7 +14,11 @@
         placeholder="password"
       />
       <button class="btn-black" @click="Login">Login</button>
-      <p class="error">{{ message }}</p>
+
+      <router-link to="/register">
+        <button class="btn">Register</button>
+      </router-link>
+      <p class="error m-2">{{ message }}</p>
     </form>
   </div>
 </template>
@@ -27,11 +31,6 @@ export default {
       email: "",
       password: "",
     };
-  },
-  computed: {
-    isModalActive() {
-      return this.$store.state.isModalActive.login;
-    },
   },
   mounted() {
     this.message = ""; // Reset on component moun
@@ -55,8 +54,13 @@ export default {
       // Check against database/store
       let res = await this.$store.dispatch("tryAndLogin", payload);
       if (this.$store.state.isAuthenticated) {
-        this.$router.push({ path: "profile" });
+        if (this.$store.getters.userRole === "admin") {
+          this.$router.push({ path: "admin" });
+        } else {
+          this.$router.push({ path: "profile" });
+        }
       }
+      this.message = res;
     },
   },
 };

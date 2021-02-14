@@ -9,7 +9,7 @@
 import { mapGetters } from "vuex";
 import ImageComponent from "@/components/ImageComponent.vue";
 import randomizer from "@/lib/randomizer";
-import { translate } from "@/lib/anime";
+import { translate, hide } from "@/lib/anime";
 export default {
   data() {
     return {
@@ -18,12 +18,17 @@ export default {
   },
   created() {},
   mounted() {
+    this.slogo = randomizer.getRandomSlogo();
+    translate(this.$refs.slogo, 150);
     let loop = () => {
-      this.slogo = randomizer.getRandomSlogo();
-      this.go(150);
       setTimeout(() => {
+        hide(this.$refs.slogo, -150, 800);
+        setTimeout(() => {
+          this.slogo = randomizer.getRandomSlogo();
+          translate(this.$refs.slogo, 150);
+        }, 800);
         loop();
-      }, 6000);
+      }, 8000);
     };
     loop();
   },
@@ -35,9 +40,9 @@ export default {
     },
   },
   methods: {
-    go(n) {
-      translate(this.$refs.slogo, n);
-    },
+    // go(n, delay) {
+    //   translate(this.$refs.slogo, n, delay);
+    // },
   },
   components: { ImageComponent },
 };

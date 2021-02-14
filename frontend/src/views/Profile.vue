@@ -1,13 +1,16 @@
 <template>
   <section class="wrapper">
     <h1 class="mv-5">Order history</h1>
-    <article class="">
-      <div class="flex mb-4">
-        <span class="light mr-2">IN PROGRESS </span>
+
+    <div class="mb-5">
+      <div class="flex">
+        <span class="light mr-2"
+          >IN PROGRESS ({{ ordersInProgress.length }})
+        </span>
         <hr />
       </div>
       <ol>
-        <li class="mb-2" v-for="(item, index) in allProducts" :key="index">
+        <li class="mb-2" v-for="(item, index) in ordersInProgress" :key="index">
           <ol>
             <span class="light">Items: </span>
             <span class="text small" v-for="(x, i) in item.items" :key="i"
@@ -20,27 +23,59 @@
           <p>_id: {{ item._id }}</p>
         </li>
       </ol>
-      <div class="flex mb-4">
-        <span class="light mr-2">DONE </span>
+    </div>
+
+    <div class="mb-5">
+      <div class="flex">
+        <span class="light mr-2">DONE ({{ ordersDone.length }}) </span>
         <hr />
       </div>
       <ol>
-        <li></li>
+        <li class="mb-2" v-for="(item, index) in ordersDone" :key="index">
+          <ol>
+            <span class="light">Items: </span>
+            <span class="text small" v-for="(x, i) in item.items" :key="i"
+              >{{ x }},
+            </span>
+          </ol>
+          <p>Timestamp: {{ item.timeStamp }}</p>
+          <p>Status: {{ item.status }}</p>
+          <p>orderValue: {{ item.orderValue }}:-</p>
+          <p>_id: {{ item._id }}</p>
+        </li>
       </ol>
+    </div>
 
-      <div>
-        <button class="btn-black" @click="logout">Logout</button>
+    <div class="mb-5">
+      <div class="flex mb-4">
+        <span class="light mr-2">PROFILE INFO </span>
+        <hr />
       </div>
-    </article>
+      <div>
+        <span><i>role:</i>{{ currentUser.role }}</span
+        ><br />
+        <span><i>name:</i>{{ currentUser.name }}</span
+        ><br />
+        <span><i>email:</i>{{ currentUser.email }}</span
+        ><br />
+        <span><i>adress:</i>{{ currentUser.adress }}</span
+        ><br />
+      </div>
+    </div>
+
+    <div>
+      <button class="btn-black" @click="logout">Logout</button>
+    </div>
   </section>
 </template>
+
 
 <script>
 import { mapGetters } from "vuex";
 export default {
   // Sad attempt at security
-  beforeCreate() {
-    if (!this.$store.state.isAuthenticated) {
+  created() {
+    if (this.role !== "customer" || !this.authenticated) {
       this.$router.push({ path: "register" });
     }
   },
@@ -62,10 +97,40 @@ export default {
     this.getOrderHistory();
   },
   computed: {
-    ...mapGetters(["orderHistory"]),
-    allProducts() {
-      return this.orderHistory;
+    ...mapGetters([
+      "orderHistory",
+      "currentUser",
+      "isAuthenticated",
+      "userRole",
+    ]),
+    ordersInProgress() {
+      // let orders = this.orderHistory
+      if (!Array.isArray(this.orderHistory) || this.orderHistory.length < 1) {
+        return [];
+      }
+      return this.orderHistory.filter((order) =>
+        /inProcess/i.test(order.status)
+      );
+    },
+    ordersDone() {
+      if (!Array.isArray(this.orderHistory) || this.orderHistory.length < 1) {
+        return [];
+      }
+      return this.orderHistory.filter((order) => /done/i.test(order.status));
+    },
+    getCurrentUser() {
+      return this.currentUser;
+    },
+    role() {
+      return this.userRole;
+    },
+    authenticated() {
+      return this.isAuthenticated;
     },
   },
 };
 </script>
+
+
+<style>
+</style>

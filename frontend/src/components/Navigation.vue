@@ -22,11 +22,18 @@
             </router-link>
           </li>
 
-          <li v-if="isCurrentUserAuthenticated">
+          <li v-if="isCurrentUserAuthenticated && currentUserRole === 'admin'">
+            <router-link class="nav-button" to="/admin">
+              <span>Admin</span>
+            </router-link>
+          </li>
+
+          <li v-else-if="isCurrentUserAuthenticated && currentUserRole === 'customer'">
             <router-link class="nav-button" to="/profile">
               <span>My Account</span>
             </router-link>
           </li>
+
           <li v-else-if="!isCurrentUserAuthenticated">
             <a
               :class="{ active: isLoginModalActive }"
@@ -73,7 +80,12 @@ import PopUp from "./PopUp.vue";
 import Login from "./Login.vue";
 export default {
   computed: {
-    ...mapGetters(["isAuthenticated", "totalItemsInCart", "modalStates"]),
+    ...mapGetters([
+      "isAuthenticated",
+      "totalItemsInCart",
+      "modalStates",
+      "userRole",
+    ]),
     isModalFullCoverActive() {
       return this.modalStates.cover;
     },
@@ -88,6 +100,9 @@ export default {
     },
     itemsInCart() {
       return this.totalItemsInCart;
+    },
+    currentUserRole() {
+      return this.userRole;
     },
   },
   components: { PopUp, CartPopOut, Login },

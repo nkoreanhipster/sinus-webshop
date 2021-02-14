@@ -1,20 +1,52 @@
 <template>
-  <aside :class="{ 'is-active': isActive }">
+  <aside :class="{ 'is-active': isActive }" ref="popup">
     <slot name="login"></slot>
     <slot name="cart"></slot>
   </aside>
 </template>
 
 <script>
+import { translate, hide, test } from "@/lib/anime";
+import { mapGetters } from "vuex";
 export default {
   props: {
     isActive: Boolean,
+  },
+  data() {
+    return {
+      states: {},
+    };
+  },
+  watch: {
+    "$store.state.isModalActive.login": {
+      immediate: true,
+      handler(x) {
+        // todo; looks bad. do manually
+        //test(this.$refs.popup, -150);
+      },
+    },
+    "$store.state.isModalActive.cart": {
+      immediate: true,
+      handler(x) {
+        // todo; looks bad. do manually
+        //test(this.$refs.popup, -150);
+      },
+    },
+  },
+  computed: {
+    ...mapGetters(["modalStates"]),
+    activeModals() {
+      return this.$store.state.isModalActive;
+    },
+    getModalStates() {
+      return this.modalStates;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-aside{
+aside {
   min-width: 32rem;
   position: absolute;
   visibility: hidden;
@@ -24,7 +56,7 @@ aside{
   z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 62px;
 }
-aside.is-active{
+aside.is-active {
   display: block;
   visibility: visible;
 }
@@ -42,7 +74,6 @@ aside::before {
   top: -1rem;
   z-index: 2;
 }
-
 
 // @import "@/styles/_variables.scss";
 // Make sure these are scoped

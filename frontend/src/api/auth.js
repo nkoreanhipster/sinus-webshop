@@ -1,13 +1,8 @@
-let tryLoginAttempt = async function (payload) {
-    let response = await fetch('http://localhost:5000/api/auth/', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+import { POST, GET } from './request';
 
-    let json = await response.json()
+let tryLoginAttempt = async function (payload) {
+    let loginResponse = await POST('auth', payload)
+    let json = await loginResponse.json()
     return json;
 }
 

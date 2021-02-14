@@ -20,12 +20,12 @@
     }
 }
 
-input.rectangle {
-    display      : block;
-    border       : 1px solid rgba(0, 0, 0, 0.60);
-    border-radius: 0;
-    color        : $black;
-}
+// input.rectangle {
+//     display      : block;
+//     border       : 1px solid rgba(0, 0, 0, 0.60);
+//     border-radius: 0;
+//     color        : $black;
+// }
 
 .image-small {
     width : 100px;
@@ -79,6 +79,10 @@ input.rectangle {
 
 .small {
     font-size: 1.4rem;
+}
+
+.bg-gray-0 {
+    background-color: $gray-0;
 }
 
 .bg-gray-1 {

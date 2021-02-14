@@ -1,25 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { fakeProducts } from './dummy-data.js'
-import api from '@/api'
-let { auth, register, products, order } = api
+// import productModule from './products.store'
+// import userModule from './user.store'
+// import uxModule from './ux.store'
+// import orderModule from './orders.store'
+import * as API from '@/api'
+import * as M from './mutationTypes'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  // modules: {
+  //   productModule, userModule, uxModule, orderModule
+  // },
   state: {
-    products: [],             // Produkter som kommer från databasen
-    cart: [],                 // Produkt som kund lägger i sin cart, I stort sett identisk med produktObject 
     isAuthenticated: false,   // Triggar login-modal m.m.
-    isModalActive: {
-      login: false,           // Loginbox
-      cart: false,            // Cart för items
-      cover: false            // Täcker hela sidan med svart bakgrund
-    },
     currentUser: {             // Hämtas vid inlogg, annars denna som default
       _id: '',
-      name: 'Johan Kivi',
-      role: 'anonymous',
+      name: '',
+      role: '',
       email: null,
       token: null,
       password: '',
@@ -30,67 +29,78 @@ export default new Vuex.Store({
       },
       orderHistory: []
     },
+
+    products: [],             // Produkter som kommer från databasen
+    cart: [],                 // Produkt som kund lägger i sin cart, I stort sett identisk med produktObject 
+    isModalActive: {
+      login: false,           // Loginbox
+      cart: false,            // Cart för items
+      cover: false            // Täcker hela sidan med svart bakgrund
+    },
     bannerSize: {
       maxHeight: 353,
       minHeight: 100
     },
+
   },
   mutations: {
     /**
-     * Sätter produkten
-     * @param {Array} payload 
-     */
-    SET_PRODUCTS(state, payload = []) {
+        * Sätter products för display
+        * @param {Array} payload 
+        */
+    [M.SET_PRODUCTS](state, payload = []) {
       state.products = payload
     },
 
     /**
-     * Lägg till produkt i db
+     * Lägger till product i display
      * @param {Object} payload 
      */
-    ADD_PRODUCT(state, payload = {}) {
+    [M.ADD_PRODUCT](state, payload = {}) {
       state.products.push(payload)
     },
 
     /**
-     * Ta bort från db
+     * Tar bort product från display. 
+     * todo;
      * @param {Object} payload 
      */
     REMOVE_PRODUCT(state, payload = {}) {
       state.products = state.products.filter(x => x._id !== payload._id)
     },
 
-    ADD_TO_CART(state, payload) {
+    /**
+     * Lägg till i kundvagnen
+     * @param {Object} payload 
+     */
+    [M.ADD_TO_CART](state, payload) {
       //payload.map(x => x.amount = 1)
       state.cart.push(payload)
     },
 
-    REMOVE_FROM_CART(state, payload) {
+    /**
+     * Ta bort från kundvagnen
+     * @param {Object} payload 
+     */
+    [M.REMOVE_FROM_CART](state, payload) {
       state.cart = state.cart.filter(x => x._id !== payload._id)
     },
 
-    CLEAR_CART(state, payload) {
+    /**
+     * Rensa kundvagnen
+     */
+    [M.CLEAR_CART](state) {
       state.cart = []
     },
 
-    // Uppdatera kundvagnen.
+    /**
+     * Uppdatera kundvagnen.
+     * todo; används eller funkar denna?
+     * @param {*} payload 
+     */
     UPDATE_CART(state, payload) {
       var itemTobeUpdated = state.cart.find(p => p._id === payload._id);
       itemTobeUpdated = payload
-    },
-
-    // Login eller ej,. status
-    TOGGLE_AUTH(state, payload) {
-      state.isAuthenticated = !state.isAuthenticated
-    },
-
-    TOGGLE_MODAL(state, nameOfModal) {
-      state.isModalActive[nameOfModal] = !state.isModalActive[nameOfModal]
-      Object.keys(state.isModalActive).filter(key => key !== nameOfModal).map(key => state.isModalActive[key] = false)
-    },
-
-    CLOSE_ALL_MODALS(state){
-      Object.keys(state.isModalActive).map(key => state.isModalActive[key] = false)
     },
 
     SET_CURRENTUSER(state, payload) {
@@ -100,37 +110,40 @@ export default new Vuex.Store({
       state.currentUser.token = token
     },
 
-    SET_BANNER_SIZE(state, payload) {
+    TOGGLE_AUTH(state, payload) {
+      state.isAuthenticated = !state.isAuthenticated
+    },
+
+    UPDATE_USER(state, payload) {
+      state.currentUser = { ...state.currentUser, ...payload }
+    },
+
+    [M.SET_BANNER_SIZE](state, payload) {
       state.bannerSize = { ...state.bannerSize, ...payload }
+    },
+
+    [M.TOGGLE_MODAL](state, nameOfModal) {
+      state.isModalActive[nameOfModal] = !state.isModalActive[nameOfModal]
+      Object.keys(state.isModalActive).filter(key => key !== nameOfModal).map(key => state.isModalActive[key] = false)
+    },
+
+    [M.CLOSE_ALL_MODALS](state) {
+      Object.keys(state.isModalActive).map(key => state.isModalActive[key] = false)
     },
   },
   actions: {
     async loadProductsFromDB({ commit }) {
-      let response = await products.getProducts()
-      commit('SET_PRODUCTS', response)
+      let response = await API.products.getProducts()
+      commit(M.SET_PRODUCTS, response)
     },
 
     async loadSingleProductbyId({ commit }, id) {
-      let response = await products.getProduct(id)
+      let response = await API.products.getProduct(id)
       return response // Should be json
     },
 
-    async insertNewProduct({ commit }, payload) {
-      let response = await products.newProduct(payload)
-      commit('ADD_PRODUCT', response)
-    },
-
-    async patchProduct({ commit }, payload) {
-      let response = await products.patchProduct(payload)
-      // todo;
-      // Should this update product list? Call the get all action
-      //
-      return response
-    },
-
-    async deleteSingleProductbyId({ commit }, id) {
-      let response = await products.deleteProduct(id)
-      return response
+    addProductToCart({ commit }, payload) {
+      commit(M.ADD_TO_CART, payload)
     },
 
     async getAllOrders({ commit, state }) {
@@ -140,28 +153,13 @@ export default new Vuex.Store({
           message: "User not logged in"
         }
       }
-      let response = await products.getListOfAllOrders(token)
+      let response = await API.products.getListOfAllOrders(token)
       return response
     },
 
     async getUserOrderHistory({ commit, state }) {
-
-      let response = await order.getListOfAllOrders(state.currentUser.token)
-      // {
-      //   "items": [
-      //     "243baSCUq5sJGwEg",
-      //     "TVOvQePGV2B4kPhU"
-      //   ],
-      //   "timeStamp": 1613141407639,
-      //   "status": "inProcess",
-      //   "orderValue": 1798,
-      //   "_id": "bPmN7ifxvkBL3lpx"
-      // }
-      state.currentUser.orderHistory = response
-    },
-
-    addProductToCart({ commit }, payload) {
-      commit('ADD_TO_CART', payload)
+      let response = await API.order.getListOfAllOrders(state.currentUser.token)
+      commit('UPDATE_USER', { orderHistory: response })
     },
 
     async submitNewOrder({ commit, state }) {
@@ -175,16 +173,16 @@ export default new Vuex.Store({
         orderValue: state.cart.reduce((a, b) => a.price + b.price)
       }
 
-      let response = await order.submitNewOrder(body, state.currentUser.token)
+      let response = await API.order.submitNewOrder(body, state.currentUser.token)
       return response
     },
 
     /**
-     * Pass data into endpoiunt
-     * @param {Object} payload Data from login form
-     */
+    * User form
+    * @param {Object} payload 
+    */
     async tryAndLogin({ commit, state }, payload) {
-      let response = await auth.tryLoginAttempt(payload)
+      let response = await API.auth.tryLoginAttempt(payload)
       if (response.error)
         return response
       else if (response.token && response.user) {
@@ -192,32 +190,23 @@ export default new Vuex.Store({
         commit('TOGGLE_AUTH', response)
         commit('TOGGLE_MODAL', 'login')
       }
-
-      //let data = {role:'',isAuthenticated:true}; // todo; fake
-      //;
     },
 
     async tryAndRegister({ commit }, payload) {
-      let response = await register.registerNewUser(payload)
-      if (response.error) {
-        return response
-      }
-      else if (response.token && response.user) {
-        return response
-      }
-      //commit('TOGGLE_AUTH', response);
+      let response = await API.register.registerNewUser(payload)
+      return response
     },
 
     toggleModal({ commit }, nameOfModal) {
-      commit('TOGGLE_MODAL', nameOfModal)
+      commit(M.TOGGLE_MODAL, nameOfModal)
     },
 
     changeBannerSize({ commit }, payload) {
-      commit('SET_BANNER_SIZE', payload)
+      commit(M.SET_BANNER_SIZE, payload)
     },
 
     closeAllModals({ commit }, payload) {
-      commit('CLOSE_ALL_MODALS')
+      commit(M.CLOSE_ALL_MODALS)
     },
 
     /**
@@ -233,22 +222,41 @@ export default new Vuex.Store({
       dispatch('closeAllModals')
     },
   },
-
   getters: {
-    // Alla prdokuter
+    /**
+     * Synliga produkter
+     */
     productCatalog: (state) => {
       return state.products
     },
 
-    modalStates: (state) => {
-      return state.isModalActive
+    /**
+     * Orders. #Admin only
+     */
+    orders: (state) => {
+      return state.products
     },
 
+    /**
+     * Nuvarande cart
+     * @param {Array} cart 
+     */
+    cart: state => {
+      return state.cart
+    },
+
+    /**
+     * Totalt antal varor i cart
+     * @param {Number} length 
+     */
     totalItemsInCart: state => {
       return state.cart.length
     },
 
-    // Beräkna ihop kostnaden av alla produkter
+    /**
+     * Beräkna ihop kostnaden av alla produkter
+     * @return {Number} sum 
+     */
     sumOfCartItems: (state) => {
       if (state.cart.length < 1) {
         return 0
@@ -257,21 +265,34 @@ export default new Vuex.Store({
       return sum
     },
 
-    cart: state => {
-      return state.cart
+    orderHistory: (state, getters, rootState) => {
+      // console.log('isAuthenticated', rootState.userModule.isAuthenticated)
+      // console.log('currentUser', rootState.userModule.currentUser)
+      // console.log('orderHistory', rootState.userModule.currentUser.orderHistory)
+      return state.currentUser.orderHistory
     },
 
     isAuthenticated: (state) => {
       return state.isAuthenticated ? true : false
     },
 
-    orderHistory: (state) => {
-      return state.currentUser.orderHistory
-    },
-
     bannerSize: (state) => {
       return state.bannerSize
-    }
+    },
+
+    modalStates: (state) => {
+      return state.isModalActive
+    },
+
+    currentUser: (state) => {
+      return state.currentUser
+    },
+
+    userRole: (state) => {
+      if(!state.currentUser.role){
+        return ''
+      }
+      return state.currentUser.role
+    },
   }
-  // modules: {}
 })

@@ -42,7 +42,7 @@ $sizes:0.25, 0.50, 1, 2, 4, 8, 16;
         padding-bottom:#{$size}rem;
     }
     .pt-#{$i} {
-        padding-bottom:#{$size}rem;
+        padding-top:#{$size}rem;
     }
     .pb-#{$i} {
         padding-bottom:#{$size}rem;

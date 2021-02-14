@@ -9,14 +9,20 @@ let url = (path = '') => new URL(path, endpointBaseUrl).href
  */
 export const POST = function (path, payload, token) {
     //console.log(`%cPOSTING REQUST TO ${url(path)}`,`color:darkgreen;font-size:25px;`, { payload, token })
+
+    let headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+    
+    if(token){
+        headers.Authorization = `Bearer ${token}`
+    }
+
     return fetch(url(path), {
         method: 'POST',
         body: JSON.stringify(payload),
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${token}`, 
-        }
+        headers
     })
 }
 
