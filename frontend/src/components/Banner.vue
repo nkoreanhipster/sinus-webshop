@@ -1,7 +1,8 @@
 <template>
   <div id="banner" :style="getBannerSize">
+    <!-- <span style="float: left; width:50rem; height:50rem; z-index:3; background-color:green;"></span> -->
     <span class="slogo" ref="slogo">{{ slogo }}</span>
-    <ImageComponent :src="'skateboard-background-1.jpg'" />
+    <ImageComponent :src="'skate_pool_2.jpg'" />
   </div>
 </template>
 
@@ -67,18 +68,21 @@ export default {
 }
 .slogo {
   z-index: 3;
-  font-size: 2.2rem;
+  font-size: 5rem;
   font-weight: 800;
+  float: right;
   text-align: center;
   position: absolute;
-  // top: 50%;
-  // left: 50%;
+  width: 40rem;
+  height: 800rem;
+  top: 20%;
+  left: 50%;
   // transform: translate(-50%, -50%);
   //transition: transform 2200ms, opacity 100ms ease, left 1000ms;
-  top: 48%;
-  white-space: nowrap;
+  // top: 48%;
+  word-wrap: break-word;
   color: $blood-orange;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
+  // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
 }
 // .fade-enter {
 //   opacity: 0;

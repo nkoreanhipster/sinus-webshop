@@ -29,7 +29,7 @@ let slogos = [
     "We’re on the top of everything",
     "We work to impress",
     "We’re better than the rest",
-    "Getting shit done",
+    "Getting stuff done",
     "You dream it. We build it.",
     "Strategy before tactics.",
     "Marketing is a habit, not an event.",

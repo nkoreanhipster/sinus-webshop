@@ -53,11 +53,11 @@
             </div>
           </li>
 
-          <li>
+          <!-- <li>
             <div class="checkout-button" @click="toggleModel('cart')">
               <div>{{ itemsInCart }}</div>
             </div>
-          </li>
+          </li> -->
         </ol>
       </nav>
     </div>

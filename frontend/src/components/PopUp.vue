@@ -53,7 +53,7 @@ aside {
   display: none;
   transition: 0.5s ease;
   right: 0;
-  z-index: 2;
+  z-index: 4;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 62px;
 }
 aside.is-active {
