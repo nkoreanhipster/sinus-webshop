@@ -8,15 +8,26 @@
 
     <div class="input-box">
       <div class="columns">
-        <div class="input-file-box">
+        <div
+          class="input-file-box"
+          :style="{ backgroundImage: `url(${selectedProduct.imgFile})` }"
+          :data-url="selectedProduct.imgFile"
+        >
           <label for="photo">Product Photo</label>
           <input name="photo" type="file" />
+          <!-- todo; fix -->
+          <label for="photo">Product Photo</label>
+          <input name="photo_url" type="text" v-model="selectedProduct.imgFile"/>
         </div>
         <div>
           <label for="photo">Product Name</label>
-          <input type="text" name="title" v-model="selectedProduct.title"/>
+          <input type="text" name="title" v-model="selectedProduct.title" />
           <label for="short_desc">Product short desc</label>
-          <input type="text" name="short_desc" v-model="selectedProduct.shortDesc"/>
+          <input
+            type="text"
+            name="short_desc"
+            v-model="selectedProduct.shortDesc"
+          />
           <label for="price">Product Price</label>
           <input type="number" name="price" v-model="selectedProduct.price" />
           <label for="serial">Product Serial</label>
@@ -24,8 +35,27 @@
         </div>
         <div>
           <label for="long_desc">Product Description</label>
-          <textarea name="long_desc" id="" cols="30" rows="10" v-model="selectedProduct.longDesc"></textarea>
-          <button>Uppdatera!</button>
+          <textarea
+            name="long_desc"
+            id=""
+            cols="30"
+            rows="10"
+            v-model="selectedProduct.longDesc"
+          ></textarea>
+          <button
+            class="btn-mustard"
+            :disabled="patchMode !== 'edit'"
+            @click="updateProduct"
+          >
+            Uppdatera!
+          </button>
+          <button
+            class="btn-mustard"
+            :disabled="patchMode !== 'add'"
+            @click="newProduct"
+          >
+            Spara!
+          </button>
         </div>
       </div>
     </div>
@@ -33,9 +63,9 @@
     <h2>Products</h2>
     <div class="admin-products" v-for="product in products" :key="product._id">
       <span @click="setSelectedProduct(product)">
-      {{ product }}
-        <button disabled>ta bort</button> 
-        <button disabled>uppdatera</button> 
+        {{ product }}
+        <button @click="deleteProduct(product)">ta bort</button>
+        <button disabled @click="setSelectedProduct(product)">uppdatera</button>
       </span>
     </div>
 
@@ -54,6 +84,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { randomVersionNumber } from "@/lib/randomizer";
 export default {
   created() {
     if (this.role !== "admin" || !this.authenticated) {
@@ -63,7 +94,11 @@ export default {
   data() {
     return {
       orderHistoryOfAllUsers: [],
-      selectedProduct:{}
+      selectedProduct: {},
+      inputboxImgSource:
+        "https://api.jkb.zone/images/de595758ab2eb950942758b2f4f8d8a545b3b82a.XLb6IeF.png",
+      inputboxDataUrl: "",
+      patchMode: "add",
     };
   },
   mounted() {
@@ -74,22 +109,51 @@ export default {
     this.getAllOrders();
     this.loadProductCatalog();
   },
+  watch: {
+    "selectedProduct.imgFile"() {
+      console.log("!!!");
+    },
+  },
   methods: {
     logout() {
       location.reload();
     },
     async getAllOrders() {
       let res = await this.$store.dispatch("getAllOrders");
-      console.log("????????????", { res });
       this.orderHistoryOfAllUsers = res;
       return res;
     },
     async loadProductCatalog() {
       let response = await this.$store.dispatch("loadProductsFromDB");
     },
-    setSelectedProduct(product){
-      this.selectedProduct = product
-    }
+    setSelectedProduct(product) {
+      this.patchMode = "edit";
+      let rv = randomVersionNumber();
+      product.imgFile = this.removeQuestionParameters(product.imgFile);
+      // Världens fulhack
+      if (this.selectedProduct.imgFile === product.imgFile) {
+        product.imgFile = `${product.imgFile}${rv}`;
+      }
+      this.selectedProduct = product;
+    },
+    removeQuestionParameters(str) {
+      return str.split("?").shift();
+    },
+    async newProduct() {
+      let res = await this.$store.dispatch("addProduct", this.selectedProduct);
+      console.log("newProduct", { res });
+    },
+    async deleteProduct(product) {
+      let res = await this.$store.dispatch("deleteProduct", product._id);
+      console.log("deleteProduct", { res });
+    },
+    async updateProduct() {
+      let res = await this.$store.dispatch(
+        "updateProduct",
+        this.selectedProduct
+      );
+      console.log("updateProduct", { res });
+    },
   },
   computed: {
     ...mapGetters(["productCatalog", "userRole", "isAuthenticated"]),
@@ -129,8 +193,17 @@ export default {
   font-family: Open Sans;
   color: rgba(255, 255, 255, 0.8);
 }
-.admin-products span:hover{
+.admin-products span:hover {
   color: rgba(206, 105, 105, 0.9);
   cursor: pointer;
+}
+.input-file-box {
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: scroll;
+}
+.input-file-box::after {
+  content: attr(data-url);
+  color: $blood-orange;
 }
 </style>

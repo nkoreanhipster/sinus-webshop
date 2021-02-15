@@ -61,6 +61,12 @@ export const getRandomSlogo =()=>{
     return slogos[(0).randomIntInclusive(0, slogos.length-1)];
 }
 
+export const randomVersionNumber=()=>{
+    let prefix = (0).randomComboIntInclusive(0,9,1).join('')
+    let suffix = (0).randomComboIntInclusive(0,9,12).join('')
+    return `?v=${prefix}.${suffix}`
+}
+
 export default{
     getRandomSlogo
 }

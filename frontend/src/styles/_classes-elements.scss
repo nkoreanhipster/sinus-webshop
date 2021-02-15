@@ -1,3 +1,29 @@
+.btn-mustard {
+    background-color: $mustard;
+    border-radius   : 1rem;
+    font-family     : $font-family;
+    font-size       : 1.8rem;
+    font-weight     : 600;
+    text-align      : center;
+    padding         : 1rem 2rem;
+    border          : none;
+    color           : $white;
+    cursor          : pointer;
+
+    &:active:not([disabled]) {
+        animation: button-click 500ms;
+    }
+
+    &:hover:not([disabled]) {
+        background-color: $mustard-opacity-70;
+    }
+
+    &[disabled],
+    &[disabled]:hover {
+        opacity         : 0.2;
+    }
+}
+
 .btn-black {
     background-color: $black;
     border-radius   : 1rem;
@@ -18,15 +44,16 @@
         background-color: $black-hover;
     }
 
-    &[disabled], &[disabled]:hover {
-        opacity: 0.5;
+    &[disabled],
+    &[disabled]:hover {
+        opacity         : 0.5;
         background-color: gray;
     }
 }
 
 .logo {
 
-    display: flex;
+    display    : flex;
     align-items: center;
 
     &:hover {

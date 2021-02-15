@@ -9,7 +9,7 @@
         <a class=""></a>
       </div>
       <img
-        :src="require(`@/assets/${product.imgFile}`)"
+        :src="`${product.imgFile}`"
         alt="/images/gallagher-not.found.png"
         class="image blur-in"
         @click.self="goToDetailedView"
