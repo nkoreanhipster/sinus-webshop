@@ -1,3 +1,4 @@
+import { POST, GET, DELETE, PATCH } from './request';
 /**
  * Getta en lista med alla products
  */
@@ -31,48 +32,30 @@ let getProduct = async (id) => {
  * Skapa ny produkt
  * @param {Object} product 
  */
-let newProduct = async (product) => {
-    let response = await fetch('http://localhost:5000/api/products/', {
-        method: 'POST',
-        body: JSON.stringify(product),
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
-
+let newProduct = async (product, token) => {
+    let response = await POST('products', product, token)
     let json = await response.json()
     return json
 }
 
-let patchProduct = async (product) => {
-
-    let { _id } = product
-
-    let response = await fetch(`http://localhost:5000/api/products/${_id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(product),
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
+/**
+ * Update existing product in db
+ * @param {Object} product 
+ */
+let patchProduct = async (payload, token) => {
+    let { _id } = payload
+    let response = await PATCH(`products/${_id}`, payload, token)
     let json = await response.json()
     return json
 }
 
 
 /**
- * 
+ * Remove existing product from db
  * @param {Number} id
  */
-let deleteProduct = async (id) => {
-    let response = await fetch(`http://localhost:5000/api/products/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
+let deleteProduct = async (id, token) => {
+    let response = await DELETE(`products/${id}`, token)
     let json = await response.json()
     return json
 }

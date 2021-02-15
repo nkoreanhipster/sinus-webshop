@@ -3,7 +3,7 @@
     <div class="image-medium img-container">
       <img src="~@/assets/bag.svg" class="bag" @click="addToCart(product)" />
       <img
-        :src="require(`@/assets/${product.imgFile}`)"
+        :src="`${product.imgFile}`"
         alt="/images/gallagher-not.found.png"
         class="image blur-in"
         @click.self="goToDetailedView"

@@ -142,6 +142,23 @@ export default new Vuex.Store({
       return response // Should be json
     },
 
+    async addProduct({ commit, state  }, payload) {
+      let response = await API.products.newProduct(payload, state.currentUser.token)
+      return response
+    },
+
+    async deleteProduct({ commit, dispatch, state }, id) {
+      let token = state.currentUser.token
+      let response = await API.products.deleteProduct(id, token)
+      dispatch('loadProductsFromDB') // Reload products todo; Could probably use commit('UPDATE_CART') to avoid reloading whole db
+      return response
+    },
+
+    async updateProduct({ commit, state  }, payload) {
+      let response = await API.products.patchProduct(payload, state.currentUser.token)
+      return response
+    },
+
     addProductToCart({ commit }, payload) {
       commit(M.ADD_TO_CART, payload)
     },
