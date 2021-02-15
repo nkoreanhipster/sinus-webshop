@@ -16,14 +16,17 @@
       />
     </div>
     <div class="">
-      <div>
+      <div class="flex">
         <span class="title"> {{ product.title }}</span>
-        <span class="text">
-          {{ product.price }} <span class="small">SEK</span>
-        </span>
-        <div>
-          <i>{{ product.shortDesc }}</i>
-        </div>
+        <p>
+          <span class="text">
+            {{ product.price }}
+          </span>
+          <span class="small"> SEK</span>
+        </p>
+      </div>
+      <div>
+        <i>{{ product.shortDesc }}</i>
       </div>
     </div>
   </article>
@@ -60,7 +63,7 @@ export default {
   justify-content: flex-end;
   align-items: center;
   transition: background-color 100ms ease;
-  border:0.4rem solid transparent; // To avoid hover wompyness
+  border: 0.4rem solid transparent; // To avoid hover wompyness
 
   & > div:nth-of-type(1) {
     padding-top: 4rem;
@@ -76,21 +79,29 @@ export default {
   }
 
   &:hover {
-    // background-color: rgba(0, 0, 0, 0.5);
-    border:0.4rem solid $success-hover;
+    background-color: $gray-1;
+    // border: 0.4rem solid $success-hover;
     cursor: pointer;
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .flex {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .text {
+    font-size: 2.4rem;
+    font-weight: 800;
   }
 }
 .img-container {
   position: relative;
-  // background-image: "~@/assets/bag.svg";
-  // width: 21rem;
   & .image {
     position: relative;
-    // top: 0;
-    // left: 0;
-    // width: 100%;
-    // height: auto;
   }
 
   & .bag {
@@ -99,18 +110,10 @@ export default {
     right: 0;
     z-index: 1;
     cursor: pointer;
-    // border-radius: 50%;
-    // width: 3.6rem;
-    // height: 3.6rem;
-    // text-align: center;
-    // padding: 0.3rem;
-    // background-color: rgba(0, 0, 0, 0.5);
     &:hover {
       color: hotpink;
-      // background-color: black;
     }
     &:active {
-      // background-color: rgba(102, 148, 64, 0.5);
       cursor: pointer;
     }
   }

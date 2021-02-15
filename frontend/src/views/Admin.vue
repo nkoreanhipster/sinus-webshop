@@ -123,7 +123,7 @@ export default {
   mounted() {
     this.$store.dispatch("closeAllModals");
     this.$store.dispatch("changeBannerSize", {
-      maxHeight: 100,
+      maxHeight: 200,
     });
     this.getAllOrders();
     this.loadProductCatalog();

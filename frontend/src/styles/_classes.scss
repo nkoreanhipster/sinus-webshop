@@ -122,6 +122,14 @@
     background-color: $blood-orange;
 }
 
+.failure {
+    color: $failure;
+}
+
+.success {
+    color:$success;
+}
+
 .modal {
     visibility: hidden;
     display   : none;

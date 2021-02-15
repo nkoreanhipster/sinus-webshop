@@ -38,6 +38,10 @@ export default {
 article {
   display: flex;
 }
+h2, p{
+  margin: 0.4rem;
+  
+}
 // article > * {
 //   flex: 1;
 // }

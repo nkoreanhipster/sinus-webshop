@@ -9,12 +9,12 @@
           <hr />
         </div>
 
-      <ProductMiniature
-        v-for="item in cartItems"
-        :key="item.obj._id"
-        :product="item.obj"
-        :duplicateCount="item.duplicateCount || 0"
-      />
+        <ProductMiniature
+          v-for="item in cartItems"
+          :key="item.obj._id"
+          :product="item.obj"
+          :duplicateCount="item.duplicateCount || 0"
+        />
         <hr class="dotted" />
         <p class="text">TOTAL: {{ cartItemSum }}</p>
       </div>
@@ -26,14 +26,19 @@
         </div>
 
         <label class="light small" for="name">Name</label>
-        <input type="text" class="" name="name" v-model="user.name" :required="user.name.length > 1"/>
+        <input type="text" class="" name="name" v-model="user.name" />
         <label class="light small" for="street">Street Adress</label>
-        <input type="text" class="" name="street" v-model="user.street" :required="user.name.length > 1"/>
+        <input type="text" class="" name="street" v-model="user.street" />
         <div class="">
           <label class="light small half-width" for="city">City</label>
-          <input type="text" class="half-width" name="city" v-model="user.city" :required="user.name.length > 1"/>
+          <input
+            type="text"
+            class="half-width"
+            name="city"
+            v-model="user.city"
+          />
           <label class="light small half-width" for="zip">Zip Code</label>
-          <input type="text" class="half-width" name="zip" v-model="user.zip" :required="user.name.length > 1"/>
+          <input type="text" class="half-width" name="zip" v-model="user.zip" />
         </div>
       </div>
 
@@ -44,20 +49,44 @@
         </div>
 
         <label class="light small" for="name">Card Owner</label>
-        <input type="text" class="" name="card_owner" v-model="user.card_owner" :required="user.name.length > 1"/>
+        <input
+          type="text"
+          class=""
+          name="card_owner"
+          v-model="user.card_owner"
+        />
         <label class="light small" for="card_number">Card Number</label>
-        <input type="text" class="" name="card_number" v-model="user.card_number" :required="user.name.length > 1"/>
+        <input
+          type="text"
+          class=""
+          name="card_number"
+          v-model="user.card_number"
+        />
         <div>
-          <label class="light small half-width" for="valid_until">Valid until</label>
-          <input type="date" class="half-width" v-model="user.valid_until" name="valid_until" :required="user.name.length > 1"/>
+          <label class="light small half-width" for="valid_until"
+            >Valid until</label
+          >
+          <input
+            type="date"
+            class="half-width"
+            v-model="user.valid_until"
+            name="valid_until"
+          />
           <label class="light small half-width" for="ccv">CCV</label>
-          <input type="text" class="half-width" v-model="user.ccv" name="ccv" :required="user.name.length > 1"/>
+          <input type="text" class="half-width" v-model="user.ccv" name="ccv" />
         </div>
       </div>
     </div>
 
     <div class="p-3" style="text-align: right">
-      <button class="btn-black" @click="order">Take my Money!</button>
+      <b
+        class="p-3"
+        :class="{ 'failure': !orderSent, 'success': orderSent }"
+        >{{ message }}</b
+      >
+      <button class="btn-black" :class="{ 'failure': !orderSent, 'success': orderSent }" @click="order">
+        Take my Money!
+      </button>
     </div>
   </section>
 </template>
@@ -65,38 +94,37 @@
 <script>
 import { mapGetters } from "vuex";
 import ProductMiniature from "@/components/ProductMiniature.vue";
-// import {
-//   addDuplicateCountProperty,
-//   removeDuplicatesFromArray,
-// } from "@/lib/array-helpers.js";
-
 export default {
   metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'CHECKOUT'
-    },
-    data() {
+    // if no subcomponents specify a metaInfo.title, this title will be used
+    title: "CHECKOUT",
+  },
+  data() {
     return {
       user: {
-        name: '',
-        street: '',
-        city: '',
-        zip: ',',
-        card_owner:'',
-        card_number:'',
-        valid_until: '',
-        ccv: '',
-      }
+        name: "",
+        street: "",
+        city: "",
+        zip: ",",
+        card_owner: "",
+        card_number: "",
+        valid_until: "",
+        ccv: "",
+      },
+      message: "",
+      orderSent: false,
     };
   },
   created() {
     this.$store.dispatch("closeAllModals");
     this.$store.dispatch("changeBannerSize", { maxHeight: 200 });
+    this.message = "";
+    this.orderSent = false;
   },
   computed: {
     ...mapGetters(["cart", "totalItemsInCart", "sumOfCartItems"]),
     cartItems() {
-       let cart = this.cart
+      let cart = this.cart;
       // Oh god.
       // Strangle me.
       cart.sort((a, b) => (a._id > b._id ? 1 : b._id > a._id ? -1 : 0));
@@ -113,20 +141,25 @@ export default {
     cartItemSum() {
       return this.sumOfCartItems;
     },
-    // userCartItems() {
-    //   let myCart = this.cart;
-    //   addDuplicateCountProperty(myCart);
-    //   myCart = removeDuplicatesFromArray(myCart);
-    //   return myCart;
-    // },
-    // getMeMyCartItemsSumTotalYeah() {
-    //   return this.sumOfCartItems;
-    // },
   },
   methods: {
+    // Activated on button click
     async order() {
+      this.message = "";
+      this.orderSent = false;
+      // Loop userdata and check if any value is bad length
+      let errorCounts = Object.entries(this.user).filter(
+        ([key, val]) => val.length < 1
+      ).length;
+
+      if (errorCounts > 0) {
+        this.message = "Something went wrong. Stuff not filled in";
+        return;
+      }
       let response = await this.$store.dispatch("submitNewOrder", this.user);
-      alert(JSON.stringify(response));
+      this.orderSent = true;
+      this.message = response;
+      // alert(JSON.stringify(response));
     },
   },
   components: { ProductMiniature },

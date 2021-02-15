@@ -6,6 +6,7 @@
         :key="item.id"
         :product="item"
       ></ProductItem>
+      <img src="@/assets/cool_skate_dude.jpg" alt="">
     </div>
     <Modal :product="selectedItem"></Modal>
   </section>
