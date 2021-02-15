@@ -9,11 +9,12 @@
           <hr />
         </div>
 
-        <ProductMiniature
-          v-for="item in cartItems"
-          :key="item.id"
-          :product="item"
-        />
+      <ProductMiniature
+        v-for="item in cartItems"
+        :key="item.obj._id"
+        :product="item.obj"
+        :duplicateCount="item.duplicateCount || 0"
+      />
         <hr class="dotted" />
         <p class="text">TOTAL: {{ cartItemSum }}</p>
       </div>
@@ -47,7 +48,9 @@
         <label class="light small" for="card_number">Card Number</label>
         <input type="text" class="" name="card_number" />
         <div>
-          <label class="light small half-width" for="valid_until">Valid until</label>
+          <label class="light small half-width" for="valid_until"
+            >Valid until</label
+          >
           <input type="date" class="half-width" name="valid_until" />
           <label class="light small half-width" for="ccv">CCV</label>
           <input type="text" class="half-width" name="ccv" />
@@ -77,7 +80,19 @@ export default {
   computed: {
     ...mapGetters(["cart", "totalItemsInCart", "sumOfCartItems"]),
     cartItems() {
-      return this.cart;
+       let cart = this.cart
+      // Oh god.
+      // Strangle me.
+      cart.sort((a, b) => (a._id > b._id ? 1 : b._id > a._id ? -1 : 0));
+      var out = [];
+      for (var j = 0; j < cart.length; j++) {
+        const obj = cart[j];
+        let found = out.find((x) => x.obj._id === obj._id);
+        if (found) continue;
+        let duplicateCount = cart.filter((x) => x._id === obj._id).length;
+        out.push({ obj, duplicateCount });
+      }
+      return out;
     },
     cartItemSum() {
       return this.sumOfCartItems;
@@ -103,7 +118,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.half-width{
+.half-width {
   max-width: 49%;
 }
 </style>

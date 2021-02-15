@@ -8,19 +8,25 @@
 
     <div class="input-box">
       <div class="columns">
-        <div
-          class="input-file-box"
-          :style="{ backgroundImage: `url(${selectedProduct.imgFile})` }"
-          :data-url="selectedProduct.imgFile"
-        >
-          <label for="photo">Product Photo</label>
-          <input name="photo" type="file" />
-          <!-- todo; fix -->
-          <label for="photo">Product Photo</label>
-          <input name="photo_url" type="text" v-model="selectedProduct.imgFile"/>
+        <div>
+          <label class="" for="photo">Product Photo</label>
+          <div
+            class="input-file-box"
+            :style="{ backgroundImage: `url(${selectedProduct.imgFile})` }"
+            :data-url="selectedProduct.imgFile"
+          >
+            <input name="photo" type="file" />
+            <!-- todo; fix -->
+            <label for="photo">Product Photo</label>
+            <input
+              name="photo_url"
+              type="text"
+              v-model="selectedProduct.imgFile"
+            />
+          </div>
         </div>
         <div>
-          <label for="photo">Product Name</label>
+          <label class="" for="photo">Product Name</label>
           <input type="text" name="title" v-model="selectedProduct.title" />
           <label for="short_desc">Product short desc</label>
           <input
@@ -29,12 +35,18 @@
             v-model="selectedProduct.shortDesc"
           />
           <label for="price">Product Price</label>
-          <input type="number" name="price" v-model="selectedProduct.price" />
+          <input
+            type="number"
+            min="0"
+            max="99999999999"
+            name="price"
+            v-model.number="selectedProduct.price"
+          />
           <label for="serial">Product Serial</label>
           <input type="text" name="serial" v-model="selectedProduct.serial" />
         </div>
         <div>
-          <label for="long_desc">Product Description</label>
+          <label class="" for="long_desc">Product Description</label>
           <textarea
             name="long_desc"
             id=""
@@ -43,14 +55,14 @@
             v-model="selectedProduct.longDesc"
           ></textarea>
           <button
-            class="btn-mustard"
+            class="btn-mustard mv-3 mr-3"
             :disabled="patchMode !== 'edit'"
             @click="updateProduct"
           >
             Uppdatera!
           </button>
           <button
-            class="btn-mustard"
+            class="btn-mustard mv-3"
             :disabled="patchMode !== 'add'"
             @click="newProduct"
           >
@@ -60,7 +72,9 @@
       </div>
     </div>
 
-    <h2>Products</h2>
+    <span>{{ message }}</span>
+
+    <h2 class="mt-3">Products</h2>
     <div class="admin-products" v-for="product in products" :key="product._id">
       <span @click="setSelectedProduct(product)">
         {{ product }}
@@ -99,6 +113,7 @@ export default {
         "https://api.jkb.zone/images/de595758ab2eb950942758b2f4f8d8a545b3b82a.XLb6IeF.png",
       inputboxDataUrl: "",
       patchMode: "add",
+      message: "",
     };
   },
   mounted() {
@@ -141,18 +156,21 @@ export default {
     },
     async newProduct() {
       let res = await this.$store.dispatch("addProduct", this.selectedProduct);
-      console.log("newProduct", { res });
+      this.selectedProduct = {};
+      this.message = res;
     },
     async deleteProduct(product) {
       let res = await this.$store.dispatch("deleteProduct", product._id);
-      console.log("deleteProduct", { res });
+      this.selectedProduct = {};
+      this.message = res;
     },
     async updateProduct() {
       let res = await this.$store.dispatch(
         "updateProduct",
         this.selectedProduct
       );
-      console.log("updateProduct", { res });
+      this.selectedProduct = {};
+      this.message = res;
     },
   },
   computed: {
@@ -193,6 +211,9 @@ export default {
   font-family: Open Sans;
   color: rgba(255, 255, 255, 0.8);
 }
+.input-box label {
+  margin-bottom: 1rem;
+}
 .admin-products span:hover {
   color: rgba(206, 105, 105, 0.9);
   cursor: pointer;
@@ -201,6 +222,7 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   overflow: scroll;
+  margin: 0.4rem 0;
 }
 .input-file-box::after {
   content: attr(data-url);

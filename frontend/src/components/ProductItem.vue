@@ -57,9 +57,10 @@ export default {
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   transition: background-color 100ms ease;
+  border:0.4rem solid transparent; // To avoid hover wompyness
 
   & > div:nth-of-type(1) {
     padding-top: 4rem;
@@ -75,7 +76,8 @@ export default {
   }
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+    // background-color: rgba(0, 0, 0, 0.5);
+    border:0.4rem solid $success-hover;
     cursor: pointer;
   }
 }

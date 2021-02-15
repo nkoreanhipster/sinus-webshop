@@ -10,7 +10,7 @@ $gap               :1.2rem;
 $white                  : #FFF;
 $black                  : #000;
 $black-hover            : #222324;
-$gray-0                 : #E1E1E1; 
+$gray-0                 : #E1E1E1;
 $gray-1                 : #EAE7DE; // Part of mood board. HEADER
 $gray-x                 : #F2F0F0; // Background of products
 $gray-2                 : #D7DACC; // FOOTER
@@ -29,8 +29,13 @@ $blood-orange-opacity-60: rgba(239, 119, 69, 0.60);
 $blood-orange-opacity-50: rgba(239, 119, 69, 0.50);
 $blood-orange-opacity-40: rgba(239, 119, 69, 0.40);
 $blood-orange-opacity-30: rgba(239, 119, 69, 0.30);
-$success                : #B0D527;
-$failure                : #d52727;
+$success                : rgba(176, 213, 39, 1);
+$success-hover          : rgb(138, 168, 31);
+$success-click          : rgb(67, 82, 15);
+$failure                : rgba(213, 39, 39, 1);
+$failure-hover          : rgba(213, 39, 39, 1);
+$failure-click          : rgba(213, 39, 39, 1);
+
 
 // Typography
 $fontsize-reset-percentage:62.5%; // 1 rem == 10px

@@ -4,7 +4,8 @@
 
 .input[type=text],
 .input[type=password],
-.input[type=email] {
+.input[type=email]{
+
     display      : block;
     font-family  : $font-family;
     color        : $gray-4;
@@ -180,87 +181,98 @@
     }
 }
 
-.checkout-bag{
-    display: flex;
+.checkout-bag {
+    display        : flex;
     justify-content: center;
-    align-items: center;
-    padding: 1rem 1rem;
-    cursor             : pointer;
+    align-items    : center;
+    padding        : 1rem 1rem;
+    cursor         : pointer;
+
     &:hover {
         background-color: $mustard-opacity-70;
     }
+
     &:active,
     &:focus {
         background-color: $blood-orange;
     }
 }
 
-.checkout-bag.hoverride{
-
-    // &:hover::after {
-    //     background-color: darkkhaki !important;
-    //     border-color: red !important;
-    // }
-
+.checkout-bag.hoverride {
     &:hover {
         background-color: transparent;
     }
 }
 
-.checkout-bag.hoverride>a{
-    background-color:inherit;
-    transition: 600ms ease;
-    transform:scale(1);
+.checkout-bag.hoverride>a {
+    background-color: inherit;
+    transition      : 200ms ease;
+    line-height     : 2.8rem;
+
+    &::before {
+        transition: 300ms ease-out;
+        transform : scale(1.1);
+    }
+
+    &::after {
+        transition: 300ms ease-out;
+        transform : scale(1.1);
+    }
+
+    &:hover::before {
+        border-color: $success;
+        transition  : 200ms ease;
+        transform   : scale(1.4);
+    }
+
+    &:hover::after {
+        //border:0.2rem solid hotpink;
+        content         : "+";
+        color           : $white;
+        font-size       : 3.2rem;
+        text-align      : center;
+        background-color: $success;
+        transition      : 200ms ease;
+        transform       : scale(1.4);
+    }
+
+    &:active::before,
+    &:focus::before {
+        border-color: $success-click;
+    }
+
+    &:active::after,
+    &:focus::after {
+        background-color: $success-click;
+
+    }
+
 }
 
-.checkout-bag.hoverride>a:hover::before{
-    //border:0.2rem solid hotpink;
-    border-color: $success ;
-    transition: 200ms ease;
-    transform:scale(1.4);
-}
-
-.checkout-bag.hoverride>a:hover::after{
-    //border:0.2rem solid hotpink;
-    content:"+";
-    color:$white;
-    font-size:3.2rem;
-    text-align:center;
-    background-color: $success ;
-    transition: 200ms ease;
-    transform:scale(1.4);
-}
-
-.checkout-bag.hoverride>a::before{
-    //border:0.2rem solid hotpink;
-}
-
-.checkout-bag.hoverride>a::after{
-    //background: darkmagenta;
-}
-
-.checkout-bag>a::before{
-    content: "";
-    border-top-left-radius: 20%;
+.checkout-bag>a::before {
+    content                : "";
+    border-top-left-radius : 20%;
     border-top-right-radius: 20%;
-    border:0.2rem solid $mustard;
-    display: block;
-    height: 0.6rem;
-    width: 1rem;
-    margin-left: 0.6rem;
+    border                 : 0.2rem solid $mustard;
+    display                : block;
+    height                 : 0.6rem;
+    width                  : 1rem;
+    margin-left            : 0.6rem;
 }
-.checkout-bag>a::after{
-    content: '';
-    display: block;
-    width: 2.6rem;
-    height: 3rem;
+
+.checkout-bag>a::after {
+    content   : '';
+    display   : block;
+    width     : 2.6rem;
+    height    : 3rem;
     background: $mustard;
 }
 
-.checkout-bag>a{
+.checkout-bag>a {
     margin-right: 1rem;
 }
-.checkout-bag b{
+
+.checkout-bag b {
     font-weight: 700;
 }
 

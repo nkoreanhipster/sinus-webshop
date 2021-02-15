@@ -83,7 +83,16 @@ export default new Vuex.Store({
      * @param {Object} payload 
      */
     [M.REMOVE_FROM_CART](state, payload) {
-      state.cart = state.cart.filter(x => x._id !== payload._id)
+      for (let cartItem of state.cart) {
+        if (cartItem._id === payload._id) {
+          state.cart.splice(state.cart.indexOf(cartItem), 1)
+          break;
+        }
+      }
+      // let index = state.cart.findIndex(x => x._id == payload._id)
+      // console.log({index})
+      // if(index < 0)return;
+      // state.cart = state.cart.splice(index, 1) // Remove single
     },
 
     /**
@@ -98,10 +107,10 @@ export default new Vuex.Store({
      * todo; används eller funkar denna?
      * @param {*} payload 
      */
-    UPDATE_CART(state, payload) {
-      var itemTobeUpdated = state.cart.find(p => p._id === payload._id);
-      itemTobeUpdated = payload
-    },
+    // UPDATE_CART(state, payload) {
+    //   var itemTobeUpdated = state.cart.find(p => p._id === payload._id);
+    //   itemTobeUpdated = payload
+    // },
 
     SET_CURRENTUSER(state, payload) {
       let { user, token } = payload
@@ -142,7 +151,7 @@ export default new Vuex.Store({
       return response // Should be json
     },
 
-    async addProduct({ commit, state  }, payload) {
+    async addProduct({ commit, state }, payload) {
       let response = await API.products.newProduct(payload, state.currentUser.token)
       return response
     },
@@ -154,13 +163,17 @@ export default new Vuex.Store({
       return response
     },
 
-    async updateProduct({ commit, state  }, payload) {
+    async updateProduct({ commit, state }, payload) {
       let response = await API.products.patchProduct(payload, state.currentUser.token)
       return response
     },
 
     addProductToCart({ commit }, payload) {
       commit(M.ADD_TO_CART, payload)
+    },
+
+    removeFromCart({ commit }, payload) {
+      commit(M.REMOVE_FROM_CART, payload)
     },
 
     async getAllOrders({ commit, state }) {
@@ -306,7 +319,7 @@ export default new Vuex.Store({
     },
 
     userRole: (state) => {
-      if(!state.currentUser.role){
+      if (!state.currentUser.role) {
         return ''
       }
       return state.currentUser.role
