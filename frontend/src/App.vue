@@ -26,6 +26,12 @@ export default {
       return this.modalStates.cover;
     },
   },
+  metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'KEWL BOARDS FOR KEWL PEOPLE',
+      // all titles will be injected into this template
+      titleTemplate: 'SINUS | %s'
+    }
 };
 </script>
 

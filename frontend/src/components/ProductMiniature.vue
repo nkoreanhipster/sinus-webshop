@@ -1,6 +1,6 @@
 <template>
   <article>
-    <div class="image-small"><img /></div>
+    <div class=""><img :src="product.imgFile" class="image-small"/></div>
     <div class="">
       <h2 v-if="duplicateCount > 1">
         <span>{{ product.title }}</span><i>(x{{ duplicateCount }})</i>

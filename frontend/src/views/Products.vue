@@ -17,6 +17,10 @@ import { mapGetters } from "vuex";
 import Modal from "@/components/Modal.vue";
 
 export default {
+  metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'PRODUCTS'
+    },
   data() {
     return {
       //The chosen product
