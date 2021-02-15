@@ -1,6 +1,6 @@
 <template>
   <article>
-    <div class="image-small"><img /></div>
+    <div class=""><img :src="product.imgFile" class="image-small"/></div>
     <div class="">
       <h2>{{product.title}}</h2>
       <p class="black-60">{{product.shortDesc}}</p>

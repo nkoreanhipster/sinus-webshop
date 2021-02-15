@@ -86,6 +86,10 @@
 import { mapGetters } from "vuex";
 import { randomVersionNumber } from "@/lib/randomizer";
 export default {
+  metaInfo: {
+      // all titles will be injected into this template
+      title: 'ADMIN'
+    },
   created() {
     if (this.role !== "admin" || !this.authenticated) {
       this.$router.push({ path: "register" });

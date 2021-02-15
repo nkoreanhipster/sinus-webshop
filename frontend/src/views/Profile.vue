@@ -73,6 +73,10 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'PROFILE'
+    },
   // Sad attempt at security
   created() {
     if (this.role !== "customer" || !this.authenticated) {
