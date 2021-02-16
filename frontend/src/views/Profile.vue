@@ -2,7 +2,7 @@
   <section class="wrapper">
     <h1 class="mv-5">Order history</h1>
 
-    <div class="mb-5">
+    <section class="mb-5">
       <div class="flex">
         <span class="light mr-2"
           >IN PROGRESS ({{ ordersInProgress.length }})
@@ -11,21 +11,12 @@
       </div>
       <ol>
         <li class="mb-2" v-for="(item, index) in ordersInProgress" :key="index">
-          <ol>
-            <span class="light">Items: </span>
-            <span class="text small" v-for="(x, i) in item.items" :key="i"
-              >{{ x }},
-            </span>
-          </ol>
-          <p>Timestamp: {{ item.timeStamp }}</p>
-          <p>Status: {{ item.status }}</p>
-          <p>orderValue: {{ item.orderValue }}:-</p>
-          <p>_id: {{ item._id }}</p>
+          <OrderDescription :item="item" :index="index"></OrderDescription>
         </li>
       </ol>
-    </div>
+    </section>
 
-    <div class="mb-5">
+    <section class="mb-5">
       <div class="flex">
         <span class="light mr-2">DONE ({{ ordersDone.length }}) </span>
         <hr />
@@ -44,9 +35,9 @@
           <p>_id: {{ item._id }}</p>
         </li>
       </ol>
-    </div>
+    </section>
 
-    <div class="mb-5">
+    <section class="mb-5">
       <div class="flex mb-4">
         <span class="light mr-2">PROFILE INFO </span>
         <hr />
@@ -61,7 +52,7 @@
         <span><i>adress:</i>{{ currentUser.adress }}</span
         ><br />
       </div>
-    </div>
+    </section>
 
     <div>
       <button class="btn-black" @click="logout">Logout</button>
@@ -72,11 +63,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import OrderDescription from "@/components/OrderDescription.vue";
 export default {
   metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'PROFILE'
-    },
+    // if no subcomponents specify a metaInfo.title, this title will be used
+    title: "PROFILE",
+  },
   // Sad attempt at security
   created() {
     if (this.role !== "customer" || !this.authenticated) {
@@ -132,6 +124,7 @@ export default {
       return this.isAuthenticated;
     },
   },
+  components: { OrderDescription },
 };
 </script>
 

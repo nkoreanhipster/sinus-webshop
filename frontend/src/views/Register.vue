@@ -28,7 +28,7 @@
 
         <form action="" class="ph-2 mv-3">
           <h2 class="mv-4">Register</h2>
-          <input type="text" class="" v-model="user" placeholder="Namn" />
+          <input type="text" class="" v-model="name" placeholder="Namn" />
           <input type="email" class="" v-model="email" placeholder="E-mail" />
           <input
             type="text"
@@ -59,7 +59,7 @@ export default {
     },
   data() {
     return {
-      user: "",
+      name: "",
       email: "",
       password: "",
       isRegisterButtonDisabled: true,
@@ -74,12 +74,12 @@ export default {
   methods: {
     async register(ev) {
       ev.preventDefault();
-      // Check if username/password are empty
-      if (this.user === "" || this.email === "" || this.password === "") {
+      // Check if namename/password are empty
+      if (this.name === "" || this.email === "" || this.password === "") {
         return;
       }
       let payload = {
-        user: this.user,
+        name: this.name,
         email: this.email,
         password: this.password,
         repeatPassword: this.password,
@@ -89,14 +89,14 @@ export default {
       let res = await this.$store.dispatch("tryAndRegister", payload);
       this.message = res;
 
-      if (res.message && res.message == "User registered!") {
+      if (res.message && res.message == "user registered!") {
         this.resetForm();
       }
     },
 
     checkIfAllFieldsAreFilledIn() {
       this.message = "";
-      let x = this.user !== "" && this.email !== "" && this.password !== "";
+      let x = this.name !== "" && this.email !== "" && this.password !== "";
       if (x) {
         this.isRegisterButtonDisabled = false;
       } else {
@@ -105,12 +105,12 @@ export default {
     },
     resetForm() {
       this.email = "";
-      this.user = "";
+      this.name = "";
       this.password = "";
     },
   },
   watch: {
-    user() {
+    name() {
       this.checkIfAllFieldsAreFilledIn();
     },
     email() {

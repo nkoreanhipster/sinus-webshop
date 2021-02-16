@@ -180,6 +180,7 @@ export default {
       let res = await this.$store.dispatch("addProduct", this.selectedProduct);
       this.selectedProduct = {};
       this.message = res;
+      this.loadProductCatalog();
     },
     async deleteProduct(product) {
       let res = await this.$store.dispatch("deleteProduct", product._id);

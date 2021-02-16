@@ -46,7 +46,9 @@
 
           <li @click="toggleModel('cart')">
             <div class="checkout-bag">
-              <a class=""></a>
+              <transition name="shake" mode="out-in">
+                   <a :key="itemsInCart" class=""></a>
+              </transition>
               <span
                 ><b>({{ itemsInCart }})</b></span
               >
@@ -116,3 +118,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.shake-enter-active {
+  transition: all .3s ease;
+}
+.shake-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.shake-enter, .shake-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+</style>

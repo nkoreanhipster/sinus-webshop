@@ -79,12 +79,14 @@
     </div>
 
     <div class="p-3" style="text-align: right">
-      <b
-        class="p-3"
-        :class="{ 'failure': !orderSent, 'success': orderSent }"
-        >{{ message }}</b
+      <b class="p-3" :class="{ failure: !orderSent, success: orderSent }">{{
+        message
+      }}</b>
+      <button
+        class="btn-black"
+        :class="{ failure: !orderSent, success: orderSent }"
+        @click="order"
       >
-      <button class="btn-black" :class="{ 'failure': !orderSent, 'success': orderSent }" @click="order">
         Take my Money!
       </button>
     </div>
@@ -121,8 +123,20 @@ export default {
     this.message = "";
     this.orderSent = false;
   },
+  mounted() {
+    if (this.$store.getters.isAuthenticated) {
+      let { name } = this.$store.getters.currentUser;
+      this.user.name = name;
+    }
+  },
   computed: {
-    ...mapGetters(["cart", "totalItemsInCart", "sumOfCartItems"]),
+    ...mapGetters([
+      "cart",
+      "totalItemsInCart",
+      "sumOfCartItems",
+      "currentUser",
+      "isAuthenticated",
+    ]),
     cartItems() {
       let cart = this.cart;
       // Oh god.
@@ -141,6 +155,12 @@ export default {
     cartItemSum() {
       return this.sumOfCartItems;
     },
+    isUserAuthenticated() {
+      return this.isAuthenticated;
+    },
+    currentUserData() {
+      return this.currentUser;
+    },
   },
   methods: {
     // Activated on button click
@@ -148,9 +168,10 @@ export default {
       this.message = "";
       this.orderSent = false;
       // Loop userdata and check if any value is bad length
-      let errorCounts = Object.entries(this.user).filter(
-        ([key, val]) => val.length < 1
-      ).length;
+      let errorCounts = Object.entries(this.user).filter(([key, val]) => {
+
+        return val.length < 1;
+      }).length;
 
       if (errorCounts > 0) {
         this.message = "Something went wrong. Stuff not filled in";
