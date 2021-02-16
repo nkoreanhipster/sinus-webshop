@@ -79,10 +79,13 @@
     </div>
 
     <div class="p-3" style="text-align: right">
-      <b
-        class="p-3"
-        :class="{ 'failure': !orderSent, 'success': orderSent }"
-        >{{ message.message }}</b
+      <b class="p-3" :class="{ failure: !orderSent, success: orderSent }">{{
+        message
+      }}</b>
+      <button
+        class="btn-black"
+        :class="{ failure: !orderSent, success: orderSent }"
+        @click="order"
       >
         Take my Money!
       </button>
@@ -112,6 +115,7 @@ export default {
       },
       message: "",
       orderSent: false,
+      itemsInCart:0
     };
   },
   created() {
@@ -164,9 +168,14 @@ export default {
     async order() {
       this.message = "";
       this.orderSent = false;
+
+      if (this.$store.getters.totalItemsInCart < 1) {
+        this.message = "0 items in cart";
+        return;
+      }
+
       // Loop userdata and check if any value is bad length
       let errorCounts = Object.entries(this.user).filter(([key, val]) => {
-
         return val.length < 1;
       }).length;
 
@@ -177,7 +186,7 @@ export default {
       let response = await this.$store.dispatch("submitNewOrder", this.user);
       this.orderSent = true;
       this.message = response;
-      this.$store.dispatch("clearCart")
+      this.$store.dispatch("clearCart");
       // alert(JSON.stringify(response));
     },
   },

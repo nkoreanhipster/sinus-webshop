@@ -80,5 +80,12 @@ module.exports = {
 
     async addOrderToUser(order, user){
         await users.update({_id:user._id}, {$push:{orderHistory:order._id}})
+    },
+
+    async getAll(){
+        console.log('------------------')
+        // # Retreive all users
+        let r =  await users.find({})
+        return r
     }
 }

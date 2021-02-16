@@ -16,6 +16,7 @@ app.use('/api/products', routes.products);
 app.use('/api/orders', routes.orders);
 app.use('/api/register', routes.register);
 app.use('/api/auth', routes.auth);
+app.use('/api/users', routes.user);
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));

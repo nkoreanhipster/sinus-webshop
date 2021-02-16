@@ -72,54 +72,68 @@
       </div>
     </div>
 
-    <span>{{ message.message }}</span>
+    <span class="p-3">{{ message.message }}</span>
 
-    <h1 class="mt-3 mb-4">Products</h1>
-    <div class="admin-products" v-for="product in products" :key="product._id">
-      <span
-        @click="
-          setSelectedProduct(product);
-          topFunction();
-        "
-      >
-        <h2>
-          {{ product.title }}
-        </h2>
-        <h3>{{ product.price }} SEK</h3>
-        <p>
-          {{ product.shortDesc }}
-        </p>
-        <p>
-          {{ product.longDesc }}
-        </p>
-        <button @click="deleteProduct(product)" class="mb-3">ta bort</button>
-        <button disabled @click="setSelectedProduct(product)">uppdatera</button>
-      </span>
-    </div>
-
-    <h1 class="mt-5 mb-3">Orders</h1>
-    <ul>
-      <li
-        class="mb-3 order-list-style"
-        v-for="item in orderHistoryOfAllUsers"
-        :key="item._id"
-      >
-        <p>Status: {{ item.status }}</p>
+    <section class="admin-products">
+      <h1 class="mt-3 mb-4">Products</h1>
+      <div class="" v-for="product in products" :key="product._id">
+        <span
+          @click="
+            setSelectedProduct(product);
+            topFunction();
+          "
+        >
+          <h2>
+            {{ product.title }}
+          </h2>
+          <h3>{{ product.price }} SEK</h3>
+          <img
+            :src="product.imgFile"
+            style="clear: both; float: left"
+            class="image-small"
+          />
+          <p>
+            <i> {{ product.shortDesc }}</i>
+          </p>
+          <p class="desc">
+            {{ product.longDesc }}
+          </p>
+          <button @click="deleteProduct(product)" class="mb-3">ta bort</button>
+          <button disabled @click="setSelectedProduct(product)">
+            uppdatera
+          </button>
+        </span>
+      </div>
+    </section>
+    <hr />
+    <section class="mb-4">
+      <h1 class="mt-3 mb-4">Orders</h1>
+      <ul>
+        <li v-for="(item, index) in orders" :key="index">
+          <OrderDescription :item="item" :index="index"></OrderDescription>
+          <!-- <p>Status: {{ item.status }}</p>
         <p>ID: {{ item._id }}</p>
         <p>Time: {{ item.timeStamp }}</p>
-        <p>Order value: {{ item.orderValue }}</p>
-      </li>
-    </ul>
-
-    <div>
-      <button class="btn-black" @click="logout">Logout</button>
-    </div>
+        <p>Order value: {{ item.orderValue }}</p> -->
+        </li>
+      </ul>
+      <div>
+        <button class="btn-black" @click="logout">Logout</button>
+      </div>
+    </section>
+    <!-- <section>
+      <h1>Users</h1>
+      <p v-for="(item, index) in users" :key="index">
+        {{ item }}
+      </p>
+    </section> -->
   </section>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import { randomVersionNumber } from "@/lib/randomizer";
+import OrderDescription from "@/components/OrderDescription.vue";
 export default {
   metaInfo: {
     // all titles will be injected into this template
@@ -132,7 +146,7 @@ export default {
   },
   data() {
     return {
-      orderHistoryOfAllUsers: [],
+      orders: [],
       selectedProduct: {},
       inputboxImgSource:
         "https://api.jkb.zone/images/de595758ab2eb950942758b2f4f8d8a545b3b82a.XLb6IeF.png",
@@ -140,6 +154,7 @@ export default {
       patchMode: "add",
       message: "",
       items: [],
+      // users: [],
     };
   },
   mounted() {
@@ -147,6 +162,7 @@ export default {
     this.$store.dispatch("changeBannerSize", {
       maxHeight: 200,
     });
+
     this.getAllOrders();
     this.loadProductCatalog();
   },
@@ -160,9 +176,18 @@ export default {
       location.reload();
     },
     async getAllOrders() {
-      let res = await this.$store.dispatch("getAllOrders");
-      this.orderHistoryOfAllUsers = res;
-      return res;
+      let orders = await this.$store.dispatch("getAllOrders");
+      let users = await this.$store.dispatch("getAllUsers");
+      for (let order of orders) {
+        console.log(users.map((x) => x));
+        let isMatch = users.find((x) => x.orderHistory.includes(order._id)) || null;
+        if (!isMatch) {
+          continue;
+        }
+        order.__match = isMatch;
+      }
+
+      this.orders = orders;
     },
     async loadProductCatalog() {
       let response = await this.$store.dispatch("loadProductsFromDB");
@@ -199,11 +224,12 @@ export default {
       this.selectedProduct = {};
       this.message = res;
     },
+    // async getAllUsers() {
+    //   let res = await this.$store.dispatch("getAllUsers");
+    //   this.users = res;
+    // },
     topFunction() {
       let target = document.querySelector("#admin-products-header");
-
-      console.log(target);
-
       target.scrollIntoView({
         behavior: "smooth",
       });
@@ -221,6 +247,7 @@ export default {
       return this.isAuthenticated;
     },
   },
+  components: { OrderDescription },
 };
 </script>
 
@@ -250,6 +277,20 @@ export default {
 .input-box label {
   margin-bottom: 1rem;
 }
+
+.admin-products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.admin-products > h1 {
+  grid-column: 1 / 5;
+}
+.admin-products .desc {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
 .admin-products span:hover {
   color: rgba(206, 105, 105, 0.9);
   cursor: pointer;

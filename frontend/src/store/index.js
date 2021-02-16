@@ -22,14 +22,13 @@ export default new Vuex.Store({
       email: null,
       token: null,
       password: '',
-      adress: {
-        street: '',
-        zip: '',
-        city: ''
-      },
-      orderHistory: []
+      // adress: {
+      //   street: '',
+      //   zip: '',
+      //   city: ''
+      // },
     },
-
+    orders:[],                // ## Admin only
     products: [],             // Produkter som kommer från databasen
     cart: [],                 // Produkt som kund lägger i sin cart, I stort sett identisk med produktObject 
     isModalActive: {
@@ -40,8 +39,7 @@ export default new Vuex.Store({
     bannerSize: {
       maxHeight: 353,
       minHeight: 100
-    },
-
+    }
   },
   mutations: {
     /**
@@ -148,7 +146,9 @@ export default new Vuex.Store({
     },
 
     async loadSingleProductbyId({ commit }, id) {
+      console.log('id', id)
       let response = await API.products.getProduct(id)
+      console.log('res', response)
       return response // Should be json
     },
 
@@ -230,6 +230,15 @@ export default new Vuex.Store({
     async tryAndRegister({ commit }, payload) {
       let response = await API.register.registerNewUser(payload)
       return response
+    },
+
+    /**
+     * Get all users from DB
+     */
+    async getAllUsers({ commit, state }) {
+      let response = await API.GET('users', state.currentUser.token)
+      let json = await response.json()
+      return json
     },
 
     toggleModal({ commit }, nameOfModal) {
