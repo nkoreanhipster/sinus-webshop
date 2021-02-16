@@ -6,7 +6,7 @@
       <hr />
     </div>
 
-    <div class="input-box">
+    <div class="input-box" id="input-box">
       <div class="columns">
         <div>
           <label class="" for="photo">Product Photo</label>
@@ -72,21 +72,33 @@
       </div>
     </div>
 
-    <span>{{ message }}</span>
+    <span>{{ message.message }}</span>
 
-    <h2 class="mt-3">Products</h2>
+    <h1 class="mt-3 mb-4">Products</h1>
     <div class="admin-products" v-for="product in products" :key="product._id">
-      <span @click="setSelectedProduct(product)">
-        {{ product }}
-        <button @click="deleteProduct(product)">ta bort</button>
+      <span @click="setSelectedProduct(product); topFunction();">
+        <h2>
+          {{ product.title }}
+        </h2>
+        <h3>{{ product.price }} SEK</h3>
+        <p>
+          {{ product.shortDesc }}
+        </p>
+        <p>
+          {{ product.longDesc }}
+        </p>
+        <button @click="deleteProduct(product)" class="mb-3">ta bort</button>
         <button disabled @click="setSelectedProduct(product)">uppdatera</button>
       </span>
     </div>
 
-    <h1 class="mt-5">Orders</h1>
+    <h1 class="mt-5 mb-3">Orders</h1>
     <ul>
-      <li v-for="item in orderHistoryOfAllUsers" :key="item._id">
-        <p>{{ item }}</p>
+      <li class="mb-3" v-for="item in orderHistoryOfAllUsers" :key="item._id">
+        <p>Status: {{ item.status }}</p>
+        <p>ID: {{ item._id }}</p>
+        <p>Time: {{ item.timeStamp }}</p>
+        <p>Order value: {{ item.orderValue }}</p>
       </li>
     </ul>
 
@@ -101,9 +113,9 @@ import { mapGetters } from "vuex";
 import { randomVersionNumber } from "@/lib/randomizer";
 export default {
   metaInfo: {
-      // all titles will be injected into this template
-      title: 'ADMIN'
-    },
+    // all titles will be injected into this template
+    title: "ADMIN",
+  },
   created() {
     if (this.role !== "admin" || !this.authenticated) {
       this.$router.push({ path: "register" });
@@ -118,6 +130,7 @@ export default {
       inputboxDataUrl: "",
       patchMode: "add",
       message: "",
+      items: [],
     };
   },
   mounted() {
@@ -175,6 +188,9 @@ export default {
       );
       this.selectedProduct = {};
       this.message = res;
+    },
+    topFunction() {
+      document.documentElement.scrollTop = 0;
     },
   },
   computed: {
