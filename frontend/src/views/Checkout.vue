@@ -108,10 +108,10 @@ export default {
         street: "",
         city: "",
         zip: "",
-        card_owner: "",
-        card_number: "",
-        valid_until: "",
-        ccv: "",
+        cardOwner: "",
+        cardNumber: "",
+        validUntil: "",
+        cvv: "",
       },
       message: "",
       orderSent: false,
@@ -183,7 +183,17 @@ export default {
         this.message = "Something went wrong. Stuff not filled in";
         return;
       }
-      let response = await this.$store.dispatch("submitNewOrder", this.user);
+
+      let {name,street,city,zip} = this.user;
+      let {cardOwner,cardNumber,validUntil,cvv} = this.user;
+
+      let payload = {
+
+        customer:{name,street,city,zip},
+        payment:{cardOwner,cardNumber,validUntil,cvv}
+      };
+
+      let response = await this.$store.dispatch("submitNewOrder", payload);
       this.orderSent = true;
       this.message = response;
       this.$store.dispatch("clearCart");
