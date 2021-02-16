@@ -176,6 +176,10 @@ export default new Vuex.Store({
       commit(M.REMOVE_FROM_CART, payload)
     },
 
+    clearCart({ commit }, payload) {
+      commit(M.CLEAR_CART)
+    },
+
     async getAllOrders({ commit, state }) {
       let token = state.currentUser.token
       if (!token || typeof token === 'undefined') {

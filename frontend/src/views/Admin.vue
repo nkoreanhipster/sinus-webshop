@@ -99,7 +99,11 @@
 
     <h1 class="mt-5 mb-3">Orders</h1>
     <ul>
-      <li class="mb-3" v-for="item in orderHistoryOfAllUsers" :key="item._id">
+      <li
+        class="mb-3 order-list-style"
+        v-for="item in orderHistoryOfAllUsers"
+        :key="item._id"
+      >
         <p>Status: {{ item.status }}</p>
         <p>ID: {{ item._id }}</p>
         <p>Time: {{ item.timeStamp }}</p>

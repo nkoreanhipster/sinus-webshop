@@ -102,6 +102,7 @@ export default {
   position: relative;
   & .image {
     position: relative;
+    object-fit: contain;
   }
 
   & .bag {

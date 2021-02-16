@@ -82,7 +82,7 @@
       <b
         class="p-3"
         :class="{ 'failure': !orderSent, 'success': orderSent }"
-        >{{ message }}</b
+        >{{ message.message }}</b
       >
       <button class="btn-black" :class="{ 'failure': !orderSent, 'success': orderSent }" @click="order">
         Take my Money!
@@ -105,7 +105,7 @@ export default {
         name: "",
         street: "",
         city: "",
-        zip: ",",
+        zip: "",
         card_owner: "",
         card_number: "",
         valid_until: "",
@@ -159,6 +159,7 @@ export default {
       let response = await this.$store.dispatch("submitNewOrder", this.user);
       this.orderSent = true;
       this.message = response;
+      this.$store.dispatch("clearCart")
       // alert(JSON.stringify(response));
     },
   },
