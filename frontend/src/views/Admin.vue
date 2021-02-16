@@ -118,7 +118,7 @@
         </li>
       </ul>
       <div>
-        <button class="btn-black" @click="logout">Logout</button>
+        <button class="btn-black m-3" @click="logout">Logout</button>
       </div>
     </section>
     <!-- <section>
@@ -179,11 +179,10 @@ export default {
       let orders = await this.$store.dispatch("getAllOrders");
       let users = await this.$store.dispatch("getAllUsers");
       for (let order of orders) {
-        console.log(users.map((x) => x));
         let isMatch = users.find((x) => x.orderHistory.includes(order._id)) || null;
         if (!isMatch) {
           continue;
-        }
+        } 
         order.__match = isMatch;
       }
 

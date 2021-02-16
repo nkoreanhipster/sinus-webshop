@@ -197,15 +197,13 @@ export default new Vuex.Store({
       commit('UPDATE_USER', { orderHistory: response })
     },
 
-    async submitNewOrder({ commit, state }) {
-      // Destruct id properties
+    async submitNewOrder({ commit, state }, payload) {
+      // Array of product IDs
       let ids = state.cart.map(item => item._id)
       let body = {
-        _id: state.currentUser._id,
-        timeStamp: Date.now(),
-        status: 'inProcess',
-        items: ids, // Array of product IDs
-        orderValue: state.cart.reduce((a, b) => a.price + b.price)
+        items: ids, 
+        customer: payload.customer,
+        payment:  payload.payment
       }
 
       let response = await API.order.submitNewOrder(body, state.currentUser.token)
