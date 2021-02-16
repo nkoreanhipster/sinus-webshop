@@ -76,7 +76,7 @@ export default {
   width: 40rem;
   height: 800rem;
   top: 20%;
-  left: 50%;
+  left: 45%;
   // transform: translate(-50%, -50%);
   //transition: transform 2200ms, opacity 100ms ease, left 1000ms;
   // top: 48%;

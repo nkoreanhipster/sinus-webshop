@@ -1,12 +1,12 @@
 <template>
   <section class="wrapper">
-    <h1 class="mt-5 mb-4">Admin Products</h1>
+    <h1 class="mt-5 mb-4" id="admin-products-header">Admin Products</h1>
     <div class="flex mb-4">
       <span class="light mr-2">Add / Edit</span>
       <hr />
     </div>
 
-    <div class="input-box" id="input-box">
+    <div class="input-box">
       <div class="columns">
         <div>
           <label class="" for="photo">Product Photo</label>
@@ -76,7 +76,12 @@
 
     <h1 class="mt-3 mb-4">Products</h1>
     <div class="admin-products" v-for="product in products" :key="product._id">
-      <span @click="setSelectedProduct(product); topFunction();">
+      <span
+        @click="
+          setSelectedProduct(product);
+          topFunction();
+        "
+      >
         <h2>
           {{ product.title }}
         </h2>
@@ -160,17 +165,17 @@ export default {
     },
     setSelectedProduct(product) {
       this.patchMode = "edit";
-      let rv = randomVersionNumber();
-      product.imgFile = this.removeQuestionParameters(product.imgFile);
-      // Världens fulhack
-      if (this.selectedProduct.imgFile === product.imgFile) {
-        product.imgFile = `${product.imgFile}${rv}`;
-      }
+      // let rv = randomVersionNumber();
+      // product.imgFile = this.removeQuestionParameters(product.imgFile);
+      // // Världens fulhack
+      // if (this.selectedProduct.imgFile === product.imgFile) {
+      //   product.imgFile = `${product.imgFile}${rv}`;
+      // }
       this.selectedProduct = product;
     },
-    removeQuestionParameters(str) {
-      return str.split("?").shift();
-    },
+    // removeQuestionParameters(str) {
+    //   return str.split("?").shift();
+    // },
     async newProduct() {
       let res = await this.$store.dispatch("addProduct", this.selectedProduct);
       this.selectedProduct = {};
@@ -190,7 +195,13 @@ export default {
       this.message = res;
     },
     topFunction() {
-      document.documentElement.scrollTop = 0;
+      let target = document.querySelector("#admin-products-header");
+
+      console.log(target);
+
+      target.scrollIntoView({
+        behavior: "smooth",
+      });
     },
   },
   computed: {
@@ -241,7 +252,7 @@ export default {
 .input-file-box {
   background-repeat: no-repeat;
   background-size: contain;
-  overflow: scroll;
+  overflow: auto;
   margin: 0.4rem 0;
 }
 .input-file-box::after {

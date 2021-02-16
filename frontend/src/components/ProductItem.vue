@@ -10,7 +10,7 @@
       </div>
       <img
         :src="`${product.imgFile}`"
-        alt="/images/gallagher-not.found.png"
+        alt="Image not found"
         class="image blur-in"
         @click.self="goToDetailedView"
       />
