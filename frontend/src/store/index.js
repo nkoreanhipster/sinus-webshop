@@ -116,6 +116,7 @@ export default new Vuex.Store({
       state.currentUser.email = user.email
       state.currentUser.token = token
       state.currentUser.name = user.name
+      state.currentUser.adress = user.adress
     },
 
     TOGGLE_AUTH(state, payload) {
