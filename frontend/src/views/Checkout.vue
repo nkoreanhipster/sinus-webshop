@@ -53,14 +53,14 @@
           type="text"
           class=""
           name="card_owner"
-          v-model="user.card_owner"
+          v-model="user.cardOwner"
         />
         <label class="light small" for="card_number">Card Number</label>
         <input
           type="text"
           class=""
           name="card_number"
-          v-model="user.card_number"
+          v-model="user.cardNumber"
         />
         <div>
           <label class="light small half-width" for="valid_until"
@@ -69,18 +69,18 @@
           <input
             type="date"
             class="half-width"
-            v-model="user.valid_until"
+            v-model="user.validUntil"
             name="valid_until"
           />
-          <label class="light small half-width" for="ccv">CCV</label>
-          <input type="text" class="half-width" v-model="user.ccv" name="ccv" />
+          <label class="light small half-width" for="cvv">CVV</label>
+          <input type="text" class="half-width" v-model="user.cvv" name="cvv" />
         </div>
       </div>
     </div>
 
     <div class="p-3" style="text-align: right">
       <b class="p-3" :class="{ failure: !orderSent, success: orderSent }">{{
-        message.message
+        message
       }}</b>
       <button
         class="btn-black"
@@ -108,10 +108,10 @@ export default {
         street: "",
         city: "",
         zip: "",
-        card_owner: "",
-        card_number: "",
-        valid_until: "",
-        ccv: "",
+        cardOwner: "",
+        cardNumber: "",
+        validUntil: "",
+        cvv: "",
       },
       message: "",
       orderSent: false,
@@ -176,6 +176,7 @@ export default {
 
       // Loop userdata and check if any value is bad length
       let errorCounts = Object.entries(this.user).filter(([key, val]) => {
+        console.log(key,val,val.length)
         return val.length < 1;
       }).length;
 
@@ -183,7 +184,16 @@ export default {
         this.message = "Something went wrong. Stuff not filled in";
         return;
       }
-      let response = await this.$store.dispatch("submitNewOrder", this.user);
+
+      let {name,street,city,zip} = this.user;
+      let {cardOwner,cardNumber,validUntil,cvv} = this.user;
+
+      let payload = {
+        customer:{name,street,city,zip},
+        payment:{cardOwner,cardNumber,validUntil,cvv}
+      };
+
+      let response = await this.$store.dispatch("submitNewOrder", payload);
       this.orderSent = true;
       this.message = response;
       this.$store.dispatch("clearCart");

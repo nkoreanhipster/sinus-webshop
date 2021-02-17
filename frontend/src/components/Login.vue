@@ -16,7 +16,7 @@
       <button class="btn-black" @click="Login">Login</button>
 
       <router-link to="/register">
-        <button class="btn">Register</button>
+        <button class="btn-mustard m-2">Register</button>
       </router-link>
       <p class="error m-2">{{ message }}</p>
     </form>

@@ -31,7 +31,7 @@
           <input type="text" class="" v-model="name" placeholder="Namn" />
           <input type="email" class="" v-model="email" placeholder="E-mail" />
           <input
-            type="text"
+            type="password"
             class=""
             v-model="password"
             placeholder="Lösenord"
