@@ -10,12 +10,21 @@
 
     <ol>
       <li>
-        <span class="tiny" v-for="(x, i) in item.items" :key="i"><a :href="`/products/${x}`">{{ x }}</a>| </span>
+        <span class="tiny" v-for="(x, i) in item.items" :key="i">
+          <router-link :to="`/products/${x}`">
+            <a>{{ x }}</a>
+          </router-link>
+          |
+        </span>
       </li>
     </ol>
     <p class="">
-      <span class="tiny" v-if="!item.__match">{{'Anonnymous (fattar inte hur man fick ur adress från dessa)'}}</span>
-      <span class="tiny" v-else>{{item.__match.email}} | {{item.__match.adress}}</span>
+      <span class="tiny" v-if="!item.__match">{{
+        "Anonnymous (fattar inte hur man fick ur adress från dessa)"
+      }}</span>
+      <span class="tiny" v-else
+        >{{ item.__match.email }} | {{ item.__match.adress }}</span
+      >
     </p>
     <!-- 
     <p>
@@ -56,7 +65,7 @@ article {
 article > *:not(h3) {
   margin-left: 0.5rem;
 }
-.tiny{
+.tiny {
   font-size: 0.8rem;
 }
 .in-process,
