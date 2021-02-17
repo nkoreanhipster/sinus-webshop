@@ -83,6 +83,8 @@ export default {
         email: this.email,
         password: this.password,
         repeatPassword: this.password,
+        // Hårdkodat atm. todo; #
+        adress:{ "street": "Fakestreet 123", "zip": "123 45", "city": "Springfield" },
       };
 
       // Check against database/store

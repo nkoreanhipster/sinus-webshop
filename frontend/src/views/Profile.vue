@@ -11,7 +11,7 @@
       </div>
       <ol>
         <li class="mb-2" v-for="(item, index) in ordersInProgress" :key="index">
-          <OrderDescription :item="item" :index="index"></OrderDescription>
+          <OrderDescription :item="item" :index="index" :user="currentUser"></OrderDescription>
         </li>
       </ol>
     </section>

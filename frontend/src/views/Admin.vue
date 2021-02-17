@@ -110,7 +110,7 @@
       <h1 class="mt-3 mb-4">Orders</h1>
       <ul>
         <li v-for="(item, index) in orders" :key="index">
-          <OrderDescription :item="item" :index="index"></OrderDescription>
+          <OrderDescription :item="item" :index="index" :user="item.__match"></OrderDescription>
           <!-- <p>Status: {{ item.status }}</p>
         <p>ID: {{ item._id }}</p>
         <p>Time: {{ item.timeStamp }}</p>
@@ -154,10 +154,12 @@ export default {
       patchMode: "add",
       message: "",
       items: [],
+      potentialUser:{}
       // users: [],
     };
   },
   mounted() {
+    this.potentialUser = {}
     this.$store.dispatch("closeAllModals");
     this.$store.dispatch("changeBannerSize", {
       maxHeight: 200,
@@ -180,12 +182,12 @@ export default {
       let users = await this.$store.dispatch("getAllUsers");
       for (let order of orders) {
         let isMatch = users.find((x) => x.orderHistory.includes(order._id)) || null;
+        console.log(isMatch)
         if (!isMatch) {
           continue;
         } 
         order.__match = isMatch;
       }
-
       this.orders = orders;
     },
     async loadProductCatalog() {

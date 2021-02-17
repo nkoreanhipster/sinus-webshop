@@ -19,12 +19,12 @@
       </li>
     </ol>
     <p class="">
-      <span class="tiny" v-if="!item.__match">{{
+      <!-- <span class="tiny" v-if="!user">{{
         "Anonnymous (fattar inte hur man fick ur adress från dessa)"
       }}</span>
       <span class="tiny" v-else
-        >{{ item.__match.email }} | {{ item.__match.adress }}</span
-      >
+        >{{ user.email }} | {{ user.adress }}</span -->
+      <span class="tiny">{{ user.adress }} | {{ user.email }}</span>
     </p>
     <!-- 
     <p>
@@ -44,6 +44,15 @@ export default {
     index: {
       type: Number,
       value: 0,
+    },
+    user: {
+      type: Object,
+      default: function () {
+        return {
+          adress: "Not yet implemented for <anonymous> non-users",
+          email: "-//-",
+        }
+      },
     },
   },
   methods: {
