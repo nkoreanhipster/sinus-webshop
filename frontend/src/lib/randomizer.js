@@ -15,8 +15,6 @@ let slogos = [
     "For every mood, and every move.",
     "Making dreams come to life",
     "Plan to action",
-    "We take pride in your work",
-    "Put us to test",
     "Making your vision come true",
     "Quality is what we pursue",
     "Our reputation is the proof.",

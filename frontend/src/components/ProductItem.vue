@@ -1,5 +1,5 @@
 <template>
-  <article class="product-item mh-3" @click.self="goToDetailedView">
+  <article class="product-item mh-3">
     <div class="content">
       <div class="checkout-bag bag hoverride" @click="addToCart(product)">
         <a class=""></a>
@@ -8,6 +8,7 @@
         class="img-280-320"
         :src="`${product.imgFile}`"
         alt="Image not found"
+        @click.self="goToDetailedView"
       />
     </div>
 
