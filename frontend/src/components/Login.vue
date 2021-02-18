@@ -1,13 +1,13 @@
 <template>
   <div class="bg-white p-3 m-2">
     <form method="POST" novalidate>
-      <div class="input-icon mv-2">
+      <div class="input-icon mv-2" :class="{'invalid':errors[0]}">
         <input class="input" type="email" v-model="email" placeholder="email" />
         <span class="icon"><i class="gg-mail"></i></span>
       </div>
       <p class="failure" style="font-size: 1.4rem">{{ errors[0] || "" }}</p>
 
-      <div class="input-icon mv-2">
+      <div class="input-icon mv-2" :class="{'invalid':errors[1]}">
         <input
           class="input"
           type="password"
@@ -23,8 +23,8 @@
         <i class="gg-log-in"></i>
       </button>
 
-      <router-link to="/register">
-        <button class="btn-mustard m-2">Register</button>
+      <router-link to="/register" class="can-be-disabled">
+        <button class="btn-mustard m-2" :disabled="isCurrentPage('/register')">Register</button>
       </router-link>
       <p class="error m-2">{{ message }}</p>
     </form>
@@ -51,6 +51,16 @@ export default {
     //this.message = ""; // Reset on component moun
   },
   methods: {
+    
+    /**
+     * Disable button if current page is $path
+     */
+    isCurrentPage(path){
+      return this.$route.path.includes(path)
+    },
+    /**
+     * Login POST
+     */
     async Login(event) {
       event.preventDefault();
 
@@ -87,9 +97,7 @@ export default {
         hasPassword: this.password.length > 0,
         validEmail: this.isEmailValidForm(this.email),
       };
-
-      console.log({ inputCheck });
-
+      
       Object.entries(inputCheck)
         .filter(([key, val]) => val === false)
         .map(([key, val]) => this.errors.push(errorMessages[key]));
