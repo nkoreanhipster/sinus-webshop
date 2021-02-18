@@ -56,7 +56,7 @@ export default {
      * Disable button if current page is $path
      */
     isCurrentPage(path){
-      return this.$route.path.includes(path)
+      return this.$route.path.toLowerCase().includes(path)
     },
     /**
      * Login POST
