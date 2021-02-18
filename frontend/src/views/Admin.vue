@@ -7,7 +7,7 @@
     </div>
 
     <div class="input-box">
-      <div class="columns">
+      <div class="columns" style="max-width: 100%; max-height: 100%;">
         <div>
           <label class="" for="photo">Product Photo</label>
           <div
@@ -52,6 +52,7 @@
             id=""
             cols="30"
             rows="10"
+            style="resize: none; width: 100%;"
             v-model="selectedProduct.longDesc"
           ></textarea>
           <button
@@ -59,17 +60,15 @@
             :disabled="patchMode !== 'edit'"
             @click="updateProduct"
           >
-            Uppdatera!
+            Spara!
           </button>
           <button
             class="btn-mustard mv-3"
             :disabled="patchMode !== 'add'"
             @click="newProduct"
+            id="addProductButton"
           >
-            Spara!
-          </button>
-          <button class="btn-mustard mv-3" @click="newProduct" :disabled="patchMode !== 'edit'">
-            Lägg till ny produkt
+            Lägg till!
           </button>
         </div>
       </div>
@@ -219,7 +218,9 @@ export default {
       let res = await this.$store.dispatch("addProduct", this.selectedProduct);
       this.selectedProduct = {};
       this.message = res;
-      this.loadProductCatalog();
+      await this.loadProductCatalog();
+      var element = document.getElementById("addProductButton");
+      element.classList.add("btn-success");
     },
     async deleteProduct(product) {
       let res = await this.$store.dispatch("deleteProduct", product._id);
@@ -267,6 +268,7 @@ export default {
 .input-box {
   background-color: $gray-5;
   padding: 1rem;
+  display: flex;
   & .input-file-box {
     padding: 1rem;
     border: 0.2rem dotted rgba(255, 255, 255, 0.4);
