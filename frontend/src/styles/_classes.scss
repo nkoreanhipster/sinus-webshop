@@ -4,20 +4,42 @@
 
 .input[type=text],
 .input[type=password],
-.input[type=email]{
+.input[type=email] {
 
-    display      : block;
-    font-family  : $font-family;
-    color        : $gray-4;
-    font-size    : 1.8rem;
-    border       : 1px solid rgba(0, 0, 0, 0.50);
-    height       : 5rem;
-    border-radius: 1rem;
-    padding-left : 4rem;
-    padding-right: 4rem;
+    display         : block;
+    font-family     : $font-family;
+    color           : $gray-4;
+    font-size       : 1.8rem;
+    border          : 1px solid rgba(0, 0, 0, 0.50);
+    height          : 5rem;
+    border-radius   : 1rem;
+    padding-left    : 4rem;
+    // padding-right: 4rem;
 
     &:focus {
         color: $black;
+    }
+}
+
+.input-icon {
+    display    : flex;
+    align-items: center;
+    border     : 1px solid rgba(0, 0, 0, 0.50);
+    .input[type=text],
+    .input[type=password],
+    .input[type=email] {
+        border: none;
+        padding-left: 1rem;
+    }
+    .input[type=text]:focus-visible,
+    .input[type=password]:focus-visible,
+    .input[type=email]:focus-visible{
+        outline: none;
+    }
+    & .icon {}
+
+    &:focus, &:focus-visible{
+        border:2px solid rgba(0, 0, 0, 0.80)
     }
 }
 
@@ -36,7 +58,7 @@
 .image-medium {
     width : 220px;
     height: auto;
-    
+
 }
 
 .image-large {
@@ -128,7 +150,7 @@
 }
 
 .success {
-    color:$success;
+    color: $success;
 }
 
 .modal {
@@ -217,6 +239,7 @@
     background-color: inherit;
     transition      : 200ms ease;
     line-height     : 2.8rem;
+
     &::before {
         transition: 300ms ease-out;
         transform : scale(1.1);
