@@ -68,6 +68,9 @@
           >
             Spara!
           </button>
+          <button class="btn-mustard mv-3" @click="newProduct" :disabled="patchMode !== 'edit'">
+            Lägg till ny produkt
+          </button>
         </div>
       </div>
     </div>
@@ -110,7 +113,11 @@
       <h1 class="mt-3 mb-4">Orders</h1>
       <ul>
         <li v-for="(item, index) in orders" :key="index">
-          <OrderDescription :item="item" :index="index" :user="item.__match"></OrderDescription>
+          <OrderDescription
+            :item="item"
+            :index="index"
+            :user="item.__match"
+          ></OrderDescription>
           <!-- <p>Status: {{ item.status }}</p>
         <p>ID: {{ item._id }}</p>
         <p>Time: {{ item.timeStamp }}</p>
@@ -154,12 +161,12 @@ export default {
       patchMode: "add",
       message: "",
       items: [],
-      potentialUser:{}
+      potentialUser: {},
       // users: [],
     };
   },
   mounted() {
-    this.potentialUser = {}
+    this.potentialUser = {};
     this.$store.dispatch("closeAllModals");
     this.$store.dispatch("changeBannerSize", {
       maxHeight: 200,
@@ -181,11 +188,12 @@ export default {
       let orders = await this.$store.dispatch("getAllOrders");
       let users = await this.$store.dispatch("getAllUsers");
       for (let order of orders) {
-        let isMatch = users.find((x) => x.orderHistory.includes(order._id)) || null;
-        console.log(isMatch)
+        let isMatch =
+          users.find((x) => x.orderHistory.includes(order._id)) || null;
+        console.log(isMatch);
         if (!isMatch) {
           continue;
-        } 
+        }
         order.__match = isMatch;
       }
       this.orders = orders;
@@ -207,6 +215,7 @@ export default {
     //   return str.split("?").shift();
     // },
     async newProduct() {
+      this.patchMode = "add";
       let res = await this.$store.dispatch("addProduct", this.selectedProduct);
       this.selectedProduct = {};
       this.message = res;

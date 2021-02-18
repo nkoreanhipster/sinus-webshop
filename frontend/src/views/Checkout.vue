@@ -80,7 +80,7 @@
 
     <div class="p-3" style="text-align: right">
       <b class="p-3" :class="{ failure: !orderSent, success: orderSent }">{{
-        message
+        message.message
       }}</b>
       <button
         class="btn-black"

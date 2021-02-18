@@ -1,9 +1,9 @@
 <template>
   <footer class="p-4 columns">
     <section>
-      <i>Settings</i>
-      <input type="checkbox" v-model="isChecked"/>
-      <div class="collapsable" :class="{'is-collapsed':isChecked}">
+      <!-- <i>Settings</i>
+      <input type="checkbox" v-model="isChecked"/> -->
+      <!-- <div class="collapsable" :class="{'is-collapsed':isChecked}">
         <i>banner_max_height</i>
         <input
           type="number"
@@ -20,7 +20,7 @@
           v-model.number="minHeight"
           @change="changeSizeOfBanner"
         />
-      </div>
+      </div> -->
     </section>
     <section></section>
     <section></section>
