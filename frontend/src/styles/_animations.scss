@@ -62,3 +62,17 @@
     }
 }
 
+@keyframes success-btn-color {
+    0% {
+        background-color: $mustard;
+    }
+
+    15% {
+        background-color: $green;
+    }
+
+    100% {
+        background-color: $mustard;
+    }
+}
+

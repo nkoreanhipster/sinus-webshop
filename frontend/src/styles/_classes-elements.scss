@@ -25,7 +25,7 @@
 }
 
 .btn-success {
-    background-color: $green;
+    animation       : success-btn-color 3000ms;
     border-radius   : 1rem;
     font-family     : $font-family;
     font-size       : 1.8rem;
@@ -39,11 +39,7 @@
     &:active:not([disabled]) {
         animation: button-click 500ms;
     }
-
-    &:hover:not([disabled]) {
-        background-color: $green-opacity-70;
-    }
-
+    
     &[disabled],
     &[disabled]:hover {
         opacity         : 0.2;

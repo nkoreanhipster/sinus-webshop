@@ -59,6 +59,7 @@
             class="btn-mustard mv-3 mr-3"
             :disabled="patchMode !== 'edit'"
             @click="updateProduct"
+            id="updateProductButton"
           >
             Spara!
           </button>
@@ -214,7 +215,7 @@ export default {
     //   return str.split("?").shift();
     // },
     async newProduct() {
-      this.patchMode = "add";
+      this.patchMode = "edit";
       let res = await this.$store.dispatch("addProduct", this.selectedProduct);
       this.selectedProduct = {};
       this.message = res;
@@ -234,6 +235,9 @@ export default {
       );
       this.selectedProduct = {};
       this.message = res;
+      var element = document.getElementById("updateProductButton");
+      element.classList.add("btn-success");
+      this.patchMode="add"
     },
     // async getAllUsers() {
     //   let res = await this.$store.dispatch("getAllUsers");
