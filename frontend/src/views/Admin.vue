@@ -60,7 +60,7 @@
             @click="updateProduct"
             id="updateProductButton"
           >
-            Spara!
+            Save!
           </button>
           <button
             class="btn-mustard mv-3"
@@ -68,7 +68,7 @@
             @click="newProduct"
             id="addProductButton"
           >
-            Lägg till!
+            Add!
           </button>
         </div>
       </div>
