@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
-    <Navigation :class="{ 'is-blurred': isModalFullCoverActive }"></Navigation>
+  <div id="app" :class="{ 'is-blurred': isModalFullCoverActive }">
+    <Navigation ></Navigation>
     <main class="is-fullsize">
-      <Banner :class="{ 'is-blurred': isModalFullCoverActive }"/>
+      <Banner class="is-blurrable"/>
       <router-view />
     </main>
-    <Footer :class="{ 'is-blurred': isModalFullCoverActive }"></Footer>
+    <Footer class="is-blurrable"></Footer>
   </div>
 </template>
 

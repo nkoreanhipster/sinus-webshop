@@ -37,7 +37,9 @@ export default {
 @import "@/styles/_variables.scss";
 article {
   display: flex;
+  justify-content: space-between;
 }
+article
 h2, p{
   margin: 0.4rem;
   

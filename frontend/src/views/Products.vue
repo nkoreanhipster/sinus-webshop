@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="products" :class="{'is-blurred':isModalFullCoverActive}">
+    <div class="products is-blurrable">
       <ProductItem
         v-for="item in allProducts"
         :key="item.id"

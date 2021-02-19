@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'is-blurred': isModalFullCoverActive }">
+  <header class="is-blurrable">
     <div class="nav-inner ph-4">
       <!-- Left side of the header -->
       <div class="logo ph-2">
