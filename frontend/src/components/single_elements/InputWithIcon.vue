@@ -1,7 +1,12 @@
 <template>
   <div>
     <label :for="name"></label>
-    <input :name="name" :type="type" :placeholder="placeholder" :value="value" />
+    <input
+      :name="name"
+      :type="type"
+      :placeholder="placeholder"
+      :value="value"
+    />
   </div>
 </template>
 

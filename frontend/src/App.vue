@@ -1,8 +1,8 @@
 <template>
   <div id="app" :class="{ 'is-blurred': isModalFullCoverActive }">
-    <Navigation ></Navigation>
+    <Navigation></Navigation>
     <main class="is-fullsize">
-      <Banner class="is-blurrable"/>
+      <Banner class="is-blurrable" />
       <router-view />
     </main>
     <Footer class="is-blurrable"></Footer>
@@ -13,12 +13,12 @@
 import Navigation from "@/components/Navigation.vue";
 import Banner from "@/components/Banner.vue";
 import Footer from "@/components/Footer.vue";
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   components: {
-    Navigation, 
+    Navigation,
     Banner,
-    Footer
+    Footer,
   },
   computed: {
     ...mapGetters(["modalStates"]),
@@ -27,11 +27,9 @@ export default {
     },
   },
   metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'KEWL BOARDS FOR KEWL PEOPLE',
-      // all titles will be injected into this template
-      titleTemplate: 'SINUS | %s'
-    }
+    title: "KEWL BOARDS FOR KEWL PEOPLE",
+    titleTemplate: "SINUS | %s",
+  },
 };
 </script>
 

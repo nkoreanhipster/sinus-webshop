@@ -1,9 +1,10 @@
 <template>
   <article>
-    <div class=""><img :src="product.imgFile" class="image-small"/></div>
+    <div class=""><img :src="product.imgFile" class="image-small" /></div>
     <div class="">
       <h2 v-if="duplicateCount > 1">
-        <span>{{ product.title }}</span><i>(x{{ duplicateCount }})</i>
+        <span>{{ product.title }}</span
+        ><i>(x{{ duplicateCount }})</i>
       </h2>
       <h2 v-else>{{ product.title }}</h2>
       <p class="black-60">{{ product.shortDesc }}</p>
@@ -39,14 +40,10 @@ article {
   display: flex;
   justify-content: space-between;
 }
-article
-h2, p{
+article h2,
+p {
   margin: 0.4rem;
-  
 }
-// article > * {
-//   flex: 1;
-// }
 .icon-remove {
   position: relative;
   width: 3rem;

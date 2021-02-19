@@ -10,7 +10,9 @@
       </span>
       <span class="m-2">
         <h1 class="m-1">{{ product.title }}</h1>
-        <p class="m-1"><i>{{ product.shortDesc }}</i></p>
+        <p class="m-1">
+          <i>{{ product.shortDesc }}</i>
+        </p>
         <p class="m-1">{{ product.longDesc }}</p>
         <h2 class="m-1">{{ product.price }} SEK</h2>
       </span>

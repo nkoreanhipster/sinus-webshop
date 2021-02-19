@@ -39,7 +39,6 @@ export default {
          * @param {Object} payload 
          */
         [M.ADD_TO_CART](state, payload) {
-            //payload.map(x => x.amount = 1)
             state.cart.push(payload)
         },
 
@@ -60,7 +59,6 @@ export default {
 
         /**
          * Uppdatera kundvagnen.
-         * todo; används eller funkar denna?
          * @param {*} payload 
          */
         UPDATE_CART(state, payload) {
@@ -78,25 +76,6 @@ export default {
             let response = await API.products.getProduct(id)
             return response // Should be json
         },
-
-        // async insertNewProduct({ commit }, payload) {
-        //     let response = await API.products.newProduct(payload)
-        //     commit(M.ADD_PRODUCT, response)
-        // },
-
-        // async patchProduct({ commit }, payload) {
-        //     let response = await API.products.patchProduct(payload)
-        //     // todo;
-        //     // Should this update product list? Call the get all action
-        //     //
-        //     return response
-        // },
-
-        // todo; should be used?
-        // async deleteSingleProductbyId({ commit }, id) {
-        //     let response = await API.products.deleteProduct(id)
-        //     return response
-        // },
 
         addProductToCart({ commit }, payload) {
             commit(M.ADD_TO_CART, payload)
@@ -138,6 +117,5 @@ export default {
             let sum = state.cart.reduce((n, { price }) => n + price, 0)
             return sum
         },
-
     }
 }

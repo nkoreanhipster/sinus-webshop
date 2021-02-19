@@ -20,8 +20,6 @@ export function hide(element, n, duration) {
     opacity:0,
     easing: 'easeInOutSine',
     duration:duration,
-    //direction: 'alternate',
-    //loop: true,
   });
 }
 

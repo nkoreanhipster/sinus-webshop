@@ -53,12 +53,6 @@
               >
             </div>
           </li>
-
-          <!-- <li>
-            <div class="checkout-button" @click="toggleModel('cart')">
-              <div>{{ itemsInCart }}</div>
-            </div>
-          </li> -->
         </ol>
       </nav>
     </div>
@@ -132,12 +126,7 @@ export default {
 .shake-enter-active {
   animation: shake 500ms;
 }
-// .shake-leave-active {
-//   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-// }
-.shake-enter
-/* .slide-fade-leave-active for <2.1.8 */ {
-}
+
 @keyframes shake {
   10%,
   90% {

@@ -4,7 +4,7 @@
     :src="require(`@/assets/${src}`)"
     alt="loading"
   />
-    <!-- :class="{ 'is-loading': isLoading }" -->
+  <!-- :class="{ 'is-loading': isLoading }" -->
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
       isLoaded: false,
       isLoading: true,
       image: null,
-      scale:1.0
+      scale: 1.0,
     };
   },
   created() {
@@ -33,14 +33,12 @@ export default {
     //   this.isLoaded = true;
     // };
   },
-  mounted(){
+  mounted() {
     // setInterval(()=>{
     //   this.scale += 0.06
     // }, 2900)
   },
-  loaded() {
-
-  },
+  loaded() {},
 };
 </script>
 
@@ -55,16 +53,6 @@ img.image-component {
   // transition: transform 3000ms;
 }
 
-.is-loading::after {
-  // width: 100%;
-  // height: 100%;
-  // position: absolute;
-  // background: linear-gradient(145deg, #2a5a77, #71a393);
-  // background-size: cover;
-  // content: "";
-  // animation: spinZ 1000ms infinite;
-  // animation-timing-function: linear;
-}
 @keyframes spinZ {
   0% {
     transform: rotateZ(0deg);

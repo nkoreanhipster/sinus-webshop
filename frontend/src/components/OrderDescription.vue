@@ -28,30 +28,16 @@
           <h4 class="pv-2">Information:</h4>
           <ul class="ml-3">
             <li>
-              <span>{{user.adress}}</span>
+              <span>{{ user.adress }}</span>
             </li>
             <li>
-              <span>{{user.email}}</span><i class="gg-email"></i>
+              <span>{{ user.email }}</span
+              ><i class="gg-email"></i>
             </li>
           </ul>
         </section>
       </details>
     </transition>
-    <!-- <span style="float:left;clear:both;"><i class="gg-details-more"></i></span> -->
-
-    <!-- <ol>
-      <li>
-        <span class="tiny" v-for="(x, i) in item.items" :key="i">
-          <router-link :to="`/products/${x}`">
-            <a>{{ x }}</a>
-          </router-link>
-          |
-        </span>
-      </li>
-    </ol>
-    <p class="">
-      <span class="tiny">{{ user.adress }} | {{ user.email }}</span>
-    </p>  -->
   </article>
 </template>
 

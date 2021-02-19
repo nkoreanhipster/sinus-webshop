@@ -14,7 +14,6 @@
     height          : 5rem;
     border-radius   : 1rem;
     padding-left    : 4rem;
-    // padding-right: 4rem;
 
     &:focus {
         color: $black;
@@ -39,8 +38,6 @@
         outline: none;
     }
 
-    & .icon {}
-
     &:focus,
     &:focus-visible {
         border: 2px solid rgba(0, 0, 0, 0.80)
@@ -50,13 +47,6 @@
         border-color: $failure;
     }
 }
-
-// input.rectangle {
-//     display      : block;
-//     border       : 1px solid rgba(0, 0, 0, 0.60);
-//     border-radius: 0;
-//     color        : $black;
-// }
 
 .image-small {
     width : 50px;
@@ -181,7 +171,6 @@
 .nav-inner {
     display            : flex;
     justify-content    : space-between;
-    // align-items     : center;
 }
 
 .nav-links {
@@ -265,7 +254,6 @@
     }
 
     &:hover::after {
-        //border:0.2rem solid hotpink;
         content         : "+";
         color           : $white;
         font-size       : 3.2rem;
@@ -328,7 +316,6 @@
     cursor             : pointer;
 
     & * {
-        // position: absolute;
         background-color: $blood-orange;
         top             : 0;
         right           : 0;

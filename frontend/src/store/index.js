@@ -1,18 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import productModule from './products.store'
-// import userModule from './user.store'
-// import uxModule from './ux.store'
-// import orderModule from './orders.store'
 import * as API from '@/api'
 import * as M from './mutationTypes'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // modules: {
-  //   productModule, userModule, uxModule, orderModule
-  // },
   state: {
     isAuthenticated: false,   // Triggar login-modal m.m.
     currentUser: {             // Hämtas vid inlogg, annars denna som default
@@ -22,11 +15,6 @@ export default new Vuex.Store({
       email: null,
       token: null,
       password: '',
-      // adress: {
-      //   street: '',
-      //   zip: '',
-      //   city: ''
-      // },
     },
     orders:[],                // ## Admin only
     products: [],             // Produkter som kommer från databasen
@@ -60,7 +48,6 @@ export default new Vuex.Store({
 
     /**
      * Tar bort product från display. 
-     * todo;
      * @param {Object} payload 
      */
     REMOVE_PRODUCT(state, payload = {}) {
@@ -72,7 +59,6 @@ export default new Vuex.Store({
      * @param {Object} payload 
      */
     [M.ADD_TO_CART](state, payload) {
-      //payload.map(x => x.amount = 1)
       state.cart.push(payload)
     },
 
@@ -87,10 +73,6 @@ export default new Vuex.Store({
           break;
         }
       }
-      // let index = state.cart.findIndex(x => x._id == payload._id)
-      // console.log({index})
-      // if(index < 0)return;
-      // state.cart = state.cart.splice(index, 1) // Remove single
     },
 
     /**
@@ -99,16 +81,6 @@ export default new Vuex.Store({
     [M.CLEAR_CART](state) {
       state.cart = []
     },
-
-    /**
-     * Uppdatera kundvagnen.
-     * todo; används eller funkar denna?
-     * @param {*} payload 
-     */
-    // UPDATE_CART(state, payload) {
-    //   var itemTobeUpdated = state.cart.find(p => p._id === payload._id);
-    //   itemTobeUpdated = payload
-    // },
 
     SET_CURRENTUSER(state, payload) {
       let { user, token } = payload
@@ -274,13 +246,6 @@ export default new Vuex.Store({
     },
 
     /**
-     * Orders. #Admin only
-     */
-    // orders: (state) => {
-    //   return state.orders
-    // },
-
-    /**
      * Nuvarande cart
      * @param {Array} cart 
      */
@@ -309,9 +274,6 @@ export default new Vuex.Store({
     },
 
     orderHistory: (state, getters, rootState) => {
-      // console.log('isAuthenticated', rootState.userModule.isAuthenticated)
-      // console.log('currentUser', rootState.userModule.currentUser)
-      // console.log('orderHistory', rootState.userModule.currentUser.orderHistory)
       return state.currentUser.orderHistory
     },
 

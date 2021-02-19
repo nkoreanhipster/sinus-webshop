@@ -98,7 +98,6 @@ import { mapGetters } from "vuex";
 import ProductMiniature from "@/components/ProductMiniature.vue";
 export default {
   metaInfo: {
-    // if no subcomponents specify a metaInfo.title, this title will be used
     title: "CHECKOUT",
   },
   data() {
@@ -115,7 +114,7 @@ export default {
       },
       message: "",
       orderSent: false,
-      itemsInCart:0
+      itemsInCart: 0,
     };
   },
   created() {
@@ -176,7 +175,7 @@ export default {
 
       // Loop userdata and check if any value is bad length
       let errorCounts = Object.entries(this.user).filter(([key, val]) => {
-        console.log(key,val,val.length)
+        console.log(key, val, val.length);
         return val.length < 1;
       }).length;
 
@@ -185,12 +184,12 @@ export default {
         return;
       }
 
-      let {name,street,city,zip} = this.user;
-      let {cardOwner,cardNumber,validUntil,cvv} = this.user;
+      let { name, street, city, zip } = this.user;
+      let { cardOwner, cardNumber, validUntil, cvv } = this.user;
 
       let payload = {
-        customer:{name,street,city,zip},
-        payment:{cardOwner,cardNumber,validUntil,cvv}
+        customer: { name, street, city, zip },
+        payment: { cardOwner, cardNumber, validUntil, cvv },
       };
 
       let response = await this.$store.dispatch("submitNewOrder", payload);

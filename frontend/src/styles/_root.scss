@@ -14,11 +14,10 @@ html {
     text-rendering                : optimizeLegibility !important;
     -webkit-font-smoothing        : antialiased !important;
     -moz-osx-font-smoothing       : grayscale !important;
-    font-size                     : $fontsize-reset-percentage; // 
+    font-size                     : $fontsize-reset-percentage;
     background-color              : $white; // Standard
-    color                         : $black; // todo;
-    font-family                   : $font-family; // todo;
-    //overflow-y      : scroll; // Hidnra scrollbar från att putta
+    color                         : $black;
+    font-family                   : $font-family;
 }
 
 html {
@@ -85,8 +84,6 @@ hr.dotted {
     border-bottom: 0.1rem dotted rgba(0, 0, 0, 0.4);
     border-radius: 0.2rem;
 }
-
-form {}
 
 input[type=text]:not(.input),
 input[type=date]:not(.input),
