@@ -37,7 +37,7 @@ export default {
      * Filtered by joined duplicates
      */
     cartItems() {
-      let cart = this.cart
+      let cart = this.cart;
       // Oh god.
       // Strangle me.
       cart.sort((a, b) => (a._id > b._id ? 1 : b._id > a._id ? -1 : 0));
@@ -45,11 +45,11 @@ export default {
       for (var j = 0; j < cart.length; j++) {
         const obj = cart[j];
         let found = out.find((x) => x.obj._id === obj._id);
-        if (found)continue;
+        if (found) continue;
         let duplicateCount = cart.filter((x) => x._id === obj._id).length;
         out.push({ obj, duplicateCount });
       }
-      return out
+      return out;
     },
     cartItemSum() {
       return this.sumOfCartItems;

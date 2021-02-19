@@ -54,9 +54,8 @@
 <script>
 export default {
   metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'REGISTER'
-    },
+    title: "REGISTER",
+  },
   data() {
     return {
       name: "",
@@ -83,8 +82,11 @@ export default {
         email: this.email,
         password: this.password,
         repeatPassword: this.password,
-        // Hårdkodat atm. todo; #
-        adress:{ "street": "Fakestreet 123", "zip": "123 45", "city": "Springfield" },
+        adress: {
+          street: "Fakestreet 123",
+          zip: "123 45",
+          city: "Springfield",
+        },
       };
 
       // Check against database/store
@@ -130,10 +132,8 @@ export default {
 .fat-boy {
   font-size: 4.2rem;
   color: $white;
-  text-shadow: 1px 1px 4px rgb(0, 0, 0),
-   1px 1px 6px rgb(0, 0, 0),
-   1px 1px 8px rgb(0, 0, 0),
-   1px 1px 14px rgb(0, 0, 0);
+  text-shadow: 1px 1px 4px rgb(0, 0, 0), 1px 1px 6px rgb(0, 0, 0),
+    1px 1px 8px rgb(0, 0, 0), 1px 1px 14px rgb(0, 0, 0);
   position: absolute;
   top: 50%;
   left: 50%;

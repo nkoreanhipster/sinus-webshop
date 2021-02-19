@@ -41,7 +41,9 @@
               ><i class="gg-user"></i>
             </li>
             <li>
-              <span style="display:flex;align-items:center;">{{ user.email }} <i class="gg-mail"> </i></span>
+              <span style="display: flex; align-items: center"
+                >{{ user.email }} <i class="gg-mail"> </i
+              ></span>
             </li>
             <li>
               <span>{{ user.adress.street }} </span>
@@ -84,14 +86,6 @@ export default {
       },
     },
   },
-  // watch: {
-  //   isOpen: {
-  //     handler(ev) {
-  //       // When handler is activated. Make get requests to fill in items from their ids
-  //       console.log({ev},this.isOpen)
-  //     },
-  //   },
-  // },
   methods: {
     formatTimestamp(timestamp) {
       let date = new Date(timestamp);
@@ -101,7 +95,6 @@ export default {
     onOpen(ev) {
       let { explicitOriginalTarget } = ev;
       if (explicitOriginalTarget.tagName !== "DETAILS") return;
-      //this.isOpen = explicitOriginalTarget.hasAttribute("open") ? true : false;
       this.isOpen = !this.isOpen;
       if (!this.isOpen) return;
 
@@ -115,7 +108,6 @@ export default {
       this.totalOrderPrice = this.products.reduce((a, b) => a.price + b.price);
     },
     async loadProductsByCurrentOrderId(ev) {
-      //let response = await this.$store.dispatch("loadProductsFromDB");
       let response = await this.$store.dispatch(
         "getProductsByOrderId",
         this.item._id

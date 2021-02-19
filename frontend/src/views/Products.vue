@@ -6,7 +6,12 @@
         :key="item.id"
         :product="item"
       ></ProductItem>
-      <img src="@/assets/cool_skate_dude.jpg" style="grid-row: 2; grid-column: 2 / 3" alt="" class="mb-4 mt-2">
+      <img
+        src="@/assets/cool_skate_dude.jpg"
+        style="grid-row: 2; grid-column: 2 / 3"
+        alt=""
+        class="mb-4 mt-2"
+      />
     </div>
     <Modal :product="selectedItem"></Modal>
   </section>
@@ -19,9 +24,8 @@ import Modal from "@/components/Modal.vue";
 
 export default {
   metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'PRODUCTS'
-    },
+    title: "PRODUCTS",
+  },
   data() {
     return {
       //The chosen product

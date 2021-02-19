@@ -7,7 +7,7 @@
     </div>
 
     <div class="input-box">
-      <div class="columns" style="max-width: 100%; max-height: 100%;">
+      <div class="columns" style="max-width: 100%; max-height: 100%">
         <div>
           <label class="" for="photo">Product Photo</label>
           <div
@@ -15,15 +15,14 @@
             :style="{ backgroundImage: `url(${selectedProduct.imgFile})` }"
             :data-url="selectedProduct.imgFile"
           >
-            <input name="photo" type="file" />
-            <!-- todo; fix -->
-            <label for="photo">Product Photo</label>
+            <img src="" alt="">
+          </div>
+            <label for="photo" class="mt-2">Photo url:</label>
             <input
               name="photo_url"
               type="text"
               v-model="selectedProduct.imgFile"
             />
-          </div>
         </div>
         <div>
           <label class="" for="photo">Product Name</label>
@@ -42,7 +41,7 @@
             name="price"
             v-model.number="selectedProduct.price"
           />
-          <label for="serial">Product Serial</label>
+          <label for="serial" class="mt-2">Product Serial</label>
           <input type="text" name="serial" v-model="selectedProduct.serial" />
         </div>
         <div>
@@ -52,7 +51,7 @@
             id=""
             cols="30"
             rows="10"
-            style="resize: none; width: 100%;"
+            style="resize: none; width: 100%"
             v-model="selectedProduct.longDesc"
           ></textarea>
           <button
@@ -61,7 +60,7 @@
             @click="updateProduct"
             id="updateProductButton"
           >
-            Spara!
+            Save!
           </button>
           <button
             class="btn-mustard mv-3"
@@ -69,7 +68,7 @@
             @click="newProduct"
             id="addProductButton"
           >
-            Lägg till!
+            Add!
           </button>
         </div>
       </div>
@@ -83,7 +82,7 @@
         <span
           @click="
             setSelectedProduct(product);
-            topFunction();
+            topFunction($event);
           "
         >
           <h2>
@@ -101,7 +100,9 @@
           <p class="desc">
             {{ product.longDesc }}
           </p>
-          <button @click="deleteProduct(product)" class="mb-3">ta bort</button>
+          <button @click="deleteProduct(product)" class="delete-button mb-3">
+            ta bort
+          </button>
           <button disabled @click="setSelectedProduct(product)">
             uppdatera
           </button>
@@ -118,22 +119,12 @@
             :index="index"
             :user="item.__match"
           ></OrderDescription>
-          <!-- <p>Status: {{ item.status }}</p>
-        <p>ID: {{ item._id }}</p>
-        <p>Time: {{ item.timeStamp }}</p>
-        <p>Order value: {{ item.orderValue }}</p> -->
         </li>
       </ul>
       <div>
         <button class="btn-black m-3" @click="logout">Logout</button>
       </div>
     </section>
-    <!-- <section>
-      <h1>Users</h1>
-      <p v-for="(item, index) in users" :key="index">
-        {{ item }}
-      </p>
-    </section> -->
   </section>
 </template>
 
@@ -203,19 +194,12 @@ export default {
     },
     setSelectedProduct(product) {
       this.patchMode = "edit";
-      // let rv = randomVersionNumber();
-      // product.imgFile = this.removeQuestionParameters(product.imgFile);
-      // // Världens fulhack
-      // if (this.selectedProduct.imgFile === product.imgFile) {
-      //   product.imgFile = `${product.imgFile}${rv}`;
-      // }
       this.selectedProduct = product;
     },
-    // removeQuestionParameters(str) {
-    //   return str.split("?").shift();
-    // },
     async newProduct() {
-      this.patchMode = "edit";
+      setTimeout(() => {
+        this.patchMode = "edit";
+      }, 1150);
       let res = await this.$store.dispatch("addProduct", this.selectedProduct);
       this.selectedProduct = {};
       this.message = res;
@@ -229,6 +213,9 @@ export default {
       this.message = res;
     },
     async updateProduct() {
+      setTimeout(() => {
+        this.patchMode = "add";
+      }, 1150);
       let res = await this.$store.dispatch(
         "updateProduct",
         this.selectedProduct
@@ -237,13 +224,12 @@ export default {
       this.message = res;
       var element = document.getElementById("updateProductButton");
       element.classList.add("btn-success");
-      this.patchMode="add"
     },
-    // async getAllUsers() {
-    //   let res = await this.$store.dispatch("getAllUsers");
-    //   this.users = res;
-    // },
-    topFunction() {
+    topFunction(event) {
+      console.log(event, event.target);
+      if (event.target.classList.contains("delete-button")) {
+        return;
+      }
       let target = document.querySelector("#admin-products-header");
       target.scrollIntoView({
         behavior: "smooth",
@@ -276,9 +262,7 @@ export default {
   & .input-file-box {
     padding: 1rem;
     border: 0.2rem dotted rgba(255, 255, 255, 0.4);
-    & label {
-      margin: 1rem;
-    }
+
   }
 }
 .input-box input {
@@ -314,11 +298,12 @@ export default {
 .input-file-box {
   background-repeat: no-repeat;
   background-size: contain;
+  height: 15rem;
   overflow: auto;
-  margin: 0.4rem 0;
+  max-width: 30rem;
 }
 .input-file-box::after {
-  content: attr(data-url);
+  // content: attr(data-url);
   color: $blood-orange;
 }
 </style>
