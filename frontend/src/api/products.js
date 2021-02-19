@@ -3,12 +3,7 @@ import { POST, GET, DELETE, PATCH } from './request';
  * Getta en lista med alla products
  */
 let getProducts = async () => {
-    let response = await fetch('http://localhost:5000/api/products/', {
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-
+    let response = await GET('products')
     let json = await response.json()
     return json
 }
@@ -18,12 +13,7 @@ let getProducts = async () => {
  * @param {Number} id 
  */
 let getProduct = async (id) => {
-    let response = await fetch(`http://localhost:5000/api/products/${id}`, {
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-
+    let response = await GET(`products/${id}`)
     let json = await response.json()
     return json
 }

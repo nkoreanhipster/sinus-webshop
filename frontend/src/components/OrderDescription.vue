@@ -1,14 +1,45 @@
 <template>
   <article class="p-3" :class="{ even: index % 2 === 0, odd: index % 2 !== 0 }">
-    <h3>{{ formatTimestamp(item.timeStamp) }}</h3>
-    <p :class="item.status">{{ item.status }}</p>
-    <p>{{ item._id }}</p>
-    <p>
-      <b>{{ item.orderValue }}</b
-      ><i> SEK</i>
-    </p>
+    <summary>
+      <h3>{{ formatTimestamp(item.timeStamp) }}</h3>
+      <p :class="item.status">{{ item.status }}</p>
+      <p>
+        <b>{{ item.orderValue }}</b
+        ><i> SEK</i>
+      </p>
+    </summary>
 
-    <ol>
+    <transition>
+      <details>
+        <section class="p-3">
+          <h4 class="pv-2">Order id:</h4>
+          <p class="ml-3">
+            <i>{{ item._id }}</i>
+          </p>
+          <h4 class="pv-2">Products:</h4>
+          <ul class="ml-3" v-for="(x, i) in item.items" :key="i">
+            <li>
+              <router-link :to="`/products/${x}`">
+                <a>{{ x }}</a>
+              </router-link>
+            </li>
+          </ul>
+
+          <h4 class="pv-2">Information:</h4>
+          <ul class="ml-3">
+            <li>
+              <span>{{user.adress}}</span>
+            </li>
+            <li>
+              <span>{{user.email}}</span><i class="gg-email"></i>
+            </li>
+          </ul>
+        </section>
+      </details>
+    </transition>
+    <!-- <span style="float:left;clear:both;"><i class="gg-details-more"></i></span> -->
+
+    <!-- <ol>
       <li>
         <span class="tiny" v-for="(x, i) in item.items" :key="i">
           <router-link :to="`/products/${x}`">
@@ -19,26 +50,18 @@
       </li>
     </ol>
     <p class="">
-      <!-- <span class="tiny" v-if="!user">{{
-        "Anonnymous (fattar inte hur man fick ur adress från dessa)"
-      }}</span>
-      <span class="tiny" v-else
-        >{{ user.email }} | {{ user.adress }}</span -->
       <span class="tiny">{{ user.adress }} | {{ user.email }}</span>
-    </p>
-    <!-- 
-    <p>
-      {{item}}
-    </p> -->
-    <!-- <p>Timestamp: {{ item.timeStamp }}</p>
-    <p>Status: {{ item.status }}</p>
-    <p>orderValue: {{ item.orderValue }}:-</p>
-    <p>_id: {{ item._id }}</p> -->
+    </p>  -->
   </article>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isOpen: false, // Toggle collapse
+    };
+  },
   props: {
     item: Object,
     index: {
@@ -51,7 +74,7 @@ export default {
         return {
           adress: "Not yet implemented for <anonymous> non-users",
           email: "-//-",
-        }
+        };
       },
     },
   },
@@ -67,12 +90,18 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/_variables.scss";
-article {
+summary {
   display: flex;
   justify-content: flex-start;
 }
-article > *:not(h3) {
+summary > *:not(h3) {
   margin-left: 0.5rem;
+}
+details {
+  cursor: pointer;
+}
+details section {
+  cursor: initial;
 }
 .tiny {
   font-size: 0.8rem;

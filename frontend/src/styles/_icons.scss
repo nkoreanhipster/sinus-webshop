@@ -1,7 +1,8 @@
 // src:https://css.gg
-// lock .gg-mail
-// mail .gg-lock
-// login .gg-login
+// mail .gg-mail .gg-mail-open .gg-mail-reply
+// lock .gg-lock .gg-lock-unlock
+// chevrons .gg-chevron-down .gg-chevron-right
+// details .gg-details-more
 
 $ggs:1.2;
 
@@ -232,4 +233,82 @@ $ggs:1.2;
     left: -11px;
     bottom: 5px;
   }
+}
+
+.gg-chevron-right {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px
+}
+.gg-chevron-right::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(-45deg);
+  right: 6px;
+  top: 4px
+}
+
+.gg-chevron-down {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px
+}
+
+.gg-chevron-down::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(45deg);
+  left: 4px;
+  top: 2px
+}
+
+.gg-details-more {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 20px;
+  height: 14px;
+  border: 2px solid transparent
+}
+.gg-details-more::after,
+.gg-details-more::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  height: 2px;
+  border-radius: 3px;
+  background: currentColor
+}
+.gg-details-more::before {
+  box-shadow: 0 4px 0 0;
+  top: 0;
+  width: 16px
+}
+.gg-details-more::after {
+  width: 10px;
+  bottom: 0
 }

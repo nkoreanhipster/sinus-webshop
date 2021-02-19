@@ -1,5 +1,24 @@
+// Root endpoint-url
 const endpointBaseUrl = 'http://localhost:5000/api/'
+// Most commonly used request header
+const defaultHeaders = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+}
+
+/**
+ * Generate full url with included path
+ * @param {String} path 
+ */
 let url = (path = '') => new URL(path, endpointBaseUrl).href
+
+/**
+ * Overwritable header-object
+ * @param {Object} additionalHeaderItems 
+ */
+let generateHeader = (additionalHeaderItems) => {
+    return { ...defaultHeaders, ...additionalHeaderItems }
+}
 
 /**
  * POST-request to localhost:5000/api/:path
@@ -8,12 +27,7 @@ let url = (path = '') => new URL(path, endpointBaseUrl).href
  * @param {String} token 
  */
 export const POST = function (path, payload, token) {
-    //console.log(`%cPOSTING REQUST TO ${url(path)}`,`color:darkgreen;font-size:25px;`, { payload, token })
-
-    let headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
+    let headers = generateHeader()
 
     if (token) {
         headers.Authorization = `Bearer ${token}`
@@ -63,10 +77,7 @@ export const DELETE = function (path, token) {
  * @param {String} token 
  */
 export const PATCH = function (path, payload, token) {
-    let headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
+    let headers = generateHeader()
 
     if (token) {
         headers.Authorization = `Bearer ${token}`
