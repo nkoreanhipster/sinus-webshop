@@ -15,14 +15,14 @@
             :style="{ backgroundImage: `url(${selectedProduct.imgFile})` }"
             :data-url="selectedProduct.imgFile"
           >
-            <input name="photo" type="file" />
-            <label for="photo">Product Photo</label>
+            <img src="" alt="">
+          </div>
+            <label for="photo" class="mt-2">Photo url:</label>
             <input
               name="photo_url"
               type="text"
               v-model="selectedProduct.imgFile"
             />
-          </div>
         </div>
         <div>
           <label class="" for="photo">Product Name</label>
@@ -41,7 +41,7 @@
             name="price"
             v-model.number="selectedProduct.price"
           />
-          <label for="serial">Product Serial</label>
+          <label for="serial" class="mt-2">Product Serial</label>
           <input type="text" name="serial" v-model="selectedProduct.serial" />
         </div>
         <div>
@@ -262,9 +262,7 @@ export default {
   & .input-file-box {
     padding: 1rem;
     border: 0.2rem dotted rgba(255, 255, 255, 0.4);
-    & label {
-      margin: 1rem;
-    }
+
   }
 }
 .input-box input {
@@ -300,11 +298,12 @@ export default {
 .input-file-box {
   background-repeat: no-repeat;
   background-size: contain;
+  height: 15rem;
   overflow: auto;
-  margin: 0.4rem 0;
+  max-width: 30rem;
 }
 .input-file-box::after {
-  content: attr(data-url);
+  // content: attr(data-url);
   color: $blood-orange;
 }
 </style>

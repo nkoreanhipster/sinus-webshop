@@ -1,6 +1,6 @@
 <template>
   <article>
-    <div class=""><img :src="product.imgFile" class="image-small" /></div>
+    <div class=""><img :src="formatImageSource(product.imgFile)" class="image-small" /></div>
     <div class="">
       <h2 v-if="duplicateCount > 1">
         <span>{{ product.title }}</span
@@ -21,7 +21,7 @@
 export default {
   props: {
     // ProductObject från parent
-    product: Object,
+    product: {},
     // If more than one
     duplicateCount: Number,
   },
@@ -30,6 +30,9 @@ export default {
       console.log(1);
       this.$store.dispatch("removeFromCart", this.product);
     },
+    formatImageSource(url) {
+        return url.charAt(0) == "/" ? url : "/" + url
+    }
   },
 };
 </script>
