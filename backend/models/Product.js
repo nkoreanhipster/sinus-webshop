@@ -1,6 +1,5 @@
 const NeDB = require('nedb-promise')
 const products = new NeDB({filename:'database/products.db', autoload: true})
-
 const Errors = require('../errors')
 
 const categorySort = (a,b) => a.category < b.category ? -1 : 1

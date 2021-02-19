@@ -182,6 +182,15 @@ export default new Vuex.Store({
       commit(M.CLEAR_CART)
     },
 
+    /**
+     * Get products that are included in specified order
+     * @param {Number} orderId 
+     */
+    async getProductsByOrderId({ commit, state }, orderId) {
+      let response = await API.products.getProductsByOrderId(orderId, state.currentUser.token)
+      return response
+    },
+
     async getAllOrders({ commit, state }) {
       let token = state.currentUser.token
       if (!token || typeof token === 'undefined') {

@@ -48,5 +48,10 @@ module.exports = {
         let user = await User.findOne(userID)
         const ords = await orders.find({_id:{$in:user.orderHistory}})
         return ords
+    },
+
+    async findById(id){
+        const order = await orders.find({_id:id})
+        return order
     }
 }

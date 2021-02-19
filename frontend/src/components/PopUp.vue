@@ -22,7 +22,7 @@ export default {
       immediate: true,
       handler(x) {
         // todo; looks bad. do manually
-        //test(this.$refs.popup, -150);
+        test(this.$refs.popup, -150);
       },
     },
     "$store.state.isModalActive.cart": {

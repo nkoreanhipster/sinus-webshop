@@ -19,6 +19,16 @@ let getProduct = async (id) => {
 }
 
 /**
+ * Få produkter som är inkluderade i angivet orderId
+ * @param {Number} orderId 
+ */
+let getProductsByOrderId = async (orderId, token) => {
+    let response = await GET(`products/order/${orderId}`, token)
+    let json = await response.json()
+    return json
+}
+
+/**
  * Skapa ny produkt
  * @param {Object} product 
  */
@@ -50,5 +60,5 @@ let deleteProduct = async (id, token) => {
     return json
 }
 
-export default { getProducts, getProduct, deleteProduct, newProduct, patchProduct }
-export { getProducts, getProduct, deleteProduct, newProduct, patchProduct }
+export default { getProducts, getProduct,getProductsByOrderId, deleteProduct, newProduct, patchProduct }
+export { getProducts, getProduct, getProductsByOrderId, deleteProduct, newProduct, patchProduct }

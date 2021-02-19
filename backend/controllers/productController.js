@@ -1,9 +1,17 @@
 const Product = require('../models/Product')
+const Order = require('../models/Order')
 const Errors = require('../errors')
 
 module.exports = {
     getAllProducts: async (req,res) => {
         let products = await Product.all()
+        res.json(products)
+    },
+    getAllProductsWithId: async (req,res) => {
+        // Id is specified Order.id
+        let orders = await Order.findById(req.params.id)
+        let items = orders.map(o => o.items).flat()
+        let products = await Product.find(items)
         res.json(products)
     },
     getProduct: async (req,res) => {

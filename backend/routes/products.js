@@ -9,5 +9,6 @@ router.get('/:id',                    ProductController.getProduct)
 router.post('/',        Auth.admin,   ProductController.createProduct)
 router.patch('/:id',    Auth.admin,   ProductController.updateProduct)
 router.delete('/:id',   Auth.admin,   ProductController.deleteProduct)
+router.get('/order/:id',           ProductController.getAllProductsWithId)
 
 module.exports = router

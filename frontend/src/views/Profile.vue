@@ -54,7 +54,7 @@
       </div>
     </section>
 
-    <div>
+    <div class="mb-3">
       <button class="btn-black" @click="logout">Logout</button>
     </div>
   </section>
@@ -89,7 +89,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("closeAllModals");
-    this.$store.dispatch("changeBannerSize", { maxHeight: 120 });
+    this.$store.dispatch("changeBannerSize", { maxHeight: 150 });
     this.getOrderHistory();
   },
   computed: {
